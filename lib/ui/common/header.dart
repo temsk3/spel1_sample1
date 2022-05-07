@@ -23,7 +23,22 @@ class Header extends ConsumerWidget with PreferredSizeWidget {
         style: theme.textTheme.h40,
       ),
       centerTitle: true,
-      leading: const AutoBackButton(),
+      leading: Row(
+        children: [
+          const AutoBackButton(),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.account_circle),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

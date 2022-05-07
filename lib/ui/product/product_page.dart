@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -28,7 +29,23 @@ class ProductPage extends HookConsumerWidget {
               toolbarHeight: 30,
               backgroundColor: theme.appColors.primary,
               foregroundColor: theme.appColors.onPrimary,
-              leading: const AutoBackButton(),
+              leading: Row(
+                children: [
+                  const AutoBackButton(),
+                  Builder(
+                    builder: (context) {
+                      return IconButton(
+                        icon: const Icon(Icons.account_circle),
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        tooltip: MaterialLocalizations.of(context)
+                            .openAppDrawerTooltip,
+                      );
+                    },
+                  ),
+                ],
+              ),
               title: Text(
                 // l10n.productlist,
                 'Product List',
@@ -46,6 +63,7 @@ class ProductPage extends HookConsumerWidget {
                 ],
               ),
             ),
+            drawer: const CustomDrawer(),
             body: SafeArea(
               child: RefreshIndicator(
                 onRefresh: () async {
