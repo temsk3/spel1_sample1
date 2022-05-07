@@ -14,7 +14,7 @@ class RoutePath {
   // Bazaar
   static const appRouteBazaarList = 'bazaar';
   static const appRouteBazaarDetails = ':bazaarId';
-  static const appRouteBazaarUpdate = 'bazaarUpdate';
+  static const appRouteBazaarEdit = 'bazaarEdit';
   static const appRouteBazaarAdd = 'bazaarAdd';
   //Favorite
   static const appRouteFavorite = 'favorite';

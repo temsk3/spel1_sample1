@@ -11,25 +11,23 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i15;
+import 'package:flutter/material.dart' as _i13;
 import 'package:flutter_application_1/ui/auth/auth.dart' as _i5;
-import 'package:flutter_application_1/ui/bazaar/bazaar_add_page.dart' as _i13;
+import 'package:flutter_application_1/ui/bazaar/bazaar_add_page.dart' as _i11;
 import 'package:flutter_application_1/ui/bazaar/bazaar_details_page.dart'
-    as _i12;
-import 'package:flutter_application_1/ui/bazaar/bazaar_page.dart' as _i11;
-import 'package:flutter_application_1/ui/common/image_crop.dart' as _i14;
+    as _i10;
+import 'package:flutter_application_1/ui/bazaar/bazaar_edit_page.dart' as _i9;
+import 'package:flutter_application_1/ui/bazaar/bazaar_page.dart' as _i8;
+import 'package:flutter_application_1/ui/common/image_crop.dart' as _i12;
 import 'package:flutter_application_1/ui/favorite/favorite_page.dart' as _i4;
 import 'package:flutter_application_1/ui/home.dart' as _i1;
-import 'package:flutter_application_1/ui/item/item_add_page.dart' as _i9;
-import 'package:flutter_application_1/ui/item/item_details_page.dart' as _i8;
-import 'package:flutter_application_1/ui/item/item_page.dart' as _i7;
-import 'package:flutter_application_1/ui/product/product_page.dart' as _i10;
+import 'package:flutter_application_1/ui/product/product_page.dart' as _i7;
 import 'package:flutter_application_1/ui/transaction/transaction_page.dart'
     as _i3;
 import 'package:flutter_application_1/ui/xxx/xxx_page.dart' as _i6;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i15.GlobalKey<_i15.NavigatorState>? navigatorKey])
+  AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -37,10 +35,6 @@ class AppRouter extends _i2.RootStackRouter {
     HomeRoute.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i1.HomePage());
-    },
-    ItemListRouter.name: (routeData) {
-      return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i2.EmptyRouterPage());
     },
     ProductRouter.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
@@ -66,30 +60,19 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i6.XXXPage());
     },
-    ItemListRoute.name: (routeData) {
-      return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i7.ItemListPage());
-    },
-    ItemDetailsRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ItemDetailsRouteArgs>(
-          orElse: () =>
-              ItemDetailsRouteArgs(itemId: pathParams.getInt('itemId')));
-      return _i2.AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: _i8.ItemDetailsPage(key: args.key, itemId: args.itemId));
-    },
-    ItemAddRoute.name: (routeData) {
-      return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i9.ItemAddPage());
-    },
     ProductRoute.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i10.ProductPage());
+          routeData: routeData, child: const _i7.ProductPage());
     },
     BazaarListRoute.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i11.BazaarListPage());
+          routeData: routeData, child: const _i8.BazaarListPage());
+    },
+    BazaarEditRoute.name: (routeData) {
+      final args = routeData.argsAs<BazaarEditRouteArgs>();
+      return _i2.AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: _i9.BazaarEditPage(key: args.key, index: args.index));
     },
     BazaarDetailsRouter.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -98,7 +81,7 @@ class AppRouter extends _i2.RootStackRouter {
               BazaarDetailsRouterArgs(index: pathParams.getInt('index')));
       return _i2.AdaptivePage<dynamic>(
           routeData: routeData,
-          child: _i12.BazaarDetailsPage(key: args.key, index: args.index));
+          child: _i10.BazaarDetailsPage(key: args.key, index: args.index));
     },
     BazaarAddRouter.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
@@ -106,33 +89,17 @@ class AppRouter extends _i2.RootStackRouter {
     },
     BazaarAddRoute.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i13.BazaarAddPage());
+          routeData: routeData, child: const _i11.BazaarAddPage());
     },
     ImageCropRoute.name: (routeData) {
       return _i2.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i14.ImageCropPage());
+          routeData: routeData, child: const _i12.ImageCropPage());
     }
   };
 
   @override
   List<_i2.RouteConfig> get routes => [
         _i2.RouteConfig(HomeRoute.name, path: '/', children: [
-          _i2.RouteConfig(ItemListRouter.name,
-              path: 'items',
-              parent: HomeRoute.name,
-              children: [
-                _i2.RouteConfig(ItemListRoute.name,
-                    path: '', parent: ItemListRouter.name),
-                _i2.RouteConfig(ItemDetailsRoute.name,
-                    path: ':itemId', parent: ItemListRouter.name),
-                _i2.RouteConfig('*#redirect',
-                    path: '*',
-                    parent: ItemListRouter.name,
-                    redirectTo: '',
-                    fullMatch: true),
-                _i2.RouteConfig(ItemAddRoute.name,
-                    path: 'itemAdd', parent: ItemListRouter.name)
-              ]),
           _i2.RouteConfig(ProductRouter.name,
               path: 'product',
               parent: HomeRoute.name,
@@ -151,6 +118,8 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(BazaarListRoute.name,
                     path: '', parent: BazaarListRouter.name),
+                _i2.RouteConfig(BazaarEditRoute.name,
+                    path: 'bazaarEdit', parent: BazaarListRouter.name),
                 _i2.RouteConfig(BazaarDetailsRouter.name,
                     path: ':bazaarId', parent: BazaarListRouter.name),
                 _i2.RouteConfig('*#redirect',
@@ -190,15 +159,6 @@ class HomeRoute extends _i2.PageRouteInfo<void> {
       : super(HomeRoute.name, path: '/', initialChildren: children);
 
   static const String name = 'HomeRoute';
-}
-
-/// generated route for
-/// [_i2.EmptyRouterPage]
-class ItemListRouter extends _i2.PageRouteInfo<void> {
-  const ItemListRouter({List<_i2.PageRouteInfo>? children})
-      : super(ItemListRouter.name, path: 'items', initialChildren: children);
-
-  static const String name = 'ItemListRouter';
 }
 
 /// generated route for
@@ -252,48 +212,7 @@ class XXXRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.ItemListPage]
-class ItemListRoute extends _i2.PageRouteInfo<void> {
-  const ItemListRoute() : super(ItemListRoute.name, path: '');
-
-  static const String name = 'ItemListRoute';
-}
-
-/// generated route for
-/// [_i8.ItemDetailsPage]
-class ItemDetailsRoute extends _i2.PageRouteInfo<ItemDetailsRouteArgs> {
-  ItemDetailsRoute({_i15.Key? key, required int itemId})
-      : super(ItemDetailsRoute.name,
-            path: ':itemId',
-            args: ItemDetailsRouteArgs(key: key, itemId: itemId),
-            rawPathParams: {'itemId': itemId});
-
-  static const String name = 'ItemDetailsRoute';
-}
-
-class ItemDetailsRouteArgs {
-  const ItemDetailsRouteArgs({this.key, required this.itemId});
-
-  final _i15.Key? key;
-
-  final int itemId;
-
-  @override
-  String toString() {
-    return 'ItemDetailsRouteArgs{key: $key, itemId: $itemId}';
-  }
-}
-
-/// generated route for
-/// [_i9.ItemAddPage]
-class ItemAddRoute extends _i2.PageRouteInfo<void> {
-  const ItemAddRoute() : super(ItemAddRoute.name, path: 'itemAdd');
-
-  static const String name = 'ItemAddRoute';
-}
-
-/// generated route for
-/// [_i10.ProductPage]
+/// [_i7.ProductPage]
 class ProductRoute extends _i2.PageRouteInfo<void> {
   const ProductRoute() : super(ProductRoute.name, path: '');
 
@@ -301,7 +220,7 @@ class ProductRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.BazaarListPage]
+/// [_i8.BazaarListPage]
 class BazaarListRoute extends _i2.PageRouteInfo<void> {
   const BazaarListRoute() : super(BazaarListRoute.name, path: '');
 
@@ -309,9 +228,33 @@ class BazaarListRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.BazaarDetailsPage]
+/// [_i9.BazaarEditPage]
+class BazaarEditRoute extends _i2.PageRouteInfo<BazaarEditRouteArgs> {
+  BazaarEditRoute({_i13.Key? key, required int index})
+      : super(BazaarEditRoute.name,
+            path: 'bazaarEdit',
+            args: BazaarEditRouteArgs(key: key, index: index));
+
+  static const String name = 'BazaarEditRoute';
+}
+
+class BazaarEditRouteArgs {
+  const BazaarEditRouteArgs({this.key, required this.index});
+
+  final _i13.Key? key;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'BazaarEditRouteArgs{key: $key, index: $index}';
+  }
+}
+
+/// generated route for
+/// [_i10.BazaarDetailsPage]
 class BazaarDetailsRouter extends _i2.PageRouteInfo<BazaarDetailsRouterArgs> {
-  BazaarDetailsRouter({_i15.Key? key, required int index})
+  BazaarDetailsRouter({_i13.Key? key, required int index})
       : super(BazaarDetailsRouter.name,
             path: ':bazaarId',
             args: BazaarDetailsRouterArgs(key: key, index: index),
@@ -323,7 +266,7 @@ class BazaarDetailsRouter extends _i2.PageRouteInfo<BazaarDetailsRouterArgs> {
 class BazaarDetailsRouterArgs {
   const BazaarDetailsRouterArgs({this.key, required this.index});
 
-  final _i15.Key? key;
+  final _i13.Key? key;
 
   final int index;
 
@@ -344,7 +287,7 @@ class BazaarAddRouter extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.BazaarAddPage]
+/// [_i11.BazaarAddPage]
 class BazaarAddRoute extends _i2.PageRouteInfo<void> {
   const BazaarAddRoute() : super(BazaarAddRoute.name, path: '');
 
@@ -352,7 +295,7 @@ class BazaarAddRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ImageCropPage]
+/// [_i12.ImageCropPage]
 class ImageCropRoute extends _i2.PageRouteInfo<void> {
   const ImageCropRoute() : super(ImageCropRoute.name, path: 'crop');
 

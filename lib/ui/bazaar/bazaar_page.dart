@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/bazaar/bazaar_details_state.dart';
 import 'package:flutter_application_1/ui/bazaar/widget/bazaar_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/model/bazaar/bazaar_model.dart';
 import '../common/header.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
@@ -48,10 +46,7 @@ class BazaarListPage extends HookConsumerWidget {
             child: FloatingActionButton(
               backgroundColor: theme.appColors.primary,
               foregroundColor: theme.appColors.onPrimary,
-              onPressed: () {
-                ref
-                    .read(bazaarDetailsProvider.notifier)
-                    .setDetail(Bazaar.empty());
+              onPressed: () async {
                 appRoute.push(const BazaarAddRouter());
               },
               child: const Icon(Icons.add_sharp),

@@ -31,7 +31,7 @@ class ImageCropPage extends HookConsumerWidget {
       appBar: AppBar(
         backgroundColor: theme.appColors.primary,
         title: Text(
-          'Coloreful Screen Crop',
+          'Image Crop',
           style: TextStyle(color: theme.appColors.onPrimary),
         ),
         actions: [

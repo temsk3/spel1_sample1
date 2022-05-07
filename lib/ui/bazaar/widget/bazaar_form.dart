@@ -6,22 +6,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../../../data/model/bazaar/bazaar_model.dart';
 import '../../../gen/assets.gen.dart';
 import '../../common/image_crop_controller.dart';
 import '../../hooks/use_l10n.dart';
 import '../../hooks/use_router.dart';
 import '../../routes/app_route.gr.dart';
 import '../../theme/app_theme.dart';
-import '../bazaar_details_state.dart';
 import '../bazaar_page.dart';
 import '../bazaar_view_model.dart';
 
 class BazaarForm extends HookConsumerWidget {
-  // Bazaar bazaar = Bazaar.empty();
-  // BazaarForm({required Bazaar bazaar}) {
-  //   this.bazaar = bazaar;
-  // }
-
+  BazaarForm({Key? key, required this.bazaar}) : super(key: key);
+  Bazaar bazaar;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     DateFormat dateFormat = DateFormat('yyyy-MM-dd');
@@ -33,34 +30,23 @@ class BazaarForm extends HookConsumerWidget {
     //
     final _form = GlobalKey<FormState>();
     DateTime _now = DateTime.now();
+    //
     String uid = 'test';
-    final _name = useTextEditingController(
-        text: ref.watch(bazaarDetailsProvider).bazaar?.name);
-    final _message = useTextEditingController(
-        text: ref.watch(bazaarDetailsProvider).bazaar?.message);
+    final _name = useTextEditingController(text: bazaar.name);
+    final _message = useTextEditingController(text: bazaar.message);
     final _salesStart = useTextEditingController(
         text: dateFormat.format(
-            ref.watch(bazaarDetailsProvider).bazaar?.salesStart != null
-                ? ref.watch(bazaarDetailsProvider).bazaar?.salesStart
-                    as DateTime
-                : _now));
+            bazaar.salesStart != null ? bazaar.salesStart as DateTime : _now));
     final _salesEnd = useTextEditingController(
         text: dateFormat.format(
-            ref.watch(bazaarDetailsProvider).bazaar?.salesEnd != null
-                ? ref.watch(bazaarDetailsProvider).bazaar?.salesEnd as DateTime
-                : _now));
+            bazaar.salesEnd != null ? bazaar.salesEnd as DateTime : _now));
     final _eventFrom = useTextEditingController(
         text: dateFormat.format(
-            ref.watch(bazaarDetailsProvider).bazaar?.eventFrom != null
-                ? ref.watch(bazaarDetailsProvider).bazaar?.eventFrom as DateTime
-                : _now));
+            bazaar.eventFrom != null ? bazaar.eventFrom as DateTime : _now));
     final _eventTo = useTextEditingController(
         text: dateFormat.format(
-            ref.watch(bazaarDetailsProvider).bazaar?.eventTo != null
-                ? ref.watch(bazaarDetailsProvider).bazaar?.eventTo as DateTime
-                : _now));
-    final _place = useTextEditingController(
-        text: ref.watch(bazaarDetailsProvider).bazaar?.place);
+            bazaar.eventTo != null ? bazaar.eventTo as DateTime : _now));
+    final _place = useTextEditingController(text: bazaar.place);
     //
     final ImagePicker _picker = ImagePicker();
     Image _photoImage = Assets.img.flutterIcon.image();

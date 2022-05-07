@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sizer/sizer.dart';
+// import 'package:sizer/sizer.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../ui/routes/app_route.gr.dart';
 import '../ui/theme/app_theme.dart';
@@ -21,8 +22,8 @@ class MyApp extends HookConsumerWidget {
     final appRouter = useMemoized(() => AppRouter());
     final initialize = ref.watch(firebaseinitializerProvider);
 
-    return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp.router(
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         useInheritedMediaQuery: true,
         theme: theme.data,

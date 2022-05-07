@@ -4,13 +4,11 @@ import '../../ui/routes/route_path.dart';
 import '../auth/auth.dart';
 import '../bazaar/bazaar_add_page.dart';
 import '../bazaar/bazaar_details_page.dart';
+import '../bazaar/bazaar_edit_page.dart';
 import '../bazaar/bazaar_page.dart';
 import '../common/image_crop.dart';
 import '../favorite/favorite_page.dart';
 import '../home.dart';
-import '../item/item_add_page.dart';
-import '../item/item_details_page.dart';
-import '../item/item_page.dart';
 import '../product/product_page.dart';
 import '../transaction/transaction_page.dart';
 import '../xxx/xxx_page.dart';
@@ -23,30 +21,6 @@ import '../xxx/xxx_page.dart';
       page: HomePage,
       initial: true,
       children: [
-        // Item
-        AutoRoute(
-          path: RoutePath.appRouteItemList,
-          name: 'ItemListRouter',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              path: RoutePath.appRouteBlanc,
-              page: ItemListPage,
-            ),
-            AutoRoute(
-              path: RoutePath.appRouteItemDetails,
-              page: ItemDetailsPage,
-            ),
-            RedirectRoute(
-              path: RoutePath.appRouteAsterisk,
-              redirectTo: RoutePath.appRouteBlanc,
-            ),
-            AutoRoute(
-              path: RoutePath.appRouteItemAdd,
-              page: ItemAddPage,
-            ),
-          ],
-        ),
         // Product
         AutoRoute(
           path: RoutePath.appRouteProductList,
@@ -86,10 +60,10 @@ import '../xxx/xxx_page.dart';
             //   name: "BazaarDetailsRouter",
             //   page: BazaarDetailsPage,
             // children: [
-            //   AutoRoute(
-            //     path: RoutePath.appRouteBazaarUpdate,
-            //     page: BazaarUpdatePage,
-            //   ),
+            AutoRoute(
+              path: RoutePath.appRouteBazaarEdit,
+              page: BazaarEditPage,
+            ),
             // ],
             // ),
             AutoRoute(

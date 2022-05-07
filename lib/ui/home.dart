@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../ui/routes/app_route.gr.dart';
+import 'common/drawer.dart';
 import 'theme/app_theme.dart';
 
 class HomePage extends ConsumerWidget {
@@ -14,9 +15,31 @@ class HomePage extends ConsumerWidget {
 
     return AutoTabsScaffold(
       backgroundColor: theme.appColors.background,
-      // appBarBuilder: (_, tabsRouter) {
-      //   return Header(title: 'Jumble Moll');
-      // },
+      appBarBuilder: (_, tabsRouter) {
+        return AppBar(
+          backgroundColor: theme.appColors.primary,
+          foregroundColor: theme.appColors.onPrimary,
+          elevation: 0,
+          title: Text(
+            'Jumble Moll',
+            style: theme.textTheme.h50,
+          ),
+          centerTitle: true,
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.account_circle),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+          // const AutoBackButton(),
+        );
+      },
+      drawer: const CustomDrawer(),
       homeIndex: 1,
       routes: const [
         ProductRouter(),

@@ -16,7 +16,6 @@ class Footer extends ConsumerWidget {
       backgroundColor: theme.appColors.background,
       homeIndex: 1,
       routes: const [
-        ItemListRouter(),
         BazaarListRouter(),
         // UserRoute(),
         // PickerRouter(),

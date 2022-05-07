@@ -135,11 +135,8 @@ class BazaarDetailsPage extends HookConsumerWidget {
                           onPrimary: theme.appColors.onPrimary,
                         ),
                         child: const Text('更新'),
-                        onPressed: () {
-                          // ref
-                          //     .read(bazaarDetailsProvider.notifier)
-                          //     .setDetail(bazaar);
-                          appRoute.push(const BazaarAddRouter());
+                        onPressed: () async {
+                          appRoute.push(BazaarEditRoute(index: index));
                         },
                       ),
                     ],
