@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../gen/assets.gen.dart';
+import '../common/drawer.dart';
 import '../common/image_crop_controller.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
@@ -73,7 +74,23 @@ class BazaarEditPage extends HookConsumerWidget {
               style: theme.textTheme.h40,
             ),
             centerTitle: true,
-            leading: const AutoBackButton(),
+            leading: Row(
+              children: [
+                const AutoBackButton(),
+                Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.account_circle),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
+                    );
+                  },
+                ),
+              ],
+            ),
             actions: [
               IconButton(
                 onPressed: () async {
@@ -102,6 +119,7 @@ class BazaarEditPage extends HookConsumerWidget {
             ],
           ),
           // Header(title: 'Event'),
+          drawer: const CustomDrawer(),
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
