@@ -33,23 +33,7 @@ class BazaarDetailsPage extends HookConsumerWidget {
           appBar: AppBar(
             backgroundColor: theme.appColors.primary,
             foregroundColor: theme.appColors.onPrimary,
-            leading: Row(
-              children: [
-                const AutoBackButton(),
-                Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.account_circle),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      tooltip: MaterialLocalizations.of(context)
-                          .openAppDrawerTooltip,
-                    );
-                  },
-                ),
-              ],
-            ),
+            leading: const AutoBackButton(),
             // automaticallyImplyLeading: false,
             title: Text(
               bazaar.name.toString(),

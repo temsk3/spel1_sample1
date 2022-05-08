@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../theme/app_theme.dart';
 
-class Header extends ConsumerWidget with PreferredSizeWidget {
-  Header({Key? key, required this.title}) : super(key: key);
+class TopHeader extends ConsumerWidget with PreferredSizeWidget {
+  TopHeader({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -23,7 +22,17 @@ class Header extends ConsumerWidget with PreferredSizeWidget {
         style: theme.textTheme.h40,
       ),
       centerTitle: true,
-      leading: const AutoBackButton(),
+      leading: Builder(
+        builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          );
+        },
+      ),
     );
   }
 }

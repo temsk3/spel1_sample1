@@ -74,23 +74,7 @@ class BazaarAddPage extends HookConsumerWidget {
           style: theme.textTheme.h40,
         ),
         centerTitle: true,
-        leading: Row(
-          children: [
-            const AutoBackButton(),
-            Builder(
-              builder: (context) {
-                return IconButton(
-                  icon: const Icon(Icons.account_circle),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  tooltip:
-                      MaterialLocalizations.of(context).openAppDrawerTooltip,
-                );
-              },
-            ),
-          ],
-        ),
+        leading: const AutoBackButton(),
         actions: [
           IconButton(
             onPressed: () async {
@@ -128,12 +112,38 @@ class BazaarAddPage extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (ref.watch(imageCropProvider.select((s) => s.croppedData)) !=
-                    null)
-                  SizedBox(
+                InkWell(
+                  onTap: () async {
+                    _form.currentState!.save();
+                    final XFile? _image =
+                        await _picker.pickImage(source: ImageSource.gallery);
+                    await ref
+                        .read(imageCropProvider.notifier)
+                        .pickImage(_image);
+                    await appRoute.push(const ImageCropRoute());
+                  },
+                  child: Container(
                     height: 100,
-                    child: _photoImage,
+                    color: theme.appColors.primary,
+                    alignment: Alignment.center,
+                    child:
+                        // const Icon(
+                        //   Icons.add_circle,
+                        //   semanticLabel: 'image',
+                        // ),
+                        ref.watch(imageCropProvider
+                                    .select((s) => s.croppedData)) !=
+                                null
+                            ? SizedBox.expand(child: _photoImage)
+                            : const Icon(Icons.add_circle),
                   ),
+                ),
+                // if (ref.watch(imageCropProvider.select((s) => s.croppedData)) !=
+                //     null)
+                //   SizedBox(
+                //     height: 100,
+                //     child: _photoImage,
+                //   ),
                 // if (_photoImage != null) _photoImage,
 
                 // const Padding(
@@ -335,27 +345,27 @@ class BazaarAddPage extends HookConsumerWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: theme.appColors.primary,
-                        onPrimary: theme.appColors.onPrimary,
-                      ),
-                      child: const Text('image'),
-                      onPressed: () async {
-                        _form.currentState!.save();
-                        final XFile? _image = await _picker.pickImage(
-                            source: ImageSource.gallery);
-                        await ref
-                            .read(imageCropProvider.notifier)
-                            .pickImage(_image);
-                        await appRoute.push(const ImageCropRoute());
-                      },
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     ElevatedButton(
+                //       style: ElevatedButton.styleFrom(
+                //         primary: theme.appColors.primary,
+                //         onPrimary: theme.appColors.onPrimary,
+                //       ),
+                //       child: const Text('image'),
+                //       onPressed: () async {
+                //         _form.currentState!.save();
+                //         final XFile? _image = await _picker.pickImage(
+                //             source: ImageSource.gallery);
+                //         await ref
+                //             .read(imageCropProvider.notifier)
+                //             .pickImage(_image);
+                //         await appRoute.push(const ImageCropRoute());
+                //       },
+                //     ),
+                //   ],
+                // ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,22 +28,17 @@ class ProductPage extends HookConsumerWidget {
               toolbarHeight: 30,
               backgroundColor: theme.appColors.primary,
               foregroundColor: theme.appColors.onPrimary,
-              leading: Row(
-                children: [
-                  const AutoBackButton(),
-                  Builder(
-                    builder: (context) {
-                      return IconButton(
-                        icon: const Icon(Icons.account_circle),
-                        onPressed: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        tooltip: MaterialLocalizations.of(context)
-                            .openAppDrawerTooltip,
-                      );
+              leading: Builder(
+                builder: (context) {
+                  return IconButton(
+                    icon: const Icon(Icons.account_circle),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
                     },
-                  ),
-                ],
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  );
+                },
               ),
               title: Text(
                 // l10n.productlist,

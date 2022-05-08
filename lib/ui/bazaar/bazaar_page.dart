@@ -3,7 +3,7 @@ import 'package:flutter_application_1/ui/bazaar/widget/bazaar_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../common/drawer.dart';
-import '../common/header.dart';
+import '../common/header_top.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../routes/app_route.gr.dart';
@@ -25,7 +25,7 @@ class BazaarListPage extends HookConsumerWidget {
       data: (data) {
         return Scaffold(
           backgroundColor: theme.appColors.background,
-          appBar: Header(title: 'All Event'),
+          appBar: TopHeader(title: 'All Event'),
           drawer: const CustomDrawer(),
           body: SafeArea(
             child: RefreshIndicator(

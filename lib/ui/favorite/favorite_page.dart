@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../common/drawer.dart';
-import '../common/header.dart';
+import '../common/header_top.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -17,7 +17,7 @@ class FavoritePage extends HookConsumerWidget {
     final appRoute = useRouter();
 
     return Scaffold(
-      appBar: Header(title: 'Products you care about'),
+      appBar: TopHeader(title: 'Products you care about'),
       drawer: const CustomDrawer(),
       // appBar: AppBar(
       //   backgroundColor: theme.appColors.primary,

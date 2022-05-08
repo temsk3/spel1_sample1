@@ -10,12 +10,10 @@ import '../../theme/app_theme.dart';
 import '../bazaar_view_model.dart';
 
 class EventCard extends HookConsumerWidget {
-  int index = 0;
-  Bazaar bazaar = Bazaar.empty();
-  EventCard({required int index, required Bazaar bazaar}) {
-    this.index = index;
-    this.bazaar = bazaar;
-  }
+  EventCard({Key? key, required this.index, required this.bazaar})
+      : super(key: key);
+  int index;
+  Bazaar bazaar;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);

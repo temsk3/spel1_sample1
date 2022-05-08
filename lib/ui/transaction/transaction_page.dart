@@ -3,7 +3,7 @@ import 'package:flutter_application_1/ui/transaction/widget/ticket.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../common/drawer.dart';
-import '../common/header.dart';
+import '../common/header_top.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -18,7 +18,7 @@ class TransactionPage extends HookConsumerWidget {
     final appRoute = useRouter();
 
     return Scaffold(
-      appBar: Header(title: 'List'),
+      appBar: TopHeader(title: 'List'),
       drawer: const CustomDrawer(),
       // appBar: AppBar(
       //   backgroundColor: theme.appColors.primary,

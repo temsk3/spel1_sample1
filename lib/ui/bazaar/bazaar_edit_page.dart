@@ -74,23 +74,7 @@ class BazaarEditPage extends HookConsumerWidget {
               style: theme.textTheme.h40,
             ),
             centerTitle: true,
-            leading: Row(
-              children: [
-                const AutoBackButton(),
-                Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.account_circle),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      tooltip: MaterialLocalizations.of(context)
-                          .openAppDrawerTooltip,
-                    );
-                  },
-                ),
-              ],
-            ),
+            leading: const AutoBackButton(),
             actions: [
               IconButton(
                 onPressed: () async {
