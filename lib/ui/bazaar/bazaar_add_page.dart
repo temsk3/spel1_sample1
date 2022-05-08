@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../../data/model/bazaar/bazaar_model.dart';
 import '../../gen/assets.gen.dart';
+import '../common/drawer.dart';
 import '../common/image_crop_controller.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
@@ -73,7 +74,23 @@ class BazaarAddPage extends HookConsumerWidget {
           style: theme.textTheme.h40,
         ),
         centerTitle: true,
-        leading: const AutoBackButton(),
+        leading: Row(
+          children: [
+            const AutoBackButton(),
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: const Icon(Icons.account_circle),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -100,6 +117,7 @@ class BazaarAddPage extends HookConsumerWidget {
           ),
         ],
       ),
+      drawer: const CustomDrawer(),
       // Header(title: 'Event'),
       body: SafeArea(
         child: SingleChildScrollView(

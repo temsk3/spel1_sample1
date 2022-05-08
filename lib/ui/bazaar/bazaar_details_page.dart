@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../common/alertdialog.dart';
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../routes/app_route.gr.dart';
@@ -32,8 +33,24 @@ class BazaarDetailsPage extends HookConsumerWidget {
           appBar: AppBar(
             backgroundColor: theme.appColors.primary,
             foregroundColor: theme.appColors.onPrimary,
-            leading: const AutoBackButton(),
-            automaticallyImplyLeading: false,
+            leading: Row(
+              children: [
+                const AutoBackButton(),
+                Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.account_circle),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
+                    );
+                  },
+                ),
+              ],
+            ),
+            // automaticallyImplyLeading: false,
             title: Text(
               bazaar.name.toString(),
               // style: theme.textTheme.h50,
@@ -49,6 +66,7 @@ class BazaarDetailsPage extends HookConsumerWidget {
                   ))
                 : null,
           ),
+          drawer: const CustomDrawer(),
           body: SafeArea(
             child: Center(
               child: Column(
