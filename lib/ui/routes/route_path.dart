@@ -5,10 +5,11 @@ class RoutePath {
   // Product
   static const appRouteProductList = 'product';
   static const appRouteProductDetails = ':productId';
-  // Item
-  static const appRouteItemList = 'items';
-  static const appRouteItemDetails = ':itemId';
-  static const appRouteItemAdd = 'itemAdd';
+  static const appRouteProductAll = 'productAll';
+  static const appRouteProductFoods = ':productFoods';
+  static const appRouteProductGoods = ':productGoods';
+  static const appRouteProductEdit = 'productEdit';
+  static const appRouteProductAdd = 'roductAdd';
   // User
   static const appRouteUser = 'users';
   // Bazaar
@@ -20,8 +21,6 @@ class RoutePath {
   static const appRouteFavorite = 'favorite';
   // transaction
   static const appRouteTicket = 'ticket';
-  //photo
-  static const appRoutePhoto = 'photo';
   //image crop
   static const appRouteImageCrop = 'crop';
   //auth

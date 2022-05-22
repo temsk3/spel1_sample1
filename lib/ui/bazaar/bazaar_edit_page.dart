@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../gen/assets.gen.dart';
 import '../common/drawer.dart';
 import '../common/image_crop_controller.dart';
 import '../hooks/use_l10n.dart';
@@ -34,16 +33,12 @@ class BazaarEditPage extends HookConsumerWidget {
 
     //
     final ImagePicker _picker = ImagePicker();
-    Image _photoImage = Assets.img.flutterIcon.image();
     Uint8List? picture;
     if (ref.watch(imageCropProvider.select((s) => s.croppedData)) != null) {
-      _photoImage = Image.memory(
-        ref.watch(imageCropProvider.select((s) => s.croppedData)) as Uint8List,
-        fit: BoxFit.cover,
-      );
-      picture = ref.watch(imageCropProvider.select((s) => s.croppedData))
-          as Uint8List;
+      picture = ref
+          .watch(imageCropProvider.select((s) => s.croppedData as Uint8List));
     }
+
     return state.when(
       data: (data) {
         final bazaar = data.bazaarList[index];
@@ -64,6 +59,7 @@ class BazaarEditPage extends HookConsumerWidget {
             text: dateFormat.format(
                 bazaar.eventTo != null ? bazaar.eventTo as DateTime : _now));
         final _place = useTextEditingController(text: bazaar.place);
+        final _oldPicture = useTextEditingController(text: bazaar.pictureURL);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: theme.appColors.primary,
@@ -74,7 +70,7 @@ class BazaarEditPage extends HookConsumerWidget {
               style: theme.textTheme.h40,
             ),
             centerTitle: true,
-            leading: const AutoBackButton(),
+            leading: const AutoLeadingButton(),
             actions: [
               IconButton(
                 onPressed: () async {
@@ -94,8 +90,14 @@ class BazaarEditPage extends HookConsumerWidget {
                       eventTo: DateTime.parse(_eventTo.text),
                       place: _place.text,
                     );
-                    viewModel.updateBazaar(updateBazaar: updateBazaar);
-                    appRoute.pop(BazaarDetailsRouter(index: index));
+                    viewModel.updateBazaar(
+                      updateBazaar: updateBazaar,
+                      newPicture: picture,
+                      oldPicture: bazaar.pictureName,
+                    );
+                    // viewModel.readBazaar();
+                    // appRoute.pop(BazaarDetailsRouter(index: index));
+                    appRoute.pop();
                   }
                 },
                 icon: const Icon(Icons.save),
@@ -107,37 +109,39 @@ class BazaarEditPage extends HookConsumerWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
-              // child: BazaarForm(bazaar: Bazaar.empty()
               child: Form(
                 key: _form,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 100,
-                      color: theme.appColors.primary,
-                      alignment: Alignment.center,
-                      child: const Icon(
-                        Icons.add_circle,
-                        semanticLabel: 'image',
+                    InkWell(
+                      onTap: () async {
+                        _form.currentState!.save();
+                        final XFile? _image = await _picker.pickImage(
+                            source: ImageSource.gallery);
+                        await ref
+                            .read(imageCropProvider.notifier)
+                            .pickImage(_image);
+                        await appRoute.push(const ImageCropRoute());
+                      },
+                      child: Container(
+                        height: 100,
+                        width: 300,
+                        color: theme.appColors.primary,
+                        alignment: Alignment.center,
+                        child: (ref.watch(imageCropProvider
+                                    .select((s) => s.croppedData)) ==
+                                null)
+                            ? (_oldPicture.text == '')
+                                ? const Icon(Icons.add_photo_alternate)
+                                : SizedBox.expand(
+                                    child: Image.network(_oldPicture.text))
+                            : SizedBox.expand(
+                                child: Image.memory(ref.watch(imageCropProvider
+                                        .select((s) => s.croppedData))
+                                    as Uint8List)),
                       ),
                     ),
-                    if (ref.watch(
-                            imageCropProvider.select((s) => s.croppedData)) !=
-                        null)
-                      SizedBox(
-                        height: 100,
-                        child: _photoImage,
-                      ),
-                    // if (_photoImage != null) _photoImage,
-
-                    // const Padding(
-                    //   padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 30.0),
-                    //   child: Text(
-                    //     'イベントの作成',
-                    //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    //   ),
-                    // ),
                     TextFormField(
                       controller: _name,
                       decoration: const InputDecoration(labelText: 'title'),
@@ -328,30 +332,6 @@ class BazaarEditPage extends HookConsumerWidget {
                       onSaved: (value) {
                         _place.text = value.toString();
                       },
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
-                          child: const Text('image'),
-                          onPressed: () async {
-                            _form.currentState!.save();
-                            final XFile? _image = await _picker.pickImage(
-                                source: ImageSource.gallery);
-                            await ref
-                                .read(imageCropProvider.notifier)
-                                .pickImage(_image);
-                            await appRoute.push(const ImageCropRoute());
-                          },
-                        ),
-                      ],
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),

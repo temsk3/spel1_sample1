@@ -23,29 +23,43 @@ class Product with _$Product {
 
   const factory Product({
     String? id,
+    String? organizer,
     int? exchangeNumber,
     required String? name,
+    required String? genre,
     required String? desc,
     required int? stock,
     required int? price,
-    String? picture,
+    String? picture1Name,
+    String? picture1URL,
+    String? picture2Name,
+    String? picture2URL,
+    String? picture3Name,
+    String? picture3URL,
     @timestampkey required DateTime? expirationFrom,
     @timestampkey required DateTime? expirationTo,
+    required bool? isPublished,
     @timestampkey DateTime? createdAt,
     @timestampkey DateTime? updatedAt,
     @timestampkey DateTime? deletedAt,
-    required bool? isActive,
   }) = _Product;
 
   factory Product.empty() => const Product(
+        organizer: '',
         name: '',
+        genre: 'Goods',
         desc: '',
         stock: 0,
         price: 0,
-        picture: '',
+        picture1Name: '',
+        picture1URL: '',
+        picture2Name: '',
+        picture2URL: '',
+        picture3Name: '',
+        picture3URL: '',
         expirationFrom: null,
         expirationTo: null,
-        isActive: true,
+        isPublished: true,
       );
 
   factory Product.fromJson(Map<String, dynamic> json) =>

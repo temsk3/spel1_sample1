@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/model/bazaar/bazaar_model.dart';
-import '../../gen/assets.gen.dart';
 import '../common/drawer.dart';
 import '../common/image_crop_controller.dart';
 import '../hooks/use_l10n.dart';
@@ -52,16 +51,7 @@ class BazaarAddPage extends HookConsumerWidget {
     final _place = useTextEditingController(text: bazaar.place);
     //
     final ImagePicker _picker = ImagePicker();
-    Image _photoImage = Assets.img.flutterIcon.image();
-    Uint8List? picture;
-    if (ref.watch(imageCropProvider.select((s) => s.croppedData)) != null) {
-      _photoImage = Image.memory(
-        ref.watch(imageCropProvider.select((s) => s.croppedData)) as Uint8List,
-        fit: BoxFit.cover,
-      );
-      picture = ref.watch(imageCropProvider.select((s) => s.croppedData))
-          as Uint8List;
-    }
+
     // return state.when(
     //   data: (data) {
     return Scaffold(
@@ -74,7 +64,7 @@ class BazaarAddPage extends HookConsumerWidget {
           style: theme.textTheme.h40,
         ),
         centerTitle: true,
-        leading: const AutoBackButton(),
+        leading: const AutoLeadingButton(),
         actions: [
           IconButton(
             onPressed: () async {
@@ -92,7 +82,13 @@ class BazaarAddPage extends HookConsumerWidget {
                   eventFrom: DateTime.parse(_eventFrom.text),
                   eventTo: DateTime.parse(_eventTo.text),
                   place: _place.text,
-                  picture: picture,
+                  picture: (ref.watch(
+                              imageCropProvider.select((s) => s.croppedData)) ==
+                          null)
+                      ? null
+                      : (ref.watch(
+                              imageCropProvider.select((s) => s.croppedData))
+                          as Uint8List),
                 );
                 appRoute.pop(BazaarListPage);
               }
@@ -102,7 +98,6 @@ class BazaarAddPage extends HookConsumerWidget {
         ],
       ),
       drawer: const CustomDrawer(),
-      // Header(title: 'Event'),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -124,35 +119,20 @@ class BazaarAddPage extends HookConsumerWidget {
                   },
                   child: Container(
                     height: 100,
+                    width: 300,
                     color: theme.appColors.primary,
                     alignment: Alignment.center,
-                    child:
-                        // const Icon(
-                        //   Icons.add_circle,
-                        //   semanticLabel: 'image',
-                        // ),
-                        ref.watch(imageCropProvider
-                                    .select((s) => s.croppedData)) !=
-                                null
-                            ? SizedBox.expand(child: _photoImage)
-                            : const Icon(Icons.add_circle),
+                    child: ref.watch(imageCropProvider
+                                .select((s) => s.croppedData)) ==
+                            null
+                        ? const Icon(Icons.add_photo_alternate)
+                        : SizedBox.expand(
+                            child: Image.memory(
+                            ref.watch(imageCropProvider
+                                .select((s) => s.croppedData)) as Uint8List,
+                          )),
                   ),
                 ),
-                // if (ref.watch(imageCropProvider.select((s) => s.croppedData)) !=
-                //     null)
-                //   SizedBox(
-                //     height: 100,
-                //     child: _photoImage,
-                //   ),
-                // if (_photoImage != null) _photoImage,
-
-                // const Padding(
-                //   padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 30.0),
-                //   child: Text(
-                //     'イベントの作成',
-                //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                //   ),
-                // ),
                 TextFormField(
                   controller: _name,
                   decoration: const InputDecoration(labelText: 'title'),
@@ -165,9 +145,9 @@ class BazaarAddPage extends HookConsumerWidget {
                   onSaved: (value) {
                     _name.text = value.toString();
                   },
-                  onChanged: (value) {
-                    // _name.text = value.toString();
-                  },
+                  // onChanged: (value) {
+                  // _name.text = value.toString();
+                  // },
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -218,7 +198,6 @@ class BazaarAddPage extends HookConsumerWidget {
                         },
                         onSaved: (value) {
                           _salesStart.text = value.toString();
-                          // DateTime.parse(value) as TextEditingValue;
                         },
                       ),
                     ),
@@ -240,7 +219,6 @@ class BazaarAddPage extends HookConsumerWidget {
                         },
                         onSaved: (value) {
                           _salesEnd.text = value.toString();
-                          // DateTime.parse(value) as TextEditingValue;
                         },
                       ),
                     ),
@@ -294,7 +272,6 @@ class BazaarAddPage extends HookConsumerWidget {
                         },
                         onSaved: (value) {
                           _eventFrom.text = value.toString();
-                          // DateTime.parse(value);
                         },
                       ),
                     ),
@@ -320,7 +297,6 @@ class BazaarAddPage extends HookConsumerWidget {
                         },
                         onSaved: (value) {
                           _eventTo.text = value.toString();
-                          // DateTime.parse(value) as TextEditingValue;
                         },
                       ),
                     ),
@@ -345,30 +321,6 @@ class BazaarAddPage extends HookConsumerWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(
-                //         primary: theme.appColors.primary,
-                //         onPrimary: theme.appColors.onPrimary,
-                //       ),
-                //       child: const Text('image'),
-                //       onPressed: () async {
-                //         _form.currentState!.save();
-                //         final XFile? _image = await _picker.pickImage(
-                //             source: ImageSource.gallery);
-                //         await ref
-                //             .read(imageCropProvider.notifier)
-                //             .pickImage(_image);
-                //         await appRoute.push(const ImageCropRoute());
-                //       },
-                //     ),
-                //   ],
-                // ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                ),
                 TextFormField(
                   controller: _message,
                   maxLines: 2,
@@ -389,50 +341,6 @@ class BazaarAddPage extends HookConsumerWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
-                // Row(
-                //   children: [
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(
-                //         primary: theme.appColors.primary,
-                //         onPrimary: theme.appColors.onPrimary,
-                //       ),
-                //       onPressed: () {
-                //         appRoute.pop(BazaarListPage);
-                //       },
-                //       child: const Text('戻る'),
-                //     ),
-                //     const Padding(
-                //       padding: EdgeInsets.symmetric(horizontal: 5.0),
-                //     ),
-                //     ElevatedButton(
-                //       style: ElevatedButton.styleFrom(
-                //         primary: theme.appColors.primary,
-                //         onPrimary: theme.appColors.onPrimary,
-                //       ),
-                //       child: const Text('登録'),
-                //       onPressed: () async {
-                //         if (_form.currentState!.validate()) {
-                //           _form.currentState!.save();
-                //           ScaffoldMessenger.of(context).showSnackBar(
-                //             const SnackBar(content: Text('Processing Data')),
-                //           );
-                //           viewModel.addBazaarEvent(
-                //             organizer: uid,
-                //             name: _name.text,
-                //             message: _message.text,
-                //             salesStart: DateTime.parse(_salesStart.text),
-                //             salesEnd: DateTime.parse(_salesEnd.text),
-                //             eventFrom: DateTime.parse(_eventFrom.text),
-                //             eventTo: DateTime.parse(_eventTo.text),
-                //             place: _place.text,
-                //             picture: picture,
-                //           );
-                //           appRoute.pop(BazaarListPage);
-                //         }
-                //       },
-                //     ),
-                //   ],
-                // )
               ],
             ),
           ),

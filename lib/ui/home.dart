@@ -63,7 +63,7 @@ class HomePage extends ConsumerWidget {
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_basket),
-              label: 'All Items',
+              label: 'Item List',
               backgroundColor: theme.appColors.primary,
             ),
             BottomNavigationBarItem(

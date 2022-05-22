@@ -28,12 +28,14 @@ class BazaarListPage extends HookConsumerWidget {
           appBar: TopHeader(title: 'All Event'),
           drawer: const CustomDrawer(),
           body: SafeArea(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                viewModel.readBazaar();
-              },
-              child: Center(
+            child: Center(
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  // ref.refresh(bazzarViewModelProvider);
+                  viewModel.readBazaar();
+                },
                 child: ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: data.bazaarList.length,
                   itemBuilder: (_, index) {
                     final bazaar = data.bazaarList[index];

@@ -31,7 +31,8 @@ class Bazaar with _$Bazaar {
     @timestampkey required DateTime? eventFrom,
     @timestampkey required DateTime? eventTo,
     required String? place,
-    String? picture,
+    String? pictureName,
+    String? pictureURL,
     @timestampkey DateTime? createdAt,
     @timestampkey DateTime? updatedAt,
     @timestampkey DateTime? deletedAt,
@@ -47,7 +48,6 @@ class Bazaar with _$Bazaar {
         eventFrom: null,
         eventTo: null,
         place: '',
-        picture: '',
       );
 
   factory Bazaar.fromJson(Map<String, dynamic> json) => _$BazaarFromJson(json);

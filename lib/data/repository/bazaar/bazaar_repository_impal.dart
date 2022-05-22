@@ -45,10 +45,14 @@ class BazaarRepositoryImpl implements BazaarRepository {
   Future<Result<String>> createBazaar({required Bazaar bazaar}) async {
     return Result.guardFuture(
       () async {
-        // アイテムを登録
+        // 登録
         final docRef = await _db
             .collection(_collectionPath)
             .add(bazaar.toJson()..remove('id'));
+        await docRef.set({
+          'createdAt': FieldValue.serverTimestamp(),
+          'updatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
         return docRef.id;
       },
     );
@@ -59,10 +63,11 @@ class BazaarRepositoryImpl implements BazaarRepository {
     return Result.guardFuture(
       () async {
         // アイテムを更新
-        await _db
-            .collection(_collectionPath)
-            .doc(bazaar.id)
-            .update(bazaar.toJson());
+        _db.collection(_collectionPath).doc(bazaar.id)
+          ..update(bazaar.toJson())
+          ..set({
+            'updatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
       },
     );
   }

@@ -8,6 +8,15 @@ import 'product_repository.dart';
 final productRepositoryProvider =
     Provider<ProductRepository>((ref) => ProductRepositoryImpl(ref.read));
 
+final productListStreamProvider = StreamProvider.autoDispose((ref) {
+  CollectionReference ref = FirebaseFirestore.instance.collection('product');
+  return ref.snapshots().map((snapshot) {
+    return snapshot.docs
+        .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+  });
+});
+
 class ProductRepositoryImpl implements ProductRepository {
   ProductRepositoryImpl(this._reader);
   final Reader _reader;
@@ -38,6 +47,10 @@ class ProductRepositoryImpl implements ProductRepository {
         final docRef = await _db
             .collection(_collectionPath)
             .add(product.toJson()..remove('id'));
+        await docRef.set({
+          'createdAt': FieldValue.serverTimestamp(),
+          'updatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
         return docRef.id;
       },
     );
@@ -48,10 +61,11 @@ class ProductRepositoryImpl implements ProductRepository {
     return Result.guardFuture(
       () async {
         // アイテムを更新
-        await _db
-            .collection(_collectionPath)
-            .doc(product.id)
-            .update(product.toJson());
+        _db.collection(_collectionPath).doc(product.id)
+          ..update(product.toJson())
+          ..set({
+            'updatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
       },
     );
   }

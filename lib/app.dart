@@ -15,11 +15,14 @@ class MyApp extends HookConsumerWidget {
   final firebaseinitializerProvider = FutureProvider<FirebaseApp>((ref) async {
     return await Firebase.initializeApp();
   });
+
+  final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
-    final appRouter = useMemoized(() => AppRouter());
+    final appRouter = useMemoized(() => _appRouter);
     final initialize = ref.watch(firebaseinitializerProvider);
 
     return ResponsiveSizer(
@@ -32,8 +35,8 @@ class MyApp extends HookConsumerWidget {
         locale: DevicePreview.locale(context),
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
-        routeInformationParser: appRouter.defaultRouteParser(),
         routerDelegate: appRouter.delegate(),
+        routeInformationParser: appRouter.defaultRouteParser(),
       ),
     );
   }

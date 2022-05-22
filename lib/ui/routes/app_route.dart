@@ -9,6 +9,12 @@ import '../bazaar/bazaar_page.dart';
 import '../common/image_crop.dart';
 import '../favorite/favorite_page.dart';
 import '../home.dart';
+import '../product/product_add_page.dart';
+import '../product/product_details_page.dart';
+import '../product/product_edit_page.dart';
+import '../product/product_list_all.dart';
+import '../product/product_list_foods.dart';
+import '../product/product_list_goods.dart';
 import '../product/product_page.dart';
 import '../transaction/transaction_page.dart';
 import '../xxx/xxx_page.dart';
@@ -27,22 +33,40 @@ import '../xxx/xxx_page.dart';
           name: 'ProductRouter',
           page: EmptyRouterPage,
           children: [
-            AutoRoute(
-              path: RoutePath.appRouteBlanc,
-              page: ProductPage,
-            ),
-            // AutoRoute(
-            //   path: RoutePath.appRouteProductDetails,
-            //   page: ProductDetailsPage,
-            // ),
             RedirectRoute(
               path: RoutePath.appRouteAsterisk,
               redirectTo: RoutePath.appRouteBlanc,
             ),
-            // AutoRoute(
-            //   path: RoutePath.appRouteProductmAdd,
-            //   page: ProductAddPage,
-            // ),
+            AutoRoute(
+              path: RoutePath.appRouteBlanc,
+              page: ProductPage,
+              children: [
+                AutoRoute(
+                  path: RoutePath.appRouteProductAll,
+                  page: ProductAllPage,
+                ),
+                AutoRoute(
+                  path: RoutePath.appRouteProductFoods,
+                  page: ProductFoodsPage,
+                ),
+                AutoRoute(
+                  path: RoutePath.appRouteProductGoods,
+                  page: ProductGoodsPage,
+                ),
+              ],
+            ),
+            AutoRoute(
+              path: RoutePath.appRouteProductDetails,
+              page: ProductDetailsPage,
+            ),
+            AutoRoute(
+              path: RoutePath.appRouteProductEdit,
+              page: ProductEditPage,
+            ),
+            AutoRoute(
+              path: RoutePath.appRouteProductAdd,
+              page: ProductAddPage,
+            ),
           ],
         ),
         // Bazaar
@@ -55,45 +79,43 @@ import '../xxx/xxx_page.dart';
               path: RoutePath.appRouteBlanc,
               page: BazaarListPage,
             ),
-            // AutoRoute(
-            //   path: RoutePath.appRouteBazaarDetails,
-            //   name: "BazaarDetailsRouter",
-            //   page: BazaarDetailsPage,
-            // children: [
-            AutoRoute(
-              path: RoutePath.appRouteBazaarEdit,
-              page: BazaarEditPage,
-            ),
-            // ],
-            // ),
-            AutoRoute(
-              path: RoutePath.appRouteBazaarDetails,
-              name: "BazaarDetailsRouter",
-              page: BazaarDetailsPage,
-            ),
             RedirectRoute(
               path: RoutePath.appRouteAsterisk,
               redirectTo: RoutePath.appRouteBlanc,
             ),
             AutoRoute(
+              path: RoutePath.appRouteBazaarDetails,
+              name: "BazaarDetailsRouter",
+              page: BazaarDetailsPage,
+            ),
+            AutoRoute(
+              path: RoutePath.appRouteBazaarEdit,
+              page: BazaarEditPage,
+            ),
+            AutoRoute(
               path: RoutePath.appRouteBazaarAdd,
               name: "BazaarAddRouter",
-              page: EmptyRouterPage,
-              children: [
-                AutoRoute(
-                  path: RoutePath.appRouteBlanc,
-                  page: BazaarAddPage,
-                ),
-                RedirectRoute(
-                  path: RoutePath.appRouteAsterisk,
-                  redirectTo: RoutePath.appRouteBlanc,
-                ),
-                AutoRoute(
-                  path: RoutePath.appRouteImageCrop,
-                  page: ImageCropPage,
-                ),
-              ],
+              page: BazaarAddPage,
             ),
+            // AutoRoute(
+            //   path: RoutePath.appRouteBazaarAdd,
+            //   name: "BazaarAddRouter",
+            //   page: EmptyRouterPage,
+            //   children: [
+            //     AutoRoute(
+            //       path: RoutePath.appRouteBlanc,
+            //       page: BazaarAddPage,
+            //     ),
+            //     RedirectRoute(
+            //       path: RoutePath.appRouteAsterisk,
+            //       redirectTo: RoutePath.appRouteBlanc,
+            //     ),
+            AutoRoute(
+              path: RoutePath.appRouteImageCrop,
+              page: ImageCropPage,
+            ),
+            // ],
+            // ),
           ],
         ),
         // AutoRoute(

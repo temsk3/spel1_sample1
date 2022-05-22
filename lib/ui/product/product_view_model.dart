@@ -21,7 +21,7 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
         super(const AsyncLoading()) {
     readProduct();
   }
-
+  final String _path = 'products';
   // repository
   late final ProductRepository productRepository =
       _ref.read(productRepositoryProvider);
@@ -44,25 +44,38 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
   }
 
   // 追加
-  Future<void> addProductEvent({
+  Future<void> addProduct({
+    required String organizer,
     required String name,
+    required String genre,
     required String desc,
     required int stock,
     required int price,
     required DateTime expirationFrom,
     required DateTime expirationTo,
-    required bool isActive,
-    required Uint8List? picture,
+    required bool isPublished,
+    required Uint8List? picture1,
+    // required Uint8List? picture2,
+    // required Uint8List? picture3,
   }) async {
-    final product = Product(
+    var product = Product(
+      organizer: organizer,
       name: name,
+      genre: genre,
       desc: desc,
       stock: stock,
       price: price,
       expirationFrom: expirationFrom,
       expirationTo: expirationTo,
-      isActive: isActive,
+      isPublished: isPublished,
     );
+    if (picture1 != null) {
+      product = await pictureAdd(
+        path: _path,
+        newPicture1: picture1,
+        updateProduct: product,
+      );
+    }
     final productId = await productRepository.createProduct(product: product);
     productId.when(
       success: (id) async {
@@ -75,20 +88,6 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
               ),
           ),
         );
-        if (picture != null) {
-          final image =
-              await imageRepository.uploadImage(image: picture, id: id);
-          image.when(
-            success: (imagePath) {
-              // Product.copyWith(id:id,picture: imagePath);
-              updateProduct(
-                  updateProduct: product.copyWith(id: id, picture: imagePath));
-            },
-            failure: (error) {
-              state = AsyncValue.error(error);
-            },
-          );
-        }
       },
       failure: (error) {
         state = AsyncValue.error(error);
@@ -97,7 +96,24 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
   }
 
   // 更新
-  Future<void> updateProduct({required Product updateProduct}) async {
+  Future<void> updateProduct({
+    required Product updateProduct,
+    Uint8List? newPicture1,
+    String? oldPicture1,
+  }) async {
+    if (newPicture1 != null) {
+      if (oldPicture1 != null) {
+        await imageRepository.deleteImage(
+          path: _path,
+          pictureName: updateProduct.picture1Name.toString(),
+        );
+      }
+      updateProduct = await pictureAdd(
+        path: _path,
+        newPicture1: newPicture1,
+        updateProduct: updateProduct,
+      );
+    }
     final result =
         await productRepository.updateProduct(product: updateProduct);
     result.when(
@@ -124,16 +140,14 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
     result.when(
       success: (data) async {
         final productList = state.value!.productList;
-        for (var event in productList) {
-          if (event.id == productId && event.picture != null) {
-            final imageResult =
-                await imageRepository.deleteImage(id: productId);
-            imageResult.when(
-              success: (data) {},
-              failure: (error) {
-                state = AsyncValue.error(error);
-              },
-            );
+        for (var product in productList) {
+          if (product.id == productId) {
+            if (product.picture1URL != null) {
+              await imageRepository.deleteImage(
+                path: _path,
+                pictureName: product.picture1Name.toString(),
+              );
+            }
           }
         }
         state = AsyncValue.data(
@@ -146,6 +160,36 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
       failure: (error) {
         state = AsyncValue.error(error);
       },
+    );
+  }
+
+  //image
+  Future<Product> pictureAdd({
+    required String path,
+    required Uint8List newPicture1,
+    required Product updateProduct,
+  }) async {
+    String? _pictureName;
+    String? _pictureURL;
+    final name = await imageRepository.pictureNameing(path: path);
+    name.when(success: (pictureName) {
+      _pictureName = pictureName;
+    }, failure: (error) {
+      state = AsyncValue.error(error);
+    });
+    final url = await imageRepository.uploadImage(
+        image: newPicture1, path: _path, pictureName: _pictureName.toString());
+    url.when(
+      success: (pictureURL) {
+        _pictureURL = pictureURL;
+      },
+      failure: (error) {
+        state = AsyncValue.error(error);
+      },
+    );
+    return updateProduct.copyWith(
+      picture1Name: _pictureName,
+      picture1URL: _pictureURL,
     );
   }
 }

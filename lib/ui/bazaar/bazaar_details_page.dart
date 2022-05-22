@@ -33,21 +33,65 @@ class BazaarDetailsPage extends HookConsumerWidget {
           appBar: AppBar(
             backgroundColor: theme.appColors.primary,
             foregroundColor: theme.appColors.onPrimary,
-            leading: const AutoBackButton(),
+            leading: const AutoLeadingButton(),
             // automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: () async {
+                    // appRoute.pop();
+                    var result = await customShowDialog(
+                      context,
+                      'delete',
+                      'Do you want to delete it?',
+                    );
+                    if (result) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: theme.appColors.error,
+                          content: const Text('Processing Data'),
+                        ),
+                      );
+                      viewModel.deleteBazaar(
+                        bazaarId: bazaar.id.toString(),
+                      );
+                      appRoute.popUntilRoot();
+                    } else {}
+                  },
+                  icon: const Icon(Icons.delete)),
+              IconButton(
+                  onPressed: () async {
+                    appRoute.push(BazaarEditRoute(index: index));
+                  },
+                  icon: const Icon(Icons.edit)),
+            ],
             title: Text(
               bazaar.name.toString(),
               // style: theme.textTheme.h50,
             ),
             centerTitle: true,
             toolbarHeight: 100,
-            flexibleSpace: bazaar.picture != null
+            flexibleSpace: bazaar.pictureURL != null
                 ? Container(
                     decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(bazaar.picture as String),
-                        fit: BoxFit.cover),
-                  ))
+                      image: DecorationImage(
+                          image: NetworkImage(bazaar.pictureURL as String),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.5, 0.7, 0.95],
+                          colors: [
+                            Colors.white12,
+                            Colors.white54,
+                            Colors.white70,
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 : null,
           ),
           drawer: const CustomDrawer(),
@@ -84,65 +128,65 @@ class BazaarDetailsPage extends HookConsumerWidget {
                     bazaar.place.toString(),
                   ),
                   Text(
-                    bazaar.picture.toString(),
+                    bazaar.pictureName.toString(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // ElevatedButton(
-                      //   child: const Text('複写'),
-                      //   onPressed: () {
-                      //     appRoute.push(const BazaarAddRoute());
-                      //   },
-                      // ),
-                      // const Padding(
-                      //   padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      // ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: theme.appColors.primary,
-                          onPrimary: theme.appColors.onPrimary,
-                        ),
-                        child: const Text('削除'),
-                        onPressed: () async {
-                          // appRoute.pop();
-                          var result = await customShowDialog(
-                            context,
-                            'delete',
-                            'Do you want to delete it?',
-                          );
-                          if (result) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: theme.appColors.error,
-                                content: const Text('Processing Data'),
-                              ),
-                            );
-                            viewModel.deleteBazaar(
-                              bazaarId: bazaar.id.toString(),
-                            );
-                            appRoute.popUntilRoot();
-                          } else {
-                            // appRoute
-                            //     .popAndPush(BazaarDetailsRouter(index: index));
-                          }
-                        },
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: theme.appColors.primary,
-                          onPrimary: theme.appColors.onPrimary,
-                        ),
-                        child: const Text('更新'),
-                        onPressed: () async {
-                          appRoute.push(BazaarEditRoute(index: index));
-                        },
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     // ElevatedButton(
+                  //     //   child: const Text('複写'),
+                  //     //   onPressed: () {
+                  //     //     appRoute.push(const BazaarAddRoute());
+                  //     //   },
+                  //     // ),
+                  //     // const Padding(
+                  //     //   padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  //     // ),
+                  //     ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //         primary: theme.appColors.primary,
+                  //         onPrimary: theme.appColors.onPrimary,
+                  //       ),
+                  //       child: const Text('削除'),
+                  //       onPressed: () async {
+                  //         // appRoute.pop();
+                  //         var result = await customShowDialog(
+                  //           context,
+                  //           'delete',
+                  //           'Do you want to delete it?',
+                  //         );
+                  //         if (result) {
+                  //           ScaffoldMessenger.of(context).showSnackBar(
+                  //             SnackBar(
+                  //               backgroundColor: theme.appColors.error,
+                  //               content: const Text('Processing Data'),
+                  //             ),
+                  //           );
+                  //           viewModel.deleteBazaar(
+                  //             bazaarId: bazaar.id.toString(),
+                  //           );
+                  //           appRoute.popUntilRoot();
+                  //         } else {
+                  //           // appRoute
+                  //           //     .popAndPush(BazaarDetailsRouter(index: index));
+                  //         }
+                  //       },
+                  //     ),
+                  //     const Padding(
+                  //       padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  //     ),
+                  //     ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //         primary: theme.appColors.primary,
+                  //         onPrimary: theme.appColors.onPrimary,
+                  //       ),
+                  //       child: const Text('更新'),
+                  //       onPressed: () async {
+                  //         appRoute.push(BazaarEditRoute(index: index));
+                  //       },
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

@@ -21,7 +21,7 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
         super(const AsyncLoading()) {
     readBazaar();
   }
-
+  final String _path = 'events';
   // repository
   late final BazaarRepository bazaarRepository =
       _ref.read(bazaarRepositoryProvider);
@@ -55,7 +55,7 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
     required String place,
     required Uint8List? picture,
   }) async {
-    final bazaar = Bazaar(
+    var bazaar = Bazaar(
       organizer: organizer,
       name: name,
       message: message,
@@ -65,6 +65,13 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
       eventTo: eventTo,
       place: place,
     );
+    if (picture != null) {
+      bazaar = await pictureAdd(
+        path: _path,
+        newPicture: picture,
+        updateBazaar: bazaar,
+      );
+    }
     final bazaarId = await bazaarRepository.createBazaar(bazaar: bazaar);
     bazaarId.when(
       success: (id) async {
@@ -77,20 +84,6 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
               ),
           ),
         );
-        if (picture != null) {
-          final image =
-              await imageRepository.uploadImage(image: picture, id: id);
-          image.when(
-            success: (imagePath) {
-              // bazaar.copyWith(id:id,picture: imagePath);
-              updateBazaar(
-                  updateBazaar: bazaar.copyWith(id: id, picture: imagePath));
-            },
-            failure: (error) {
-              state = AsyncValue.error(error);
-            },
-          );
-        }
       },
       failure: (error) {
         state = AsyncValue.error(error);
@@ -99,7 +92,24 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
   }
 
   // 更新
-  Future<void> updateBazaar({required Bazaar updateBazaar}) async {
+  Future<void> updateBazaar({
+    required Bazaar updateBazaar,
+    Uint8List? newPicture,
+    String? oldPicture,
+  }) async {
+    if (newPicture != null) {
+      if (oldPicture != null) {
+        await imageRepository.deleteImage(
+          path: _path,
+          pictureName: updateBazaar.pictureName.toString(),
+        );
+      }
+      updateBazaar = await pictureAdd(
+        path: _path,
+        newPicture: newPicture,
+        updateBazaar: updateBazaar,
+      );
+    }
     final result = await bazaarRepository.updateBazaar(bazaar: updateBazaar);
     result.when(
       success: (data) {
@@ -126,13 +136,10 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
       success: (data) async {
         final bazaarList = state.value!.bazaarList;
         for (var event in bazaarList) {
-          if (event.id == bazaarId && event.picture != null) {
-            final imageResult = await imageRepository.deleteImage(id: bazaarId);
-            imageResult.when(
-              success: (data) {},
-              failure: (error) {
-                state = AsyncValue.error(error);
-              },
+          if (event.id == bazaarId && event.pictureURL != null) {
+            await imageRepository.deleteImage(
+              path: _path,
+              pictureName: event.pictureName.toString(),
             );
           }
         }
@@ -146,6 +153,36 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
       failure: (error) {
         state = AsyncValue.error(error);
       },
+    );
+  }
+
+  //image
+  Future<Bazaar> pictureAdd({
+    required String path,
+    required Uint8List newPicture,
+    required Bazaar updateBazaar,
+  }) async {
+    String? _pictureName;
+    String? _pictureURL;
+    final name = await imageRepository.pictureNameing(path: path);
+    name.when(success: (pictureName) {
+      _pictureName = pictureName;
+    }, failure: (error) {
+      state = AsyncValue.error(error);
+    });
+    final url = await imageRepository.uploadImage(
+        image: newPicture, path: _path, pictureName: _pictureName.toString());
+    url.when(
+      success: (pictureURL) {
+        _pictureURL = pictureURL;
+      },
+      failure: (error) {
+        state = AsyncValue.error(error);
+      },
+    );
+    return updateBazaar.copyWith(
+      pictureName: _pictureName,
+      pictureURL: _pictureURL,
     );
   }
 }

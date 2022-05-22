@@ -32,7 +32,8 @@ class _$BazaarTearOff {
       @timestampkey required DateTime? eventFrom,
       @timestampkey required DateTime? eventTo,
       required String? place,
-      String? picture,
+      String? pictureName,
+      String? pictureURL,
       @timestampkey DateTime? createdAt,
       @timestampkey DateTime? updatedAt,
       @timestampkey DateTime? deletedAt,
@@ -47,7 +48,8 @@ class _$BazaarTearOff {
       eventFrom: eventFrom,
       eventTo: eventTo,
       place: place,
-      picture: picture,
+      pictureName: pictureName,
+      pictureURL: pictureURL,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -78,7 +80,8 @@ mixin _$Bazaar {
   @timestampkey
   DateTime? get eventTo => throw _privateConstructorUsedError;
   String? get place => throw _privateConstructorUsedError;
-  String? get picture => throw _privateConstructorUsedError;
+  String? get pictureName => throw _privateConstructorUsedError;
+  String? get pictureURL => throw _privateConstructorUsedError;
   @timestampkey
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @timestampkey
@@ -106,7 +109,8 @@ abstract class $BazaarCopyWith<$Res> {
       @timestampkey DateTime? eventFrom,
       @timestampkey DateTime? eventTo,
       String? place,
-      String? picture,
+      String? pictureName,
+      String? pictureURL,
       @timestampkey DateTime? createdAt,
       @timestampkey DateTime? updatedAt,
       @timestampkey DateTime? deletedAt,
@@ -132,7 +136,8 @@ class _$BazaarCopyWithImpl<$Res> implements $BazaarCopyWith<$Res> {
     Object? eventFrom = freezed,
     Object? eventTo = freezed,
     Object? place = freezed,
-    Object? picture = freezed,
+    Object? pictureName = freezed,
+    Object? pictureURL = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -175,9 +180,13 @@ class _$BazaarCopyWithImpl<$Res> implements $BazaarCopyWith<$Res> {
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
               as String?,
-      picture: picture == freezed
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
+      pictureName: pictureName == freezed
+          ? _value.pictureName
+          : pictureName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pictureURL: pictureURL == freezed
+          ? _value.pictureURL
+          : pictureURL // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -214,7 +223,8 @@ abstract class _$BazaarCopyWith<$Res> implements $BazaarCopyWith<$Res> {
       @timestampkey DateTime? eventFrom,
       @timestampkey DateTime? eventTo,
       String? place,
-      String? picture,
+      String? pictureName,
+      String? pictureURL,
       @timestampkey DateTime? createdAt,
       @timestampkey DateTime? updatedAt,
       @timestampkey DateTime? deletedAt,
@@ -241,7 +251,8 @@ class __$BazaarCopyWithImpl<$Res> extends _$BazaarCopyWithImpl<$Res>
     Object? eventFrom = freezed,
     Object? eventTo = freezed,
     Object? place = freezed,
-    Object? picture = freezed,
+    Object? pictureName = freezed,
+    Object? pictureURL = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
@@ -284,9 +295,13 @@ class __$BazaarCopyWithImpl<$Res> extends _$BazaarCopyWithImpl<$Res>
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
               as String?,
-      picture: picture == freezed
-          ? _value.picture
-          : picture // ignore: cast_nullable_to_non_nullable
+      pictureName: pictureName == freezed
+          ? _value.pictureName
+          : pictureName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pictureURL: pictureURL == freezed
+          ? _value.pictureURL
+          : pictureURL // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -321,7 +336,8 @@ class _$_Bazaar extends _Bazaar {
       @timestampkey required this.eventFrom,
       @timestampkey required this.eventTo,
       required this.place,
-      this.picture,
+      this.pictureName,
+      this.pictureURL,
       @timestampkey this.createdAt,
       @timestampkey this.updatedAt,
       @timestampkey this.deletedAt,
@@ -354,7 +370,9 @@ class _$_Bazaar extends _Bazaar {
   @override
   final String? place;
   @override
-  final String? picture;
+  final String? pictureName;
+  @override
+  final String? pictureURL;
   @override
   @timestampkey
   final DateTime? createdAt;
@@ -369,7 +387,7 @@ class _$_Bazaar extends _Bazaar {
 
   @override
   String toString() {
-    return 'Bazaar(id: $id, organizer: $organizer, name: $name, message: $message, salesStart: $salesStart, salesEnd: $salesEnd, eventFrom: $eventFrom, eventTo: $eventTo, place: $place, picture: $picture, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, eventId: $eventId)';
+    return 'Bazaar(id: $id, organizer: $organizer, name: $name, message: $message, salesStart: $salesStart, salesEnd: $salesEnd, eventFrom: $eventFrom, eventTo: $eventTo, place: $place, pictureName: $pictureName, pictureURL: $pictureURL, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, eventId: $eventId)';
   }
 
   @override
@@ -387,7 +405,10 @@ class _$_Bazaar extends _Bazaar {
             const DeepCollectionEquality().equals(other.eventFrom, eventFrom) &&
             const DeepCollectionEquality().equals(other.eventTo, eventTo) &&
             const DeepCollectionEquality().equals(other.place, place) &&
-            const DeepCollectionEquality().equals(other.picture, picture) &&
+            const DeepCollectionEquality()
+                .equals(other.pictureName, pictureName) &&
+            const DeepCollectionEquality()
+                .equals(other.pictureURL, pictureURL) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.deletedAt, deletedAt) &&
@@ -406,7 +427,8 @@ class _$_Bazaar extends _Bazaar {
       const DeepCollectionEquality().hash(eventFrom),
       const DeepCollectionEquality().hash(eventTo),
       const DeepCollectionEquality().hash(place),
-      const DeepCollectionEquality().hash(picture),
+      const DeepCollectionEquality().hash(pictureName),
+      const DeepCollectionEquality().hash(pictureURL),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(deletedAt),
@@ -434,7 +456,8 @@ abstract class _Bazaar extends Bazaar {
       @timestampkey required DateTime? eventFrom,
       @timestampkey required DateTime? eventTo,
       required String? place,
-      String? picture,
+      String? pictureName,
+      String? pictureURL,
       @timestampkey DateTime? createdAt,
       @timestampkey DateTime? updatedAt,
       @timestampkey DateTime? deletedAt,
@@ -466,7 +489,9 @@ abstract class _Bazaar extends Bazaar {
   @override
   String? get place;
   @override
-  String? get picture;
+  String? get pictureName;
+  @override
+  String? get pictureURL;
   @override
   @timestampkey
   DateTime? get createdAt;

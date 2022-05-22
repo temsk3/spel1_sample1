@@ -34,14 +34,14 @@ class EventCard extends HookConsumerWidget {
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10),
-                image: bazaar.picture != null
+                image: bazaar.pictureURL != null
                     ? DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(bazaar.picture as String),
+                        image: NetworkImage(bazaar.pictureURL as String),
                       )
                     : null,
               ),
-              child: bazaar.picture == null
+              child: bazaar.pictureURL == null
                   ? const Center(
                       child: Text('NoImage'),
                     )

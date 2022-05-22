@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/theme/app_text_theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/model/product/product_model.dart';
-import '../../../gen/assets.gen.dart';
+import '../../../ui/product/widget/picture.dart';
 import '../../hooks/use_l10n.dart';
 import '../../hooks/use_router.dart';
+import '../../routes/app_route.gr.dart';
+import '../../theme/app_text_theme.dart';
 import '../../theme/app_theme.dart';
 
 class ProductCard extends HookConsumerWidget {
-  int index = 0;
-  Product product = Product.empty();
-  ProductCard({required int index, required Product product}) {
-    this.index = index;
-    this.product = product;
-  }
+  const ProductCard({Key? key, required this.index, required this.product})
+      : super(key: key);
+  final int index;
+  final Product product;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
@@ -37,11 +37,8 @@ class ProductCard extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AspectRatio(
-                aspectRatio: 18 / 11,
-                child: Assets.img.cat.image(
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  aspectRatio: 16 / 11,
+                  child: PictureCover(picture: product.picture1URL)),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
@@ -70,16 +67,16 @@ class ProductCard extends HookConsumerWidget {
         ),
         RawMaterialButton(
           onPressed: () async {
-            // await appRoute.push(ItemDetailsRoute(itemId: index));
+            await appRoute.push(ProductDetailsRoute(index: index));
 
-            showDialog(
-              context: context,
-              builder: (context) {
-                return const AlertDialog(
-                  title: Text('購入処理'),
-                );
-              },
-            );
+            // showDialog(
+            //   context: context,
+            //   builder: (context) {
+            //     return const AlertDialog(
+            //       title: Text('購入処理'),
+            //     );
+            //   },
+            // );
           },
           child: const SizedBox(
             width: 240,
