@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -17,7 +18,7 @@ class MyApp extends HookConsumerWidget {
   });
 
   final _appRouter = AppRouter();
-
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
@@ -35,7 +36,11 @@ class MyApp extends HookConsumerWidget {
         locale: DevicePreview.locale(context),
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
-        routerDelegate: appRouter.delegate(),
+        routerDelegate: appRouter.delegate(
+          navigatorObservers: () => [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+        ),
         routeInformationParser: appRouter.defaultRouteParser(),
       ),
     );

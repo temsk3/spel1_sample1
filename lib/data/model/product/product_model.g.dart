@@ -9,7 +9,11 @@ part of 'product_model.dart';
 _$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
       id: json['id'] as String?,
       organizer: json['organizer'] as String?,
+      bazaarId: json['bazaarId'] as String?,
+      bazaarName: json['bazaarName'] as String?,
+      register: json['register'] as String?,
       exchangeNumber: json['exchangeNumber'] as int?,
+      code: json['code'] as String?,
       name: json['name'] as String?,
       genre: json['genre'] as String?,
       desc: json['desc'] as String?,
@@ -33,7 +37,11 @@ Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
     <String, dynamic>{
       'id': instance.id,
       'organizer': instance.organizer,
+      'bazaarId': instance.bazaarId,
+      'bazaarName': instance.bazaarName,
+      'register': instance.register,
       'exchangeNumber': instance.exchangeNumber,
+      'code': instance.code,
       'name': instance.name,
       'genre': instance.genre,
       'desc': instance.desc,

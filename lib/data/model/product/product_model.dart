@@ -24,7 +24,11 @@ class Product with _$Product {
   const factory Product({
     String? id,
     String? organizer,
-    int? exchangeNumber,
+    String? bazaarId,
+    String? bazaarName,
+    String? register,
+    int? exchangeNumber, //不要
+    String? code,
     required String? name,
     required String? genre,
     required String? desc,
@@ -46,6 +50,7 @@ class Product with _$Product {
 
   factory Product.empty() => const Product(
         organizer: '',
+        register: '',
         name: '',
         genre: 'Goods',
         desc: '',

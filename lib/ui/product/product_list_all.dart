@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/repository/product/product_repository_impal.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -17,7 +18,8 @@ class ProductAllPage extends HookConsumerWidget {
     final appRoute = useRouter();
     final state = ref.watch(productViewModelProvider);
     final viewModel = ref.watch(productViewModelProvider.notifier);
-    return state.when(
+    final asyncValue = ref.watch(productListStreamProvider);
+    return asyncValue.when(
       data: (data) {
         return SafeArea(
           child: RefreshIndicator(
@@ -30,9 +32,9 @@ class ProductAllPage extends HookConsumerWidget {
                 childAspectRatio: 0.8,
               ),
               padding: const EdgeInsets.all(16.0),
-              itemCount: data.productList.length,
+              itemCount: data.length,
               itemBuilder: (_, index) {
-                final product = data.productList[index];
+                final product = data[index];
                 return ProductCard(index: index, product: product);
               },
             ),

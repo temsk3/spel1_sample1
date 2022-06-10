@@ -46,6 +46,9 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
   // 追加
   Future<void> addProduct({
     required String organizer,
+    required String bazaarId,
+    required String register,
+    required String? code,
     required String name,
     required String genre,
     required String desc,
@@ -60,6 +63,9 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
   }) async {
     var product = Product(
       organizer: organizer,
+      bazaarId: bazaarId,
+      register: register,
+      code: code,
       name: name,
       genre: genre,
       desc: desc,
@@ -169,27 +175,27 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
     required Uint8List newPicture1,
     required Product updateProduct,
   }) async {
-    String? _pictureName;
-    String? _pictureURL;
+    String? pictureName;
+    String? pictureURL;
     final name = await imageRepository.pictureNameing(path: path);
     name.when(success: (pictureName) {
-      _pictureName = pictureName;
+      pictureName = pictureName;
     }, failure: (error) {
       state = AsyncValue.error(error);
     });
     final url = await imageRepository.uploadImage(
-        image: newPicture1, path: _path, pictureName: _pictureName.toString());
+        image: newPicture1, path: _path, pictureName: pictureName.toString());
     url.when(
       success: (pictureURL) {
-        _pictureURL = pictureURL;
+        pictureURL = pictureURL;
       },
       failure: (error) {
         state = AsyncValue.error(error);
       },
     );
     return updateProduct.copyWith(
-      picture1Name: _pictureName,
-      picture1URL: _pictureURL,
+      picture1Name: pictureName,
+      picture1URL: pictureURL,
     );
   }
 }

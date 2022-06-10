@@ -20,7 +20,11 @@ class PictureCover extends HookConsumerWidget {
       color: theme.appColors.primary,
       child: Center(
         child: (picture == null || picture == '')
-            ? const Text('NoImage')
+            ? Text(
+                'NoImage',
+                style: theme.textTheme.h30
+                    .copyWith(color: theme.appColors.onPrimary),
+              )
             : SizedBox.expand(
                 child: Image.network(picture.toString()),
               ),

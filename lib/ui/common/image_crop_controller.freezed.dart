@@ -12,28 +12,7 @@ part of 'image_crop_controller.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ImageCropStateTearOff {
-  const _$ImageCropStateTearOff();
-
-  _ImageCropState call(
-      {Uint8List? imageFile,
-      bool? isProcessing,
-      Uint8List? croppedData,
-      Uint8List? uint8list}) {
-    return _ImageCropState(
-      imageFile: imageFile,
-      isProcessing: isProcessing,
-      croppedData: croppedData,
-      uint8list: uint8list,
-    );
-  }
-}
-
-/// @nodoc
-const $ImageCropState = _$ImageCropStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ImageCropState {
@@ -98,11 +77,11 @@ class _$ImageCropStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ImageCropStateCopyWith<$Res>
+abstract class _$$_ImageCropStateCopyWith<$Res>
     implements $ImageCropStateCopyWith<$Res> {
-  factory _$ImageCropStateCopyWith(
-          _ImageCropState value, $Res Function(_ImageCropState) then) =
-      __$ImageCropStateCopyWithImpl<$Res>;
+  factory _$$_ImageCropStateCopyWith(
+          _$_ImageCropState value, $Res Function(_$_ImageCropState) then) =
+      __$$_ImageCropStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Uint8List? imageFile,
@@ -112,15 +91,15 @@ abstract class _$ImageCropStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ImageCropStateCopyWithImpl<$Res>
+class __$$_ImageCropStateCopyWithImpl<$Res>
     extends _$ImageCropStateCopyWithImpl<$Res>
-    implements _$ImageCropStateCopyWith<$Res> {
-  __$ImageCropStateCopyWithImpl(
-      _ImageCropState _value, $Res Function(_ImageCropState) _then)
-      : super(_value, (v) => _then(v as _ImageCropState));
+    implements _$$_ImageCropStateCopyWith<$Res> {
+  __$$_ImageCropStateCopyWithImpl(
+      _$_ImageCropState _value, $Res Function(_$_ImageCropState) _then)
+      : super(_value, (v) => _then(v as _$_ImageCropState));
 
   @override
-  _ImageCropState get _value => super._value as _ImageCropState;
+  _$_ImageCropState get _value => super._value as _$_ImageCropState;
 
   @override
   $Res call({
@@ -129,7 +108,7 @@ class __$ImageCropStateCopyWithImpl<$Res>
     Object? croppedData = freezed,
     Object? uint8list = freezed,
   }) {
-    return _then(_ImageCropState(
+    return _then(_$_ImageCropState(
       imageFile: imageFile == freezed
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
@@ -156,7 +135,8 @@ class _$_ImageCropState implements _ImageCropState {
   const _$_ImageCropState(
       {this.imageFile, this.isProcessing, this.croppedData, this.uint8list});
 
-  @override // Image? cropImage,
+// Image? cropImage,
+  @override
   final Uint8List? imageFile;
   @override
   final bool? isProcessing;
@@ -174,7 +154,7 @@ class _$_ImageCropState implements _ImageCropState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ImageCropState &&
+            other is _$_ImageCropState &&
             const DeepCollectionEquality().equals(other.imageFile, imageFile) &&
             const DeepCollectionEquality()
                 .equals(other.isProcessing, isProcessing) &&
@@ -193,27 +173,27 @@ class _$_ImageCropState implements _ImageCropState {
 
   @JsonKey(ignore: true)
   @override
-  _$ImageCropStateCopyWith<_ImageCropState> get copyWith =>
-      __$ImageCropStateCopyWithImpl<_ImageCropState>(this, _$identity);
+  _$$_ImageCropStateCopyWith<_$_ImageCropState> get copyWith =>
+      __$$_ImageCropStateCopyWithImpl<_$_ImageCropState>(this, _$identity);
 }
 
 abstract class _ImageCropState implements ImageCropState {
   const factory _ImageCropState(
-      {Uint8List? imageFile,
-      bool? isProcessing,
-      Uint8List? croppedData,
-      Uint8List? uint8list}) = _$_ImageCropState;
+      {final Uint8List? imageFile,
+      final bool? isProcessing,
+      final Uint8List? croppedData,
+      final Uint8List? uint8list}) = _$_ImageCropState;
 
   @override // Image? cropImage,
-  Uint8List? get imageFile;
+  Uint8List? get imageFile => throw _privateConstructorUsedError;
   @override
-  bool? get isProcessing;
+  bool? get isProcessing => throw _privateConstructorUsedError;
   @override
-  Uint8List? get croppedData;
+  Uint8List? get croppedData => throw _privateConstructorUsedError;
   @override
-  Uint8List? get uint8list;
+  Uint8List? get uint8list => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ImageCropStateCopyWith<_ImageCropState> get copyWith =>
+  _$$_ImageCropStateCopyWith<_$_ImageCropState> get copyWith =>
       throw _privateConstructorUsedError;
 }

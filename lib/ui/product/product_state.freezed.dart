@@ -12,21 +12,7 @@ part of 'product_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ProductStateTearOff {
-  const _$ProductStateTearOff();
-
-  _ProductState call({List<Product> productList = const <Product>[]}) {
-    return _ProductState(
-      productList: productList,
-    );
-  }
-}
-
-/// @nodoc
-const $ProductState = _$ProductStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ProductState {
@@ -67,32 +53,33 @@ class _$ProductStateCopyWithImpl<$Res> implements $ProductStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ProductStateCopyWith<$Res>
+abstract class _$$_ProductStateCopyWith<$Res>
     implements $ProductStateCopyWith<$Res> {
-  factory _$ProductStateCopyWith(
-          _ProductState value, $Res Function(_ProductState) then) =
-      __$ProductStateCopyWithImpl<$Res>;
+  factory _$$_ProductStateCopyWith(
+          _$_ProductState value, $Res Function(_$_ProductState) then) =
+      __$$_ProductStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Product> productList});
 }
 
 /// @nodoc
-class __$ProductStateCopyWithImpl<$Res> extends _$ProductStateCopyWithImpl<$Res>
-    implements _$ProductStateCopyWith<$Res> {
-  __$ProductStateCopyWithImpl(
-      _ProductState _value, $Res Function(_ProductState) _then)
-      : super(_value, (v) => _then(v as _ProductState));
+class __$$_ProductStateCopyWithImpl<$Res>
+    extends _$ProductStateCopyWithImpl<$Res>
+    implements _$$_ProductStateCopyWith<$Res> {
+  __$$_ProductStateCopyWithImpl(
+      _$_ProductState _value, $Res Function(_$_ProductState) _then)
+      : super(_value, (v) => _then(v as _$_ProductState));
 
   @override
-  _ProductState get _value => super._value as _ProductState;
+  _$_ProductState get _value => super._value as _$_ProductState;
 
   @override
   $Res call({
     Object? productList = freezed,
   }) {
-    return _then(_ProductState(
+    return _then(_$_ProductState(
       productList: productList == freezed
-          ? _value.productList
+          ? _value._productList
           : productList // ignore: cast_nullable_to_non_nullable
               as List<Product>,
     ));
@@ -102,11 +89,16 @@ class __$ProductStateCopyWithImpl<$Res> extends _$ProductStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ProductState implements _ProductState {
-  const _$_ProductState({this.productList = const <Product>[]});
+  const _$_ProductState({final List<Product> productList = const <Product>[]})
+      : _productList = productList;
 
-  @JsonKey()
+  final List<Product> _productList;
   @override
-  final List<Product> productList;
+  @JsonKey()
+  List<Product> get productList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_productList);
+  }
 
   @override
   String toString() {
@@ -117,28 +109,29 @@ class _$_ProductState implements _ProductState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ProductState &&
+            other is _$_ProductState &&
             const DeepCollectionEquality()
-                .equals(other.productList, productList));
+                .equals(other._productList, _productList));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(productList));
+      runtimeType, const DeepCollectionEquality().hash(_productList));
 
   @JsonKey(ignore: true)
   @override
-  _$ProductStateCopyWith<_ProductState> get copyWith =>
-      __$ProductStateCopyWithImpl<_ProductState>(this, _$identity);
+  _$$_ProductStateCopyWith<_$_ProductState> get copyWith =>
+      __$$_ProductStateCopyWithImpl<_$_ProductState>(this, _$identity);
 }
 
 abstract class _ProductState implements ProductState {
-  const factory _ProductState({List<Product> productList}) = _$_ProductState;
+  const factory _ProductState({final List<Product> productList}) =
+      _$_ProductState;
 
   @override
-  List<Product> get productList;
+  List<Product> get productList => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ProductStateCopyWith<_ProductState> get copyWith =>
+  _$$_ProductStateCopyWith<_$_ProductState> get copyWith =>
       throw _privateConstructorUsedError;
 }

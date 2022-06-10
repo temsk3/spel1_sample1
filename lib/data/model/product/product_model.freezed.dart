@@ -12,74 +12,21 @@ part of 'product_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
   return _Product.fromJson(json);
 }
 
 /// @nodoc
-class _$ProductTearOff {
-  const _$ProductTearOff();
-
-  _Product call(
-      {String? id,
-      String? organizer,
-      int? exchangeNumber,
-      required String? name,
-      required String? genre,
-      required String? desc,
-      required int? stock,
-      required int? price,
-      String? picture1Name,
-      String? picture1URL,
-      String? picture2Name,
-      String? picture2URL,
-      String? picture3Name,
-      String? picture3URL,
-      @timestampkey required DateTime? expirationFrom,
-      @timestampkey required DateTime? expirationTo,
-      required bool? isPublished,
-      @timestampkey DateTime? createdAt,
-      @timestampkey DateTime? updatedAt,
-      @timestampkey DateTime? deletedAt}) {
-    return _Product(
-      id: id,
-      organizer: organizer,
-      exchangeNumber: exchangeNumber,
-      name: name,
-      genre: genre,
-      desc: desc,
-      stock: stock,
-      price: price,
-      picture1Name: picture1Name,
-      picture1URL: picture1URL,
-      picture2Name: picture2Name,
-      picture2URL: picture2URL,
-      picture3Name: picture3Name,
-      picture3URL: picture3URL,
-      expirationFrom: expirationFrom,
-      expirationTo: expirationTo,
-      isPublished: isPublished,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      deletedAt: deletedAt,
-    );
-  }
-
-  Product fromJson(Map<String, Object?> json) {
-    return Product.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Product = _$ProductTearOff();
-
-/// @nodoc
 mixin _$Product {
   String? get id => throw _privateConstructorUsedError;
   String? get organizer => throw _privateConstructorUsedError;
-  int? get exchangeNumber => throw _privateConstructorUsedError;
+  String? get bazaarId => throw _privateConstructorUsedError;
+  String? get bazaarName => throw _privateConstructorUsedError;
+  String? get register => throw _privateConstructorUsedError;
+  int? get exchangeNumber => throw _privateConstructorUsedError; //不要
+  String? get code => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
   String? get desc => throw _privateConstructorUsedError;
@@ -115,7 +62,11 @@ abstract class $ProductCopyWith<$Res> {
   $Res call(
       {String? id,
       String? organizer,
+      String? bazaarId,
+      String? bazaarName,
+      String? register,
       int? exchangeNumber,
+      String? code,
       String? name,
       String? genre,
       String? desc,
@@ -147,7 +98,11 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? organizer = freezed,
+    Object? bazaarId = freezed,
+    Object? bazaarName = freezed,
+    Object? register = freezed,
     Object? exchangeNumber = freezed,
+    Object? code = freezed,
     Object? name = freezed,
     Object? genre = freezed,
     Object? desc = freezed,
@@ -175,10 +130,26 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
           ? _value.organizer
           : organizer // ignore: cast_nullable_to_non_nullable
               as String?,
+      bazaarId: bazaarId == freezed
+          ? _value.bazaarId
+          : bazaarId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bazaarName: bazaarName == freezed
+          ? _value.bazaarName
+          : bazaarName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      register: register == freezed
+          ? _value.register
+          : register // ignore: cast_nullable_to_non_nullable
+              as String?,
       exchangeNumber: exchangeNumber == freezed
           ? _value.exchangeNumber
           : exchangeNumber // ignore: cast_nullable_to_non_nullable
               as int?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -252,14 +223,19 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$ProductCopyWith(_Product value, $Res Function(_Product) then) =
-      __$ProductCopyWithImpl<$Res>;
+abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
+  factory _$$_ProductCopyWith(
+          _$_Product value, $Res Function(_$_Product) then) =
+      __$$_ProductCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
       String? organizer,
+      String? bazaarId,
+      String? bazaarName,
+      String? register,
       int? exchangeNumber,
+      String? code,
       String? name,
       String? genre,
       String? desc,
@@ -280,19 +256,23 @@ abstract class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
-    implements _$ProductCopyWith<$Res> {
-  __$ProductCopyWithImpl(_Product _value, $Res Function(_Product) _then)
-      : super(_value, (v) => _then(v as _Product));
+class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
+    implements _$$_ProductCopyWith<$Res> {
+  __$$_ProductCopyWithImpl(_$_Product _value, $Res Function(_$_Product) _then)
+      : super(_value, (v) => _then(v as _$_Product));
 
   @override
-  _Product get _value => super._value as _Product;
+  _$_Product get _value => super._value as _$_Product;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? organizer = freezed,
+    Object? bazaarId = freezed,
+    Object? bazaarName = freezed,
+    Object? register = freezed,
     Object? exchangeNumber = freezed,
+    Object? code = freezed,
     Object? name = freezed,
     Object? genre = freezed,
     Object? desc = freezed,
@@ -311,7 +291,7 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? deletedAt = freezed,
   }) {
-    return _then(_Product(
+    return _then(_$_Product(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -320,10 +300,26 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           ? _value.organizer
           : organizer // ignore: cast_nullable_to_non_nullable
               as String?,
+      bazaarId: bazaarId == freezed
+          ? _value.bazaarId
+          : bazaarId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bazaarName: bazaarName == freezed
+          ? _value.bazaarName
+          : bazaarName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      register: register == freezed
+          ? _value.register
+          : register // ignore: cast_nullable_to_non_nullable
+              as String?,
       exchangeNumber: exchangeNumber == freezed
           ? _value.exchangeNumber
           : exchangeNumber // ignore: cast_nullable_to_non_nullable
               as int?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -402,7 +398,11 @@ class _$_Product extends _Product {
   const _$_Product(
       {this.id,
       this.organizer,
+      this.bazaarId,
+      this.bazaarName,
+      this.register,
       this.exchangeNumber,
+      this.code,
       required this.name,
       required this.genre,
       required this.desc,
@@ -430,7 +430,16 @@ class _$_Product extends _Product {
   @override
   final String? organizer;
   @override
+  final String? bazaarId;
+  @override
+  final String? bazaarName;
+  @override
+  final String? register;
+  @override
   final int? exchangeNumber;
+//不要
+  @override
+  final String? code;
   @override
   final String? name;
   @override
@@ -473,18 +482,23 @@ class _$_Product extends _Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, organizer: $organizer, exchangeNumber: $exchangeNumber, name: $name, genre: $genre, desc: $desc, stock: $stock, price: $price, picture1Name: $picture1Name, picture1URL: $picture1URL, picture2Name: $picture2Name, picture2URL: $picture2URL, picture3Name: $picture3Name, picture3URL: $picture3URL, expirationFrom: $expirationFrom, expirationTo: $expirationTo, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Product(id: $id, organizer: $organizer, bazaarId: $bazaarId, bazaarName: $bazaarName, register: $register, exchangeNumber: $exchangeNumber, code: $code, name: $name, genre: $genre, desc: $desc, stock: $stock, price: $price, picture1Name: $picture1Name, picture1URL: $picture1URL, picture2Name: $picture2Name, picture2URL: $picture2URL, picture3Name: $picture3Name, picture3URL: $picture3URL, expirationFrom: $expirationFrom, expirationTo: $expirationTo, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Product &&
+            other is _$_Product &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.organizer, organizer) &&
+            const DeepCollectionEquality().equals(other.bazaarId, bazaarId) &&
+            const DeepCollectionEquality()
+                .equals(other.bazaarName, bazaarName) &&
+            const DeepCollectionEquality().equals(other.register, register) &&
             const DeepCollectionEquality()
                 .equals(other.exchangeNumber, exchangeNumber) &&
+            const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.genre, genre) &&
             const DeepCollectionEquality().equals(other.desc, desc) &&
@@ -513,12 +527,17 @@ class _$_Product extends _Product {
             const DeepCollectionEquality().equals(other.deletedAt, deletedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(id),
         const DeepCollectionEquality().hash(organizer),
+        const DeepCollectionEquality().hash(bazaarId),
+        const DeepCollectionEquality().hash(bazaarName),
+        const DeepCollectionEquality().hash(register),
         const DeepCollectionEquality().hash(exchangeNumber),
+        const DeepCollectionEquality().hash(code),
         const DeepCollectionEquality().hash(name),
         const DeepCollectionEquality().hash(genre),
         const DeepCollectionEquality().hash(desc),
@@ -540,8 +559,8 @@ class _$_Product extends _Product {
 
   @JsonKey(ignore: true)
   @override
-  _$ProductCopyWith<_Product> get copyWith =>
-      __$ProductCopyWithImpl<_Product>(this, _$identity);
+  _$$_ProductCopyWith<_$_Product> get copyWith =>
+      __$$_ProductCopyWithImpl<_$_Product>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -551,77 +570,89 @@ class _$_Product extends _Product {
 
 abstract class _Product extends Product {
   const factory _Product(
-      {String? id,
-      String? organizer,
-      int? exchangeNumber,
-      required String? name,
-      required String? genre,
-      required String? desc,
-      required int? stock,
-      required int? price,
-      String? picture1Name,
-      String? picture1URL,
-      String? picture2Name,
-      String? picture2URL,
-      String? picture3Name,
-      String? picture3URL,
-      @timestampkey required DateTime? expirationFrom,
-      @timestampkey required DateTime? expirationTo,
-      required bool? isPublished,
-      @timestampkey DateTime? createdAt,
-      @timestampkey DateTime? updatedAt,
-      @timestampkey DateTime? deletedAt}) = _$_Product;
+      {final String? id,
+      final String? organizer,
+      final String? bazaarId,
+      final String? bazaarName,
+      final String? register,
+      final int? exchangeNumber,
+      final String? code,
+      required final String? name,
+      required final String? genre,
+      required final String? desc,
+      required final int? stock,
+      required final int? price,
+      final String? picture1Name,
+      final String? picture1URL,
+      final String? picture2Name,
+      final String? picture2URL,
+      final String? picture3Name,
+      final String? picture3URL,
+      @timestampkey required final DateTime? expirationFrom,
+      @timestampkey required final DateTime? expirationTo,
+      required final bool? isPublished,
+      @timestampkey final DateTime? createdAt,
+      @timestampkey final DateTime? updatedAt,
+      @timestampkey final DateTime? deletedAt}) = _$_Product;
   const _Product._() : super._();
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String? get organizer;
+  String? get organizer => throw _privateConstructorUsedError;
   @override
-  int? get exchangeNumber;
+  String? get bazaarId => throw _privateConstructorUsedError;
   @override
-  String? get name;
+  String? get bazaarName => throw _privateConstructorUsedError;
   @override
-  String? get genre;
+  String? get register => throw _privateConstructorUsedError;
   @override
-  String? get desc;
+  int? get exchangeNumber => throw _privateConstructorUsedError;
+  @override //不要
+  String? get code => throw _privateConstructorUsedError;
   @override
-  int? get stock;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  int? get price;
+  String? get genre => throw _privateConstructorUsedError;
   @override
-  String? get picture1Name;
+  String? get desc => throw _privateConstructorUsedError;
   @override
-  String? get picture1URL;
+  int? get stock => throw _privateConstructorUsedError;
   @override
-  String? get picture2Name;
+  int? get price => throw _privateConstructorUsedError;
   @override
-  String? get picture2URL;
+  String? get picture1Name => throw _privateConstructorUsedError;
   @override
-  String? get picture3Name;
+  String? get picture1URL => throw _privateConstructorUsedError;
   @override
-  String? get picture3URL;
+  String? get picture2Name => throw _privateConstructorUsedError;
   @override
-  @timestampkey
-  DateTime? get expirationFrom;
+  String? get picture2URL => throw _privateConstructorUsedError;
   @override
-  @timestampkey
-  DateTime? get expirationTo;
+  String? get picture3Name => throw _privateConstructorUsedError;
   @override
-  bool? get isPublished;
-  @override
-  @timestampkey
-  DateTime? get createdAt;
+  String? get picture3URL => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get updatedAt;
+  DateTime? get expirationFrom => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get deletedAt;
+  DateTime? get expirationTo => throw _privateConstructorUsedError;
+  @override
+  bool? get isPublished => throw _privateConstructorUsedError;
+  @override
+  @timestampkey
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @override
+  @timestampkey
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @override
+  @timestampkey
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ProductCopyWith<_Product> get copyWith =>
+  _$$_ProductCopyWith<_$_Product> get copyWith =>
       throw _privateConstructorUsedError;
 }

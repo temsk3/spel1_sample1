@@ -11,11 +11,12 @@ import '../../theme/app_text_theme.dart';
 import '../../theme/app_theme.dart';
 
 class ProductCard extends HookConsumerWidget {
-  const ProductCard({Key? key, required this.index, required this.product})
+  const ProductCard(
+      {Key? key, required this.index, required this.product, this.bazaar})
       : super(key: key);
   final int index;
   final Product product;
-
+  final bazaar;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
@@ -67,7 +68,8 @@ class ProductCard extends HookConsumerWidget {
         ),
         RawMaterialButton(
           onPressed: () async {
-            await appRoute.push(ProductDetailsRoute(index: index));
+            await appRoute.push(
+                ProductDetailsRoute(productItem: product, bazaarEvent: bazaar));
 
             // showDialog(
             //   context: context,
@@ -78,12 +80,12 @@ class ProductCard extends HookConsumerWidget {
             //   },
             // );
           },
+          // shape: const CircleBorder(),
+          elevation: 0,
           child: const SizedBox(
             width: 240,
             height: 240,
           ),
-          // shape: const CircleBorder(),
-          elevation: 0,
         ),
       ],
     );

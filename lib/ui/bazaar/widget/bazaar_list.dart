@@ -21,6 +21,7 @@ class EventCard extends HookConsumerWidget {
     final appRoute = useRouter();
     final viewModel = ref.watch(bazzarViewModelProvider.notifier);
     return Card(
+      color: theme.appColors.background,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       margin: const EdgeInsets.all(10.0),
@@ -42,8 +43,12 @@ class EventCard extends HookConsumerWidget {
                     : null,
               ),
               child: bazaar.pictureURL == null
-                  ? const Center(
-                      child: Text('NoImage'),
+                  ? Center(
+                      child: Text(
+                        'NoImage',
+                        style: theme.textTheme.h20
+                            .copyWith(color: theme.appColors.onPrimary),
+                      ),
                     )
                   : null,
             ),
@@ -51,15 +56,21 @@ class EventCard extends HookConsumerWidget {
               children: [
                 Text(
                   bazaar.name.toString(),
-                  style: theme.textTheme.h30.bold(),
+                  style: theme.textTheme.h30
+                      .bold()
+                      .copyWith(color: theme.appColors.onBackground),
                 ),
               ],
             ),
-            subtitle:
-                Text(bazaar.message.toString(), style: theme.textTheme.h10),
+            subtitle: Text(
+              bazaar.message.toString(),
+              style: theme.textTheme.h10
+                  .copyWith(color: theme.appColors.onBackground),
+            ),
             trailing: const Icon(Icons.navigate_next),
             onTap: () {
-              appRoute.push(BazaarDetailsRouter(index: index));
+              appRoute
+                  .push(BazaarDetailsRoute(index: index, bazaarEvent: bazaar));
             },
           ),
         ],

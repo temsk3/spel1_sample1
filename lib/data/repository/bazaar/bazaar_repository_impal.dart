@@ -8,6 +8,15 @@ import 'bazaar_repository.dart';
 final bazaarRepositoryProvider =
     Provider<BazaarRepository>((ref) => BazaarRepositoryImpl(ref.read));
 
+final bazaarListStreamProvider = StreamProvider.autoDispose((ref) {
+  CollectionReference ref = FirebaseFirestore.instance.collection('events');
+  return ref.snapshots().map((snapshot) {
+    return snapshot.docs
+        .map((doc) => Bazaar.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+  });
+});
+
 class BazaarRepositoryImpl implements BazaarRepository {
   BazaarRepositoryImpl(this._reader);
   final Reader _reader;

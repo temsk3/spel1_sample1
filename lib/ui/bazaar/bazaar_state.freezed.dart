@@ -12,21 +12,7 @@ part of 'bazaar_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$BazaarStateTearOff {
-  const _$BazaarStateTearOff();
-
-  _BazaarState call({List<Bazaar> bazaarList = const <Bazaar>[]}) {
-    return _BazaarState(
-      bazaarList: bazaarList,
-    );
-  }
-}
-
-/// @nodoc
-const $BazaarState = _$BazaarStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$BazaarState {
@@ -67,32 +53,32 @@ class _$BazaarStateCopyWithImpl<$Res> implements $BazaarStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$BazaarStateCopyWith<$Res>
+abstract class _$$_BazaarStateCopyWith<$Res>
     implements $BazaarStateCopyWith<$Res> {
-  factory _$BazaarStateCopyWith(
-          _BazaarState value, $Res Function(_BazaarState) then) =
-      __$BazaarStateCopyWithImpl<$Res>;
+  factory _$$_BazaarStateCopyWith(
+          _$_BazaarState value, $Res Function(_$_BazaarState) then) =
+      __$$_BazaarStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Bazaar> bazaarList});
 }
 
 /// @nodoc
-class __$BazaarStateCopyWithImpl<$Res> extends _$BazaarStateCopyWithImpl<$Res>
-    implements _$BazaarStateCopyWith<$Res> {
-  __$BazaarStateCopyWithImpl(
-      _BazaarState _value, $Res Function(_BazaarState) _then)
-      : super(_value, (v) => _then(v as _BazaarState));
+class __$$_BazaarStateCopyWithImpl<$Res> extends _$BazaarStateCopyWithImpl<$Res>
+    implements _$$_BazaarStateCopyWith<$Res> {
+  __$$_BazaarStateCopyWithImpl(
+      _$_BazaarState _value, $Res Function(_$_BazaarState) _then)
+      : super(_value, (v) => _then(v as _$_BazaarState));
 
   @override
-  _BazaarState get _value => super._value as _BazaarState;
+  _$_BazaarState get _value => super._value as _$_BazaarState;
 
   @override
   $Res call({
     Object? bazaarList = freezed,
   }) {
-    return _then(_BazaarState(
+    return _then(_$_BazaarState(
       bazaarList: bazaarList == freezed
-          ? _value.bazaarList
+          ? _value._bazaarList
           : bazaarList // ignore: cast_nullable_to_non_nullable
               as List<Bazaar>,
     ));
@@ -102,11 +88,16 @@ class __$BazaarStateCopyWithImpl<$Res> extends _$BazaarStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BazaarState implements _BazaarState {
-  const _$_BazaarState({this.bazaarList = const <Bazaar>[]});
+  const _$_BazaarState({final List<Bazaar> bazaarList = const <Bazaar>[]})
+      : _bazaarList = bazaarList;
 
-  @JsonKey()
+  final List<Bazaar> _bazaarList;
   @override
-  final List<Bazaar> bazaarList;
+  @JsonKey()
+  List<Bazaar> get bazaarList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bazaarList);
+  }
 
   @override
   String toString() {
@@ -117,28 +108,28 @@ class _$_BazaarState implements _BazaarState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BazaarState &&
+            other is _$_BazaarState &&
             const DeepCollectionEquality()
-                .equals(other.bazaarList, bazaarList));
+                .equals(other._bazaarList, _bazaarList));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bazaarList));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_bazaarList));
 
   @JsonKey(ignore: true)
   @override
-  _$BazaarStateCopyWith<_BazaarState> get copyWith =>
-      __$BazaarStateCopyWithImpl<_BazaarState>(this, _$identity);
+  _$$_BazaarStateCopyWith<_$_BazaarState> get copyWith =>
+      __$$_BazaarStateCopyWithImpl<_$_BazaarState>(this, _$identity);
 }
 
 abstract class _BazaarState implements BazaarState {
-  const factory _BazaarState({List<Bazaar> bazaarList}) = _$_BazaarState;
+  const factory _BazaarState({final List<Bazaar> bazaarList}) = _$_BazaarState;
 
   @override
-  List<Bazaar> get bazaarList;
+  List<Bazaar> get bazaarList => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BazaarStateCopyWith<_BazaarState> get copyWith =>
+  _$$_BazaarStateCopyWith<_$_BazaarState> get copyWith =>
       throw _privateConstructorUsedError;
 }

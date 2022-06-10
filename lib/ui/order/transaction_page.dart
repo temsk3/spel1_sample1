@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/transaction/widget/ticket.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../ui/order/widget/ticket_list.dart';
 import '../common/drawer.dart';
 import '../common/header_top.dart';
 import '../hooks/use_l10n.dart';

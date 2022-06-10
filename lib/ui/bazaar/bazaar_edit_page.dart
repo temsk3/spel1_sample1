@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,12 +26,12 @@ class BazaarEditPage extends HookConsumerWidget {
     final state = ref.watch(bazzarViewModelProvider);
     final viewModel = ref.watch(bazzarViewModelProvider.notifier);
     //
-    final _form = GlobalKey<FormState>();
-    DateTime _now = DateTime.now();
+    final form = GlobalKey<FormState>();
+    DateTime now = DateTime.now();
     String uid = 'test';
 
     //
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     Uint8List? picture;
     if (ref.watch(imageCropProvider.select((s) => s.croppedData)) != null) {
       picture = ref
@@ -42,24 +41,23 @@ class BazaarEditPage extends HookConsumerWidget {
     return state.when(
       data: (data) {
         final bazaar = data.bazaarList[index];
-        final _name = useTextEditingController(text: bazaar.name);
-        final _message = useTextEditingController(text: bazaar.message);
-        final _salesStart = useTextEditingController(
+        final name = useTextEditingController(text: bazaar.name);
+        final message = useTextEditingController(text: bazaar.message);
+        final salesStart = useTextEditingController(
             text: dateFormat.format(bazaar.salesStart != null
                 ? bazaar.salesStart as DateTime
-                : _now));
-        final _salesEnd = useTextEditingController(
+                : now));
+        final salesEnd = useTextEditingController(
             text: dateFormat.format(
-                bazaar.salesEnd != null ? bazaar.salesEnd as DateTime : _now));
-        final _eventFrom = useTextEditingController(
-            text: dateFormat.format(bazaar.eventFrom != null
-                ? bazaar.eventFrom as DateTime
-                : _now));
-        final _eventTo = useTextEditingController(
+                bazaar.salesEnd != null ? bazaar.salesEnd as DateTime : now));
+        final eventFrom = useTextEditingController(
             text: dateFormat.format(
-                bazaar.eventTo != null ? bazaar.eventTo as DateTime : _now));
-        final _place = useTextEditingController(text: bazaar.place);
-        final _oldPicture = useTextEditingController(text: bazaar.pictureURL);
+                bazaar.eventFrom != null ? bazaar.eventFrom as DateTime : now));
+        final eventTo = useTextEditingController(
+            text: dateFormat.format(
+                bazaar.eventTo != null ? bazaar.eventTo as DateTime : now));
+        final place = useTextEditingController(text: bazaar.place);
+        final oldPicture = useTextEditingController(text: bazaar.pictureURL);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: theme.appColors.primary,
@@ -70,25 +68,26 @@ class BazaarEditPage extends HookConsumerWidget {
               style: theme.textTheme.h40,
             ),
             centerTitle: true,
-            leading: const AutoLeadingButton(),
+            automaticallyImplyLeading: false,
+            // leading: const AutoLeadingButton(),
             actions: [
               IconButton(
                 onPressed: () async {
-                  if (_form.currentState!.validate()) {
-                    _form.currentState!.save();
+                  if (form.currentState!.validate()) {
+                    form.currentState!.save();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
 
                     final updateBazaar = bazaar.copyWith(
                       organizer: uid,
-                      name: _name.text,
-                      message: _message.text,
-                      salesStart: DateTime.parse(_salesStart.text),
-                      salesEnd: DateTime.parse(_salesEnd.text),
-                      eventFrom: DateTime.parse(_eventFrom.text),
-                      eventTo: DateTime.parse(_eventTo.text),
-                      place: _place.text,
+                      name: name.text,
+                      message: message.text,
+                      salesStart: DateTime.parse(salesStart.text),
+                      salesEnd: DateTime.parse(salesEnd.text),
+                      eventFrom: DateTime.parse(eventFrom.text),
+                      eventTo: DateTime.parse(eventTo.text),
+                      place: place.text,
                     );
                     viewModel.updateBazaar(
                       updateBazaar: updateBazaar,
@@ -110,18 +109,18 @@ class BazaarEditPage extends HookConsumerWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
               child: Form(
-                key: _form,
+                key: form,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
                       onTap: () async {
-                        _form.currentState!.save();
-                        final XFile? _image = await _picker.pickImage(
-                            source: ImageSource.gallery);
+                        form.currentState!.save();
+                        final XFile? image =
+                            await picker.pickImage(source: ImageSource.gallery);
                         await ref
                             .read(imageCropProvider.notifier)
-                            .pickImage(_image);
+                            .pickImage(image);
                         await appRoute.push(const ImageCropRoute());
                       },
                       child: Container(
@@ -132,10 +131,10 @@ class BazaarEditPage extends HookConsumerWidget {
                         child: (ref.watch(imageCropProvider
                                     .select((s) => s.croppedData)) ==
                                 null)
-                            ? (_oldPicture.text == '')
+                            ? (oldPicture.text == '')
                                 ? const Icon(Icons.add_photo_alternate)
                                 : SizedBox.expand(
-                                    child: Image.network(_oldPicture.text))
+                                    child: Image.network(oldPicture.text))
                             : SizedBox.expand(
                                 child: Image.memory(ref.watch(imageCropProvider
                                         .select((s) => s.croppedData))
@@ -143,7 +142,7 @@ class BazaarEditPage extends HookConsumerWidget {
                       ),
                     ),
                     TextFormField(
-                      controller: _name,
+                      controller: name,
                       decoration: const InputDecoration(labelText: 'title'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -152,7 +151,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         return null;
                       },
                       onSaved: (value) {
-                        _name.text = value.toString();
+                        name.text = value.toString();
                       },
                       onChanged: (value) {
                         // _name.text = value.toString();
@@ -180,9 +179,9 @@ class BazaarEditPage extends HookConsumerWidget {
                               lastDate: DateTime(DateTime.now().year + 3),
                             );
                             if (dateRange != null) {
-                              _salesStart.text =
+                              salesStart.text =
                                   dateFormat.format(dateRange.start);
-                              _salesEnd.text = dateFormat.format(dateRange.end);
+                              salesEnd.text = dateFormat.format(dateRange.end);
                             }
                           },
                         ),
@@ -191,7 +190,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         ),
                         Flexible(
                           child: TextFormField(
-                            controller: _salesStart,
+                            controller: salesStart,
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "From",
@@ -201,13 +200,13 @@ class BazaarEditPage extends HookConsumerWidget {
                                 return 'Please enter some text';
                               }
                               if (DateTime.parse(value)
-                                  .isAfter(DateTime.parse(_eventFrom.text))) {
+                                  .isAfter(DateTime.parse(eventFrom.text))) {
                                 return 'Please enter a date after the specified date';
                               }
                               return null;
                             },
                             onSaved: (value) {
-                              _salesStart.text = value.toString();
+                              salesStart.text = value.toString();
                               // DateTime.parse(value) as TextEditingValue;
                             },
                           ),
@@ -217,7 +216,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         ),
                         Flexible(
                           child: TextFormField(
-                            controller: _salesEnd,
+                            controller: salesEnd,
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "To",
@@ -229,7 +228,7 @@ class BazaarEditPage extends HookConsumerWidget {
                               return null;
                             },
                             onSaved: (value) {
-                              _salesEnd.text = value.toString();
+                              salesEnd.text = value.toString();
                               // DateTime.parse(value) as TextEditingValue;
                             },
                           ),
@@ -252,17 +251,16 @@ class BazaarEditPage extends HookConsumerWidget {
                             final dateRange = await showDateRangePicker(
                               context: context,
                               initialDateRange: DateTimeRange(
-                                start: DateTime.parse(_salesStart.text),
-                                end: DateTime.parse(_salesEnd.text),
+                                start: DateTime.parse(salesStart.text),
+                                end: DateTime.parse(salesEnd.text),
                               ),
-                              firstDate:
-                                  DateTime(_now.year, _now.month, _now.day),
-                              lastDate: DateTime(_now.year + 3),
+                              firstDate: DateTime(now.year, now.month, now.day),
+                              lastDate: DateTime(now.year + 3),
                             );
                             if (dateRange != null) {
-                              _eventFrom.text =
+                              eventFrom.text =
                                   dateFormat.format(dateRange.start).toString();
-                              _eventTo.text =
+                              eventTo.text =
                                   dateFormat.format(dateRange.end).toString();
                             }
                           },
@@ -272,7 +270,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         ),
                         Flexible(
                           child: TextFormField(
-                            controller: _eventFrom,
+                            controller: eventFrom,
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "From",
@@ -284,7 +282,7 @@ class BazaarEditPage extends HookConsumerWidget {
                               return null;
                             },
                             onSaved: (value) {
-                              _eventFrom.text = value.toString();
+                              eventFrom.text = value.toString();
                               // DateTime.parse(value);
                             },
                           ),
@@ -294,7 +292,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         ),
                         Flexible(
                           child: TextFormField(
-                            controller: _eventTo,
+                            controller: eventTo,
                             decoration: const InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: "To",
@@ -303,14 +301,14 @@ class BazaarEditPage extends HookConsumerWidget {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter some text';
                               }
-                              if (DateTime.parse(_salesEnd.text)
+                              if (DateTime.parse(salesEnd.text)
                                   .isAfter(DateTime.parse(value))) {
                                 return 'Please enter a date after the specified date';
                               }
                               return null;
                             },
                             onSaved: (value) {
-                              _eventTo.text = value.toString();
+                              eventTo.text = value.toString();
                               // DateTime.parse(value) as TextEditingValue;
                             },
                           ),
@@ -321,7 +319,7 @@ class BazaarEditPage extends HookConsumerWidget {
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                     ),
                     TextFormField(
-                      controller: _place,
+                      controller: place,
                       decoration: const InputDecoration(labelText: 'place'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -330,14 +328,14 @@ class BazaarEditPage extends HookConsumerWidget {
                         return null;
                       },
                       onSaved: (value) {
-                        _place.text = value.toString();
+                        place.text = value.toString();
                       },
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                     ),
                     TextFormField(
-                      controller: _message,
+                      controller: message,
                       maxLines: 2,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -350,7 +348,7 @@ class BazaarEditPage extends HookConsumerWidget {
                         return null;
                       },
                       onSaved: (value) {
-                        _message.text = value.toString();
+                        message.text = value.toString();
                       },
                     ),
                     const Padding(

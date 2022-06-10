@@ -12,58 +12,11 @@ part of 'bazaar_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Bazaar _$BazaarFromJson(Map<String, dynamic> json) {
   return _Bazaar.fromJson(json);
 }
-
-/// @nodoc
-class _$BazaarTearOff {
-  const _$BazaarTearOff();
-
-  _Bazaar call(
-      {String? id,
-      required String? organizer,
-      required String? name,
-      required String? message,
-      @timestampkey required DateTime? salesStart,
-      @timestampkey required DateTime? salesEnd,
-      @timestampkey required DateTime? eventFrom,
-      @timestampkey required DateTime? eventTo,
-      required String? place,
-      String? pictureName,
-      String? pictureURL,
-      @timestampkey DateTime? createdAt,
-      @timestampkey DateTime? updatedAt,
-      @timestampkey DateTime? deletedAt,
-      String? eventId}) {
-    return _Bazaar(
-      id: id,
-      organizer: organizer,
-      name: name,
-      message: message,
-      salesStart: salesStart,
-      salesEnd: salesEnd,
-      eventFrom: eventFrom,
-      eventTo: eventTo,
-      place: place,
-      pictureName: pictureName,
-      pictureURL: pictureURL,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      deletedAt: deletedAt,
-      eventId: eventId,
-    );
-  }
-
-  Bazaar fromJson(Map<String, Object?> json) {
-    return Bazaar.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Bazaar = _$BazaarTearOff();
 
 /// @nodoc
 mixin _$Bazaar {
@@ -209,9 +162,9 @@ class _$BazaarCopyWithImpl<$Res> implements $BazaarCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$BazaarCopyWith<$Res> implements $BazaarCopyWith<$Res> {
-  factory _$BazaarCopyWith(_Bazaar value, $Res Function(_Bazaar) then) =
-      __$BazaarCopyWithImpl<$Res>;
+abstract class _$$_BazaarCopyWith<$Res> implements $BazaarCopyWith<$Res> {
+  factory _$$_BazaarCopyWith(_$_Bazaar value, $Res Function(_$_Bazaar) then) =
+      __$$_BazaarCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -232,13 +185,13 @@ abstract class _$BazaarCopyWith<$Res> implements $BazaarCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$BazaarCopyWithImpl<$Res> extends _$BazaarCopyWithImpl<$Res>
-    implements _$BazaarCopyWith<$Res> {
-  __$BazaarCopyWithImpl(_Bazaar _value, $Res Function(_Bazaar) _then)
-      : super(_value, (v) => _then(v as _Bazaar));
+class __$$_BazaarCopyWithImpl<$Res> extends _$BazaarCopyWithImpl<$Res>
+    implements _$$_BazaarCopyWith<$Res> {
+  __$$_BazaarCopyWithImpl(_$_Bazaar _value, $Res Function(_$_Bazaar) _then)
+      : super(_value, (v) => _then(v as _$_Bazaar));
 
   @override
-  _Bazaar get _value => super._value as _Bazaar;
+  _$_Bazaar get _value => super._value as _$_Bazaar;
 
   @override
   $Res call({
@@ -258,7 +211,7 @@ class __$BazaarCopyWithImpl<$Res> extends _$BazaarCopyWithImpl<$Res>
     Object? deletedAt = freezed,
     Object? eventId = freezed,
   }) {
-    return _then(_Bazaar(
+    return _then(_$_Bazaar(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -394,7 +347,7 @@ class _$_Bazaar extends _Bazaar {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Bazaar &&
+            other is _$_Bazaar &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.organizer, organizer) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -415,6 +368,7 @@ class _$_Bazaar extends _Bazaar {
             const DeepCollectionEquality().equals(other.eventId, eventId));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -436,8 +390,8 @@ class _$_Bazaar extends _Bazaar {
 
   @JsonKey(ignore: true)
   @override
-  _$BazaarCopyWith<_Bazaar> get copyWith =>
-      __$BazaarCopyWithImpl<_Bazaar>(this, _$identity);
+  _$$_BazaarCopyWith<_$_Bazaar> get copyWith =>
+      __$$_BazaarCopyWithImpl<_$_Bazaar>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -447,63 +401,64 @@ class _$_Bazaar extends _Bazaar {
 
 abstract class _Bazaar extends Bazaar {
   const factory _Bazaar(
-      {String? id,
-      required String? organizer,
-      required String? name,
-      required String? message,
-      @timestampkey required DateTime? salesStart,
-      @timestampkey required DateTime? salesEnd,
-      @timestampkey required DateTime? eventFrom,
-      @timestampkey required DateTime? eventTo,
-      required String? place,
-      String? pictureName,
-      String? pictureURL,
-      @timestampkey DateTime? createdAt,
-      @timestampkey DateTime? updatedAt,
-      @timestampkey DateTime? deletedAt,
-      String? eventId}) = _$_Bazaar;
+      {final String? id,
+      required final String? organizer,
+      required final String? name,
+      required final String? message,
+      @timestampkey required final DateTime? salesStart,
+      @timestampkey required final DateTime? salesEnd,
+      @timestampkey required final DateTime? eventFrom,
+      @timestampkey required final DateTime? eventTo,
+      required final String? place,
+      final String? pictureName,
+      final String? pictureURL,
+      @timestampkey final DateTime? createdAt,
+      @timestampkey final DateTime? updatedAt,
+      @timestampkey final DateTime? deletedAt,
+      final String? eventId}) = _$_Bazaar;
   const _Bazaar._() : super._();
 
   factory _Bazaar.fromJson(Map<String, dynamic> json) = _$_Bazaar.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String? get organizer;
+  String? get organizer => throw _privateConstructorUsedError;
   @override
-  String? get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String? get message;
-  @override
-  @timestampkey
-  DateTime? get salesStart;
+  String? get message => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get salesEnd;
+  DateTime? get salesStart => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get eventFrom;
+  DateTime? get salesEnd => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get eventTo;
-  @override
-  String? get place;
-  @override
-  String? get pictureName;
-  @override
-  String? get pictureURL;
+  DateTime? get eventFrom => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get createdAt;
+  DateTime? get eventTo => throw _privateConstructorUsedError;
+  @override
+  String? get place => throw _privateConstructorUsedError;
+  @override
+  String? get pictureName => throw _privateConstructorUsedError;
+  @override
+  String? get pictureURL => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get updatedAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
   @timestampkey
-  DateTime? get deletedAt;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
-  String? get eventId;
+  @timestampkey
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
+  @override
+  String? get eventId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BazaarCopyWith<_Bazaar> get copyWith => throw _privateConstructorUsedError;
+  _$$_BazaarCopyWith<_$_Bazaar> get copyWith =>
+      throw _privateConstructorUsedError;
 }

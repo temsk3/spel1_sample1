@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../hooks/use_router.dart';
+import '../routes/app_route.gr.dart';
 import '../theme/app_theme.dart';
 
 class CustomDrawer extends HookConsumerWidget {
@@ -9,6 +11,7 @@ class CustomDrawer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+    final appRoute = useRouter();
     return SafeArea(
       bottom: false,
       child: ClipRRect(
@@ -45,11 +48,13 @@ class CustomDrawer extends HookConsumerWidget {
               //   decoration: BoxDecoration(color: theme.appColors.primary),
               // ),
               ListTile(
-                title: const Text('Profile'),
-                onTap: () {},
+                title: const Text('signin'),
+                onTap: () {
+                  appRoute.push(const AuthRoute());
+                },
               ),
               ListTile(
-                title: const Text('test2'),
+                title: const Text('Profile'),
                 onTap: () {},
               ),
               ListTile(

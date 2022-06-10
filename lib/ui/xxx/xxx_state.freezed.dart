@@ -12,21 +12,7 @@ part of 'xxx_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$XXXStateTearOff {
-  const _$XXXStateTearOff();
-
-  _XXXState call({int count = 0}) {
-    return _XXXState(
-      count: count,
-    );
-  }
-}
-
-/// @nodoc
-const $XXXState = _$XXXStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$XXXState {
@@ -66,27 +52,29 @@ class _$XXXStateCopyWithImpl<$Res> implements $XXXStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$XXXStateCopyWith<$Res> implements $XXXStateCopyWith<$Res> {
-  factory _$XXXStateCopyWith(_XXXState value, $Res Function(_XXXState) then) =
-      __$XXXStateCopyWithImpl<$Res>;
+abstract class _$$_XXXStateCopyWith<$Res> implements $XXXStateCopyWith<$Res> {
+  factory _$$_XXXStateCopyWith(
+          _$_XXXState value, $Res Function(_$_XXXState) then) =
+      __$$_XXXStateCopyWithImpl<$Res>;
   @override
   $Res call({int count});
 }
 
 /// @nodoc
-class __$XXXStateCopyWithImpl<$Res> extends _$XXXStateCopyWithImpl<$Res>
-    implements _$XXXStateCopyWith<$Res> {
-  __$XXXStateCopyWithImpl(_XXXState _value, $Res Function(_XXXState) _then)
-      : super(_value, (v) => _then(v as _XXXState));
+class __$$_XXXStateCopyWithImpl<$Res> extends _$XXXStateCopyWithImpl<$Res>
+    implements _$$_XXXStateCopyWith<$Res> {
+  __$$_XXXStateCopyWithImpl(
+      _$_XXXState _value, $Res Function(_$_XXXState) _then)
+      : super(_value, (v) => _then(v as _$_XXXState));
 
   @override
-  _XXXState get _value => super._value as _XXXState;
+  _$_XXXState get _value => super._value as _$_XXXState;
 
   @override
   $Res call({
     Object? count = freezed,
   }) {
-    return _then(_XXXState(
+    return _then(_$_XXXState(
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -100,8 +88,8 @@ class __$XXXStateCopyWithImpl<$Res> extends _$XXXStateCopyWithImpl<$Res>
 class _$_XXXState implements _XXXState {
   const _$_XXXState({this.count = 0});
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int count;
 
   @override
@@ -113,7 +101,7 @@ class _$_XXXState implements _XXXState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _XXXState &&
+            other is _$_XXXState &&
             const DeepCollectionEquality().equals(other.count, count));
   }
 
@@ -123,17 +111,17 @@ class _$_XXXState implements _XXXState {
 
   @JsonKey(ignore: true)
   @override
-  _$XXXStateCopyWith<_XXXState> get copyWith =>
-      __$XXXStateCopyWithImpl<_XXXState>(this, _$identity);
+  _$$_XXXStateCopyWith<_$_XXXState> get copyWith =>
+      __$$_XXXStateCopyWithImpl<_$_XXXState>(this, _$identity);
 }
 
 abstract class _XXXState implements XXXState {
-  const factory _XXXState({int count}) = _$_XXXState;
+  const factory _XXXState({final int count}) = _$_XXXState;
 
   @override
-  int get count;
+  int get count => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$XXXStateCopyWith<_XXXState> get copyWith =>
+  _$$_XXXStateCopyWith<_$_XXXState> get copyWith =>
       throw _privateConstructorUsedError;
 }

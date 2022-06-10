@@ -23,7 +23,7 @@ class Header extends ConsumerWidget with PreferredSizeWidget {
         style: theme.textTheme.h40,
       ),
       centerTitle: true,
-      leading: const AutoBackButton(),
+      leading: const AutoLeadingButton(),
     );
   }
 }

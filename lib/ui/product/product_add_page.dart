@@ -17,8 +17,9 @@ import '../theme/app_theme.dart';
 import 'widget/picture.dart';
 
 class ProductAddPage extends HookConsumerWidget {
-  const ProductAddPage({Key? key}) : super(key: key);
-
+  const ProductAddPage({Key? key, @PathParam('bazaar') this.bazaar})
+      : super(key: key);
+  final bazaar;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     DateFormat dateFormat = DateFormat('yyyy-MM-dd');
@@ -29,27 +30,30 @@ class ProductAddPage extends HookConsumerWidget {
     final viewModel = ref.watch(productViewModelProvider.notifier);
     final product = Product.empty();
     //
-    final _form = GlobalKey<FormState>();
-    DateTime _now = DateTime.now();
+    final form = GlobalKey<FormState>();
+    DateTime now = DateTime.now();
     String uid = 'test';
+    String organizer = bazaar.organizer;
+    String bazaarId = bazaar.id;
 
-    final _name = useTextEditingController(text: product.name);
-    final _genre = useState(product.genre);
-    final _desc = useTextEditingController(text: product.desc);
-    final _stock = useTextEditingController(text: product.stock.toString());
-    final _price = useTextEditingController(text: product.price.toString());
-    final _expirationFrom = useTextEditingController(
+    final code = useTextEditingController(text: product.code);
+    final name = useTextEditingController(text: product.name);
+    final genre = useState(product.genre);
+    final desc = useTextEditingController(text: product.desc);
+    final stock = useTextEditingController(text: product.stock.toString());
+    final price = useTextEditingController(text: product.price.toString());
+    final expirationFrom = useTextEditingController(
         text: dateFormat.format(product.expirationFrom != null
             ? product.expirationFrom as DateTime
-            : _now));
-    final _expirationTo = useTextEditingController(
+            : now));
+    final expirationTo = useTextEditingController(
         text: dateFormat.format(product.expirationTo != null
             ? product.expirationTo as DateTime
-            : _now));
+            : now));
 
     //
-    final ImagePicker _picker = ImagePicker();
-    var _uint8List = useState<Uint8List?>(null);
+    final ImagePicker picker = ImagePicker();
+    var uint8List = useState<Uint8List?>(null);
     // return state.when(
     //   data: (data) {
     return Scaffold(
@@ -62,27 +66,31 @@ class ProductAddPage extends HookConsumerWidget {
           style: theme.textTheme.h40,
         ),
         centerTitle: true,
-        leading: const AutoLeadingButton(),
+        automaticallyImplyLeading: false,
+        // leading: const AutoLeadingButton(),
         actions: [
           IconButton(
             onPressed: () async {
-              if (_form.currentState!.validate()) {
-                _form.currentState!.save();
+              if (form.currentState!.validate()) {
+                form.currentState!.save();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Processing Data')),
                 );
                 viewModel.addProduct(
-                    organizer: uid,
-                    name: _name.text,
-                    genre: _genre.value.toString(),
-                    desc: _desc.text,
-                    stock: int.parse(_stock.text),
-                    price: int.parse(_price.text),
-                    expirationFrom: DateTime.parse(_expirationFrom.text),
-                    expirationTo: DateTime.parse(_expirationTo.text),
+                    organizer: organizer,
+                    bazaarId: bazaarId,
+                    register: uid,
+                    code: code.text,
+                    name: name.text,
+                    genre: genre.value.toString(),
+                    desc: desc.text,
+                    stock: int.parse(stock.text),
+                    price: int.parse(price.text),
+                    expirationFrom: DateTime.parse(expirationFrom.text),
+                    expirationTo: DateTime.parse(expirationTo.text),
                     isPublished: false,
                     picture1:
-                        (_uint8List.value == null) ? null : (_uint8List.value));
+                        (uint8List.value == null) ? null : (uint8List.value));
                 appRoute.pop(const ProductRouter());
               }
             },
@@ -96,21 +104,40 @@ class ProductAddPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(20.0),
           // child: BazaarForm(bazaar: product.empty()
           child: Form(
-            key: _form,
+            key: form,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () async {
-                    _form.currentState!.save();
-                    final XFile? _image =
-                        await _picker.pickImage(source: ImageSource.gallery);
-                    _uint8List.value = await _image!.readAsBytes();
+                    form.currentState!.save();
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    uint8List.value = await image!.readAsBytes();
                   },
-                  child: PictureDetail(picture: _uint8List.value),
+                  child: PictureDetail(picture: uint8List.value),
                 ),
                 TextFormField(
-                  controller: _name,
+                  controller: code,
+                  decoration: const InputDecoration(labelText: 'code'),
+                  // validator: (value) {
+                  // if (value == null || value.isEmpty) {
+                  //   return 'Please enter some text';
+                  // }
+                  // return null;
+                  // },
+                  onSaved: (value) {
+                    code.text = value.toString();
+                  },
+                  // onChanged: (value) {
+                  // _name.text = value.toString();
+                  // },
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                ),
+                TextFormField(
+                  controller: name,
                   decoration: const InputDecoration(labelText: 'name'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -119,7 +146,7 @@ class ProductAddPage extends HookConsumerWidget {
                     return null;
                   },
                   onSaved: (value) {
-                    _name.text = value.toString();
+                    name.text = value.toString();
                   },
                   // onChanged: (value) {
                   // _name.text = value.toString();
@@ -132,12 +159,12 @@ class ProductAddPage extends HookConsumerWidget {
                   items: ['Foods', 'Goods']
                       .map(
                         (item) => DropdownMenuItem<String>(
-                          child: Text(item),
                           value: item,
+                          child: Text(item),
                         ),
                       )
                       .toList(),
-                  value: _genre.value,
+                  value: genre.value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please select';
@@ -145,14 +172,14 @@ class ProductAddPage extends HookConsumerWidget {
                     return null;
                   },
                   decoration: const InputDecoration(labelText: 'genre'),
-                  onChanged: (value) => {_genre.value = value},
-                  onSaved: (value) => {_genre.value = value},
+                  onChanged: (value) => {genre.value = value},
+                  onSaved: (value) => {genre.value = value},
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 TextFormField(
-                  controller: _desc,
+                  controller: desc,
                   maxLines: 2,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -165,14 +192,14 @@ class ProductAddPage extends HookConsumerWidget {
                     return null;
                   },
                   onSaved: (value) {
-                    _desc.text = value.toString();
+                    desc.text = value.toString();
                   },
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 TextFormField(
-                  controller: _stock,
+                  controller: stock,
                   decoration: const InputDecoration(labelText: 'stock'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -181,14 +208,14 @@ class ProductAddPage extends HookConsumerWidget {
                     return null;
                   },
                   onSaved: (value) {
-                    _stock.text = value.toString();
+                    stock.text = value.toString();
                   },
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 TextFormField(
-                  controller: _price,
+                  controller: price,
                   decoration: const InputDecoration(labelText: 'price'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -197,7 +224,7 @@ class ProductAddPage extends HookConsumerWidget {
                     return null;
                   },
                   onSaved: (value) {
-                    _price.text = value.toString();
+                    price.text = value.toString();
                   },
                 ),
                 const Padding(
@@ -222,9 +249,9 @@ class ProductAddPage extends HookConsumerWidget {
                           lastDate: DateTime(DateTime.now().year + 3),
                         );
                         if (dateRange != null) {
-                          _expirationFrom.text =
+                          expirationFrom.text =
                               dateFormat.format(dateRange.start);
-                          _expirationTo.text = dateFormat.format(dateRange.end);
+                          expirationTo.text = dateFormat.format(dateRange.end);
                         }
                       },
                     ),
@@ -233,7 +260,7 @@ class ProductAddPage extends HookConsumerWidget {
                     ),
                     Flexible(
                       child: TextFormField(
-                        controller: _expirationFrom,
+                        controller: expirationFrom,
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "From",
@@ -243,13 +270,13 @@ class ProductAddPage extends HookConsumerWidget {
                             return 'Please enter some text';
                           }
                           if (DateTime.parse(value)
-                              .isAfter(DateTime.parse(_expirationTo.text))) {
+                              .isAfter(DateTime.parse(expirationTo.text))) {
                             return 'Please enter a date after the specified date';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _expirationFrom.text = value.toString();
+                          expirationFrom.text = value.toString();
                         },
                       ),
                     ),
@@ -258,7 +285,7 @@ class ProductAddPage extends HookConsumerWidget {
                     ),
                     Flexible(
                       child: TextFormField(
-                        controller: _expirationTo,
+                        controller: expirationTo,
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "To",
@@ -270,7 +297,7 @@ class ProductAddPage extends HookConsumerWidget {
                           return null;
                         },
                         onSaved: (value) {
-                          _expirationTo.text = value.toString();
+                          expirationTo.text = value.toString();
                         },
                       ),
                     ),
