@@ -52,3 +52,6 @@ node_modules
 
 #firebase
 firebase_options.dart
+
+#.env
+.env*
