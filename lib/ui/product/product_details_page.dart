@@ -529,42 +529,51 @@ class ProductDetailsPage extends HookConsumerWidget {
                                 primary: theme.appColors.primary,
                                 onPrimary: theme.appColors.onPrimary,
                               ),
-                              onPressed: () async {
-                                // if(){};
-                                final isConfirmed = await showConfirmDialog(
-                                    context,
-                                    '${product.name} を購入しますか？\n数量 ${quantity.value}');
-                                // 購入処理
-                                if (isConfirmed) {
-                                  try {
-                                    // await model.createCharge(product);
-                                    await ref
-                                        .watch(orderViewModelProvider.notifier)
-                                        .addOrder(
-                                          userId: uid,
-                                          userName: '',
-                                          organizer: product.organizer,
-                                          bazaarId: product.bazaarId,
-                                          bazaarName: product.bazaarName,
-                                          code: product.code,
-                                          name: product.name,
-                                          desc: product.desc,
-                                          price: product.price as int,
-                                          quantity: quantity.value,
-                                          numberOfUse: quantity.value,
-                                          picture1URL: product.picture1URL,
-                                          picture2URL: product.picture2URL,
-                                          picture3URL: product.picture3URL,
-                                          expirationFrom:
-                                              product.expirationFrom,
-                                          expirationTo: product.expirationTo,
-                                        );
-                                    await showTextDialog(context, '購入しました');
-                                  } catch (e) {
-                                    await showTextDialog(context, e.toString());
-                                  }
-                                }
-                              },
+                              onPressed: product.stock == 0
+                                  ? null
+                                  : () async {
+                                      // if(){};
+                                      final isConfirmed = await showConfirmDialog(
+                                          context,
+                                          '${product.name} を購入しますか？\n数量 ${quantity.value}');
+                                      // 購入処理
+                                      if (isConfirmed) {
+                                        try {
+                                          // await model.createCharge(product);
+                                          await ref
+                                              .watch(orderViewModelProvider
+                                                  .notifier)
+                                              .addOrder(
+                                                userId: uid,
+                                                userName: '',
+                                                organizer: product.organizer,
+                                                bazaarId: product.bazaarId,
+                                                bazaarName: product.bazaarName,
+                                                code: product.code,
+                                                name: product.name,
+                                                desc: product.desc,
+                                                price: product.price as int,
+                                                quantity: quantity.value,
+                                                numberOfUse: quantity.value,
+                                                picture1URL:
+                                                    product.picture1URL,
+                                                picture2URL:
+                                                    product.picture2URL,
+                                                picture3URL:
+                                                    product.picture3URL,
+                                                expirationFrom:
+                                                    product.expirationFrom,
+                                                expirationTo:
+                                                    product.expirationTo,
+                                              );
+                                          await showTextDialog(
+                                              context, '購入しました');
+                                        } catch (e) {
+                                          await showTextDialog(
+                                              context, e.toString());
+                                        }
+                                      }
+                                    },
                               child: const Text('購入する'),
                             ),
                           ],

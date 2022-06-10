@@ -120,7 +120,14 @@ class SalesStatusPage extends HookConsumerWidget {
           body: SafeArea(
             // child: SingleChildScrollView(
             //   controller: scrollController,
-            child: _table(),
+            child: Column(children: [
+              Text(
+                'sum:${numFormatter.format(sum)}',
+                style: theme.textTheme.h50
+                    .copyWith(color: theme.appColors.onPrimary),
+              ),
+              Flexible(child: _table())
+            ]),
           ),
           // ),
         );

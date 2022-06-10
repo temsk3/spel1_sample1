@@ -11,9 +11,10 @@ final bazaarRepositoryProvider =
 final bazaarListStreamProvider = StreamProvider.autoDispose((ref) {
   CollectionReference ref = FirebaseFirestore.instance.collection('events');
   return ref.snapshots().map((snapshot) {
-    return snapshot.docs
-        .map((doc) => Bazaar.fromJson(doc.data() as Map<String, dynamic>))
-        .toList();
+    return snapshot.docs.map((doc) {
+      return Bazaar.fromJson(doc.data() as Map<String, dynamic>)
+          .copyWith(id: doc.id);
+    }).toList();
   });
 });
 

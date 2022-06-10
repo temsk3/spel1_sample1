@@ -7,13 +7,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/model/bazaar/bazaar_model.dart';
-import '../common/drawer.dart';
 import '../common/image_crop_controller.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../routes/app_route.gr.dart';
 import '../theme/app_theme.dart';
-import 'bazaar_page.dart';
 import 'bazaar_view_model.dart';
 
 class BazaarAddPage extends HookConsumerWidget {
@@ -90,14 +88,13 @@ class BazaarAddPage extends HookConsumerWidget {
                               imageCropProvider.select((s) => s.croppedData))
                           as Uint8List),
                 );
-                appRoute.pop(BazaarListPage);
+                appRoute.pop();
               }
             },
             icon: const Icon(Icons.save),
           ),
         ],
       ),
-      drawer: const CustomDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -123,7 +120,10 @@ class BazaarAddPage extends HookConsumerWidget {
                     child: ref.watch(imageCropProvider
                                 .select((s) => s.croppedData)) ==
                             null
-                        ? const Icon(Icons.add_photo_alternate)
+                        ? Icon(
+                            Icons.add_photo_alternate,
+                            color: theme.appColors.onPrimary,
+                          )
                         : SizedBox.expand(
                             child: Image.memory(
                             ref.watch(imageCropProvider
@@ -133,6 +133,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 ),
                 TextFormField(
                   controller: name,
+                  style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(labelText: 'title'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -180,6 +181,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: salesStart,
+                        style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "From",
@@ -205,6 +207,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: salesEnd,
+                        style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "To",
@@ -258,6 +261,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: eventFrom,
+                        style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "From",
@@ -279,6 +283,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: eventTo,
+                        style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "To",
@@ -305,6 +310,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 ),
                 TextFormField(
                   controller: place,
+                  style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(labelText: 'place'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -322,6 +328,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 TextFormField(
                   controller: message,
                   maxLines: 2,
+                  style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'message',

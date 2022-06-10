@@ -18,7 +18,7 @@ class BazaarListPage extends HookConsumerWidget {
     final viewModel = ref.watch(bazzarViewModelProvider.notifier);
     final l10n = useL10n();
     final appRoute = useRouter();
-    const approval = true; // c
+    const staff = true; // c
     return state.when(
       data: (data) {
         return Scaffold(
@@ -44,7 +44,7 @@ class BazaarListPage extends HookConsumerWidget {
             ),
           ),
           floatingActionButton: Visibility(
-            visible: approval,
+            visible: staff,
             child: FloatingActionButton(
               backgroundColor: theme.appColors.primary,
               foregroundColor: theme.appColors.onPrimary,

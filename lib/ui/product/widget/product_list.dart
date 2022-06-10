@@ -68,7 +68,11 @@ class ProductCard extends HookConsumerWidget {
           ),
         ),
         RawMaterialButton(
-          onPressed: () async {
+          onPressed:
+              // product.stock == 0
+              //     ? null
+              //     :
+              () async {
             await appRoute.push(
                 ProductDetailsRoute(productItem: product, bazaarEvent: bazaar));
 
@@ -88,6 +92,15 @@ class ProductCard extends HookConsumerWidget {
             height: 240,
           ),
         ),
+        if (product.stock == 0)
+          Positioned(
+            child: Text(
+              'SOLDOUT',
+              style: theme.textTheme.h60
+                  .bold()
+                  .copyWith(color: theme.appColors.onPrimary),
+            ),
+          ),
       ],
     );
   }

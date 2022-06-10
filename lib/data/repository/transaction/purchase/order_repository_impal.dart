@@ -11,9 +11,10 @@ final orderRepositoryProvider =
 final orderListStreamProvider = StreamProvider.autoDispose((ref) {
   CollectionReference ref = FirebaseFirestore.instance.collection('order');
   return ref.snapshots().map((snapshot) {
-    return snapshot.docs
-        .map((doc) => Order.fromJson(doc.data() as Map<String, dynamic>))
-        .toList();
+    return snapshot.docs.map((doc) {
+      return Order.fromJson(doc.data() as Map<String, dynamic>)
+          .copyWith(id: doc.id);
+    }).toList();
   });
 });
 
