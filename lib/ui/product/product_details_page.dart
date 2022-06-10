@@ -152,7 +152,13 @@ class ProductDetailsPage extends HookConsumerWidget {
                     if (form.currentState!.validate()) {
                       form.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        SnackBar(
+                          content: Text(
+                            'Processing Data',
+                            style: theme.textTheme.h30
+                                .copyWith(color: theme.appColors.onError),
+                          ),
+                        ),
                       );
                       final updateProduct = product.copyWith(
                         organizer: uid,
@@ -171,6 +177,7 @@ class ProductDetailsPage extends HookConsumerWidget {
                           newPicture1: uint8List.value,
                           oldPicture1: oldPicture.text);
                       // appRoute.pop(ProductDetailsRoute(index: index));
+                      appRoute.pop();
                       edit.value = false;
                     }
                   },
@@ -182,7 +189,13 @@ class ProductDetailsPage extends HookConsumerWidget {
                     if (form.currentState!.validate()) {
                       form.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        SnackBar(
+                          content: Text(
+                            'Processing Data',
+                            style: theme.textTheme.h30
+                                .copyWith(color: theme.appColors.onError),
+                          ),
+                        ),
                       );
                       viewModel.addProduct(
                           organizer: organizer.toString(),

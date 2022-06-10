@@ -11,9 +11,10 @@ final productRepositoryProvider =
 final productListStreamProvider = StreamProvider.autoDispose((ref) {
   CollectionReference ref = FirebaseFirestore.instance.collection('product');
   return ref.snapshots().map((snapshot) {
-    return snapshot.docs
-        .map((doc) => Product.fromJson(doc.data() as Map<String, dynamic>))
-        .toList();
+    return snapshot.docs.map((doc) {
+      return Product.fromJson(doc.data() as Map<String, dynamic>)
+          .copyWith(id: doc.id);
+    }).toList();
   });
 });
 

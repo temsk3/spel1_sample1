@@ -22,23 +22,23 @@ class ProductAllPage extends HookConsumerWidget {
     return asyncValue.when(
       data: (data) {
         return SafeArea(
-          child: RefreshIndicator(
-            onRefresh: () async {
-              viewModel.readProduct();
-            },
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.8,
-              ),
-              padding: const EdgeInsets.all(16.0),
-              itemCount: data.length,
-              itemBuilder: (_, index) {
-                final product = data[index];
-                return ProductCard(index: index, product: product);
-              },
+          // child: RefreshIndicator(
+          //   onRefresh: () async {
+          //     viewModel.readProduct();
+          //   },
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 0.8,
             ),
+            padding: const EdgeInsets.all(16.0),
+            itemCount: data.length,
+            itemBuilder: (_, index) {
+              final product = data[index];
+              return ProductCard(index: index, product: product);
+            },
           ),
+          // ),
         );
       },
       error: (e, msg) {

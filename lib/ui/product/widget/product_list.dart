@@ -52,6 +52,7 @@ class ProductCard extends HookConsumerWidget {
                             .bold()
                             .copyWith(color: theme.appColors.onBackground),
                         maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 8.0),
                       Text(

@@ -23,23 +23,23 @@ class ProductGoodsPage extends HookConsumerWidget {
             data.productList.where((product) => product.genre == 'Goods');
         final newList = newData.toList();
         return SafeArea(
-          child: RefreshIndicator(
-            onRefresh: () async {
-              viewModel.readProduct();
-            },
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.8,
-              ),
-              padding: const EdgeInsets.all(16.0),
-              itemCount: newList.length, //data.productList.length,
-              itemBuilder: (_, index) {
-                final product = newList[index]; //data.productList[index];
-                return ProductCard(index: index, product: product);
-              },
+          // child: RefreshIndicator(
+          //   onRefresh: () async {
+          //     viewModel.readProduct();
+          //   },
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 0.8,
             ),
+            padding: const EdgeInsets.all(16.0),
+            itemCount: newList.length, //data.productList.length,
+            itemBuilder: (_, index) {
+              final product = newList[index]; //data.productList[index];
+              return ProductCard(index: index, product: product);
+            },
           ),
+          // ),
         );
       },
       error: (e, msg) {
