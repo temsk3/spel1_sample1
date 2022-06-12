@@ -139,7 +139,7 @@ class BazaarDetailsPage extends HookConsumerWidget {
                             onPrimary: theme.appColors.onPrimary,
                           ),
                           onPressed: () {
-                            appRoute.push(OrderRoute(bazaar: bazaar.id));
+                            // appRoute.push(OrderRoute(bazaar: bazaar.id));
                           },
                           child: Text(
                             'order',
@@ -154,7 +154,7 @@ class BazaarDetailsPage extends HookConsumerWidget {
                             onPrimary: theme.appColors.onPrimary,
                           ),
                           onPressed: () {
-                            appRoute.push(SalesStatusRoute(bazaar: bazaar.id));
+                            //   appRoute.push(SalesStatusRoute(bazaar: bazaar.id));
                           },
                           child: Text(
                             'sales',
@@ -169,8 +169,8 @@ class BazaarDetailsPage extends HookConsumerWidget {
                             onPrimary: theme.appColors.onPrimary,
                           ),
                           onPressed: () {
-                            appRoute
-                                .push(ProductStatusRoute(bazaar: bazaar.id));
+                            // appRoute
+                            //     .push(ProductStatusRoute(bazaar: bazaar.id));
                           },
                           child: Text(
                             'product',

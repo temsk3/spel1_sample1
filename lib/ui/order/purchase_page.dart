@@ -150,24 +150,4 @@ class PurchasePage extends HookConsumerWidget {
       },
     );
   }
-
-  List<Widget> _getTitleWidget() {
-    return [
-      _getTitleItemWidget('Name', 100),
-      _getTitleItemWidget('Status', 100),
-      _getTitleItemWidget('product', 200),
-      _getTitleItemWidget('quantity', 100),
-      _getTitleItemWidget('Purchase date', 200),
-    ];
-  }
-
-  Widget _getTitleItemWidget(String label, double width) {
-    return Container(
-      width: width,
-      height: 56,
-      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
-      child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-    );
-  }
 }

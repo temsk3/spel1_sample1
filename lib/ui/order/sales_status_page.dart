@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/ui/order/widget/sales_datatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/repository/transaction/purchase/order_repository_impal.dart';
@@ -53,60 +53,6 @@ class SalesStatusPage extends HookConsumerWidget {
         for (var e in data) {
           sum = (sum + e.sum!);
         }
-        Widget _generateFirstColumnRow(BuildContext context, int index) {
-          return Container(
-            width: 100,
-            height: 52,
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            alignment: Alignment.centerLeft,
-            child: Text(data[index].code.toString()),
-          );
-        }
-
-        Widget _generateRightHandSideColumnRow(
-            BuildContext context, int index) {
-          return Row(
-            children: <Widget>[
-              Container(
-                width: 200,
-                height: 52,
-                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text(data[index].name.toString()),
-              ),
-              Container(
-                width: 100,
-                height: 52,
-                padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text(data[index].sum.toString()),
-              ),
-            ],
-          );
-        }
-
-        Widget _table() {
-          return HorizontalDataTable(
-            leftHandSideColumnWidth: 100,
-            rightHandSideColumnWidth: 600,
-            isFixedHeader: true,
-            headerWidgets: _getTitleWidget(),
-            leftSideItemBuilder: _generateFirstColumnRow,
-            rightSideItemBuilder: _generateRightHandSideColumnRow,
-            itemCount: data.length,
-            rowSeparatorWidget: Divider(
-              color: theme.appColors.onBackground,
-              height: 1.0,
-              thickness: 0.0,
-            ),
-            leftHandSideColBackgroundColor: theme.appColors.background,
-            rightHandSideColBackgroundColor: theme.appColors.background,
-            onScrollControllerReady: (vertical, horizontal) {
-              verticalScrollController = vertical;
-              horizontalScrollController = horizontal;
-            },
-          );
-        }
 
         return Scaffold(
           // appBar: AppBar(
@@ -116,17 +62,14 @@ class SalesStatusPage extends HookConsumerWidget {
           //   title: Text('sum:${numFormatter.format(sum)}'),
           //   centerTitle: true,
           // ),
-          // drawer: const CustomDrawer(),
           body: SafeArea(
-            // child: SingleChildScrollView(
-            //   controller: scrollController,
             child: Column(children: [
               Text(
                 'sum:${numFormatter.format(sum)}',
                 style: theme.textTheme.h50
                     .copyWith(color: theme.appColors.onPrimary),
               ),
-              Flexible(child: _table())
+              Flexible(child: salesDataTable(data: data))
             ]),
           ),
           // ),

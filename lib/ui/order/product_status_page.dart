@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/ui/order/widget/product_datatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/repository/product/product_repository_impal.dart';
@@ -166,26 +166,27 @@ class ProductStatusPage extends HookConsumerWidget {
           //     ),
           //   ),
           body: SafeArea(
-            child: HorizontalDataTable(
-              leftHandSideColumnWidth: 100,
-              rightHandSideColumnWidth: 600,
-              isFixedHeader: true,
-              headerWidgets: _getTitleWidget(),
-              leftSideItemBuilder: _generateFirstColumnRow,
-              rightSideItemBuilder: _generateRightHandSideColumnRow,
-              itemCount: data.length,
-              rowSeparatorWidget: Divider(
-                color: theme.appColors.onBackground,
-                height: 1.0,
-                thickness: 0.0,
-              ),
-              leftHandSideColBackgroundColor: theme.appColors.background,
-              rightHandSideColBackgroundColor: theme.appColors.background,
-              onScrollControllerReady: (vertical, horizontal) {
-                verticalScrollController = vertical;
-                horizontalScrollController = horizontal;
-              },
-            ),
+            child: productDataTable(data: data),
+            //  HorizontalDataTable(
+            //     leftHandSideColumnWidth: 100,
+            //     rightHandSideColumnWidth: 600,
+            //     isFixedHeader: true,
+            //     headerWidgets: _getTitleWidget(),
+            //     leftSideItemBuilder: _generateFirstColumnRow,
+            //     rightSideItemBuilder: _generateRightHandSideColumnRow,
+            //     itemCount: data.length,
+            //     rowSeparatorWidget: Divider(
+            //       color: theme.appColors.onBackground,
+            //       height: 1.0,
+            //       thickness: 0.0,
+            //     ),
+            //     leftHandSideColBackgroundColor: theme.appColors.background,
+            //     rightHandSideColBackgroundColor: theme.appColors.background,
+            //     onScrollControllerReady: (vertical, horizontal) {
+            //       verticalScrollController = vertical;
+            //       horizontalScrollController = horizontal;
+            //     },
+            //   ),
           ),
         );
       },
