@@ -9,6 +9,8 @@
       ".metadata": true,
       ".packages": true,
       "yarn.lock": true,
-      "pubspec.lock": true
+      "pubspec.lock": true,
+      "**/*.freezed.dart": true,
+      "**/*.g.dart": true,
     }
   }

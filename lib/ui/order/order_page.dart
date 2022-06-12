@@ -24,9 +24,6 @@ class OrderPage extends HookConsumerWidget {
         locale: Localizations.localeOf(context).toString());
     final DateFormat dateFormatter =
         DateFormat.yMMMEd(Localizations.localeOf(context).toString()).add_Hm();
-    final scrollController = ScrollController();
-    var verticalScrollController = ScrollController();
-    var horizontalScrollController = ScrollController();
 
     return asyncValue.when(
       data: (order) {
@@ -38,70 +35,6 @@ class OrderPage extends HookConsumerWidget {
           int result2 = b.quantity.toString().compareTo(a.quantity.toString());
           return result2;
         });
-        // Widget _generateFirstColumnRow(BuildContext context, int index) {
-        //   return Container(
-        //     width: 100,
-        //     height: 52,
-        //     padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //     alignment: Alignment.centerLeft,
-        //     child: Text(data[index].userName.toString()),
-        //   );
-        // }
-
-        // Widget _generateRightHandSideColumnRow(
-        //     BuildContext context, int index) {
-        //   return Row(
-        //     children: <Widget>[
-        //       Container(
-        //         width: 100,
-        //         height: 52,
-        //         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //         alignment: Alignment.centerLeft,
-        //         child: Row(
-        //           children: <Widget>[
-        //             Icon(
-        //                 data[index].isActive == true
-        //                     ? Icons.circle_outlined
-        //                     : Icons.check_circle,
-        //                 color: data[index].isActive == true
-        //                     ? Colors.red
-        //                     : Colors.green),
-        //             Text(data[index].isActive == true ? 'Not Yat' : 'Done')
-        //           ],
-        //         ),
-        //       ),
-        //       Container(
-        //         width: 100,
-        //         height: 52,
-        //         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //         alignment: Alignment.centerLeft,
-        //         child: Text(data[index].code.toString()),
-        //       ),
-        //       Container(
-        //         width: 200,
-        //         height: 52,
-        //         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //         alignment: Alignment.centerLeft,
-        //         child: Text(data[index].name.toString()),
-        //       ),
-        //       Container(
-        //         width: 100,
-        //         height: 52,
-        //         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //         alignment: Alignment.centerLeft,
-        //         child: Text(data[index].quantity.toString()),
-        //       ),
-        //       Container(
-        //         width: 200,
-        //         height: 52,
-        //         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-        //         alignment: Alignment.centerLeft,
-        //         child: Text(
-        //             dateFormatter.format(data[index].createdAt as DateTime)),
-        //       ),
-        //     ],
-        //   );
-        // }
 
         return Scaffold(
           // appBar: AppBar(
@@ -171,26 +104,6 @@ class OrderPage extends HookConsumerWidget {
           //   ),
           body: SafeArea(
             child: orderDataTable(data: data),
-            // HorizontalDataTable(
-            //   leftHandSideColumnWidth: 100,
-            //   rightHandSideColumnWidth: 800,
-            //   isFixedHeader: true,
-            //   headerWidgets: _getTitleWidget(),
-            //   leftSideItemBuilder: _generateFirstColumnRow,
-            //   rightSideItemBuilder: _generateRightHandSideColumnRow,
-            //   itemCount: data.length,
-            //   rowSeparatorWidget: Divider(
-            //     color: theme.appColors.onBackground,
-            //     height: 1.0,
-            //     thickness: 0.0,
-            //   ),
-            //   leftHandSideColBackgroundColor: theme.appColors.background,
-            //   rightHandSideColBackgroundColor: theme.appColors.background,
-            //   onScrollControllerReady: (vertical, horizontal) {
-            //     verticalScrollController = vertical;
-            //     horizontalScrollController = horizontal;
-            //   },
-            // ),
           ),
         );
       },
@@ -219,25 +132,4 @@ class OrderPage extends HookConsumerWidget {
       },
     );
   }
-
-//   List<Widget> _getTitleWidget() {
-//     return [
-//       _getTitleItemWidget('Name', 100),
-//       _getTitleItemWidget('Status', 100),
-//       _getTitleItemWidget('code', 100),
-//       _getTitleItemWidget('product', 200),
-//       _getTitleItemWidget('quantity', 100),
-//       _getTitleItemWidget('Purchase date', 200),
-//     ];
-//   }
-
-//   Widget _getTitleItemWidget(String label, double width) {
-//     return Container(
-//       width: width,
-//       height: 56,
-//       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-//       alignment: Alignment.centerLeft,
-//       child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-//     );
-//   }
 }
