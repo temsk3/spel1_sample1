@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../routes/app_route.gr.dart';
@@ -29,11 +30,12 @@ class ProductPage extends HookConsumerWidget {
           // homeIndex: 1,
           builder: (context, child, controller) {
             return Scaffold(
-              backgroundColor: theme.appColors.background,
+              // backgroundColor: theme.appColors.background,
               appBar: AppBar(
+                // surfaceTintColor: Colors.transparent, scrolledUnderElevation: 5,
                 // // toolbarHeight: 30,
-                backgroundColor: theme.appColors.primary,
-                foregroundColor: theme.appColors.onPrimary,
+                // backgroundColor: theme.appColors.primary,
+                // foregroundColor: theme.appColors.onPrimary,
                 // leading: Builder(
                 //   builder: (context) {
                 //     return IconButton(
@@ -58,9 +60,9 @@ class ProductPage extends HookConsumerWidget {
                   children: [
                     TabBar(
                       controller: controller,
-                      labelColor: theme.appColors.onPrimary,
-                      unselectedLabelColor: theme.appColors.onSecondary,
-                      indicatorColor: theme.appColors.onPrimary,
+                      // labelColor: theme.appColors.onPrimaryContainer,
+                      // unselectedLabelColor: theme.appColors.onPrimaryContainer,
+                      // indicatorColor: theme.appColors.onPrimaryContainer,
                       tabs: const <Tab>[
                         Tab(text: 'All Item'),
                         Tab(text: 'Foods'),
@@ -71,7 +73,18 @@ class ProductPage extends HookConsumerWidget {
                 ),
               ),
               // drawer: const CustomDrawer(),
-              body: child,
+              body: Row(
+                children: [
+                  MediaQuery.of(context).size.width > 768
+                      ? const CustomDrawer()
+                      : Container(),
+                  Expanded(
+                    child: Center(
+                      child: child,
+                    ),
+                  ),
+                ],
+              ),
               // SafeArea(
               //   child: RefreshIndicator(
               //     onRefresh: () async {
@@ -120,12 +133,12 @@ class ProductPage extends HookConsumerWidget {
         );
       },
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

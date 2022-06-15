@@ -4,6 +4,7 @@ Future<void> showTextDialog(BuildContext context, String message) async {
   await showDialog<void>(
     context: context,
     builder: (context) {
+      final localizations = MaterialLocalizations.of(context);
       return AlertDialog(
         title: Text(message),
         actions: <Widget>[
@@ -11,7 +12,7 @@ Future<void> showTextDialog(BuildContext context, String message) async {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('OK'),
+            child: Text(localizations.okButtonLabel),
           ),
         ],
       );
@@ -27,21 +28,18 @@ Future<bool> showConfirmDialog(
   return await showDialog<bool>(
         context: context,
         builder: (context) {
+          final localizations = MaterialLocalizations.of(context);
           return AlertDialog(
             title: Text(title),
             actions: [
               TextButton(
-                child: const Text(
-                  'いいえ',
-                ),
+                child: Text(localizations.cancelButtonLabel),
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },
               ),
               TextButton(
-                child: const Text(
-                  'はい',
-                ),
+                child: Text(localizations.okButtonLabel),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },
@@ -51,4 +49,65 @@ Future<bool> showConfirmDialog(
         },
       ) ??
       false;
+}
+
+/// 確認用ダイアログ（bool を返す）
+Future<int> showQuantityConfirmDialog(
+  BuildContext context,
+  int quantity,
+  String title,
+) async {
+  // final numberOfUse = useState<int>(1);
+  int numberOfUse = 1;
+  return await showDialog(
+    context: context,
+    builder: (context) {
+      final localizations = MaterialLocalizations.of(context);
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            title: Text(title),
+            content: SizedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Text(message),
+                  DropdownButton<String>(
+                    items: List.generate(quantity, (index) => 1 + index)
+                        .map(
+                          (data) => DropdownMenuItem<String>(
+                            value: data.toString(),
+                            child: Text(data.toString()),
+                          ),
+                        )
+                        .toList(),
+                    value: numberOfUse.toString(),
+                    onChanged: (data) => {
+                      setState(() {
+                        numberOfUse = int.parse(data.toString());
+                      }),
+                    },
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: Text(localizations.cancelButtonLabel),
+                onPressed: () {
+                  Navigator.pop<int>(context, 0);
+                },
+              ),
+              TextButton(
+                child: Text(localizations.okButtonLabel),
+                onPressed: () {
+                  Navigator.pop<int>(context, numberOfUse);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
 }

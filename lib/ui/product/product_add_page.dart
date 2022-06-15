@@ -58,8 +58,8 @@ class ProductAddPage extends HookConsumerWidget {
     //   data: (data) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: theme.appColors.primary,
-        foregroundColor: theme.appColors.onPrimary,
+        // backgroundColor: theme.appColors.primary,
+        // foregroundColor: theme.appColors.onPrimary,
         // toolbarHeight: 30,
         title: Text(
           'Event',
@@ -90,7 +90,9 @@ class ProductAddPage extends HookConsumerWidget {
                     expirationTo: DateTime.parse(expirationTo.text),
                     isPublished: false,
                     picture1:
-                        (uint8List.value == null) ? null : (uint8List.value));
+                        // (uint8List.value == null) ? null : (uint8List.value));
+
+                        (uint8List.value) ?? (uint8List.value));
                 appRoute.pop(const ProductRouter());
               }
             },
@@ -235,9 +237,9 @@ class ProductAddPage extends HookConsumerWidget {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: theme.appColors.primary,
-                        onPrimary: theme.appColors.onPrimary,
-                      ),
+                          // primary: theme.appColors.primary,
+                          // onPrimary: theme.appColors.onPrimary,
+                          ),
                       child: const Text('有効期間'),
                       onPressed: () async {
                         final dateRange = await showDateRangePicker(

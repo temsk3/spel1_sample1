@@ -21,20 +21,21 @@ class HomePage extends HookConsumerWidget {
     return WillPopScope(
       onWillPop: () => _finishNextPage(),
       child: AutoTabsScaffold(
-        backgroundColor: theme.appColors.background,
+        // backgroundColor: theme.appColors.background,
         appBarBuilder: (_, tabsRouter) {
           return AppBar(
-            backgroundColor: theme.appColors.primary,
-            foregroundColor: theme.appColors.onPrimary,
-            elevation: 0,
+            // surfaceTintColor: Colors.transparent, scrolledUnderElevation: 5,
+            // backgroundColor: theme.appColors.primary,
+            // foregroundColor: theme.appColors.onPrimary,
+            // elevation: 0,
             // title: const Text(
             //   'Jumble Moll',
-            //   // style: theme.textTheme.h50,
+            // style: theme.textTheme.h50,
             // ),
             centerTitle: true,
-            leading: AutoLeadingButton(
-              color: theme.appColors.onPrimary,
-            ),
+            leading: const AutoLeadingButton(
+                // color: theme.appColors.onPrimary,
+                ),
             actions: const [],
           );
         },
@@ -48,37 +49,60 @@ class HomePage extends HookConsumerWidget {
           PurchaseRoute(),
         ],
         bottomNavigationBuilder: (_, tabsRouter) {
-          return BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            backgroundColor: theme.appColors.primary,
-            selectedIconTheme:
-                IconThemeData(size: 30, color: theme.appColors.onPrimary),
-            selectedItemColor: theme.appColors.onPrimary,
-            unselectedIconTheme:
-                IconThemeData(size: 25, color: theme.appColors.onPrimary),
-            currentIndex: tabsRouter.activeIndex,
-            onTap: tabsRouter.setActiveIndex,
-            items: [
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.shopping_basket),
+          return NavigationBar(
+            // type: BottomNavigationBarType.shifting,
+            // backgroundColor: theme.appColors.primary,
+            // selectedIconTheme:
+            //     IconThemeData(size: 30, color: theme.appColors.onPrimary),
+            // selectedItemColor: theme.appColors.onPrimary,
+            // unselectedIconTheme:
+            //     IconThemeData(size: 25, color: theme.appColors.onPrimary),
+            // currentIndex: tabsRouter.activeIndex,
+            selectedIndex: tabsRouter.activeIndex,
+            // onTap: tabsRouter.setActiveIndex,
+            onDestinationSelected: tabsRouter.setActiveIndex,
+            // items: const [
+            //   BottomNavigationBarItem(
+            //     icon: Icon(Icons.shopping_basket),
+            //     label: 'Item List',
+            //     // backgroundColor: theme.appColors.primary,
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: Icon(Icons.event),
+            //     label: 'Event List',
+            //     // backgroundColor: theme.appColors.primary,
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: Icon(Icons.bookmark),
+            //     label: 'Favorite',
+            //     // backgroundColor: theme.appColors.primary,
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: FaIcon(FontAwesomeIcons.ticketSimple),
+            //     label: 'Purchased Items',
+            //     // backgroundColor: theme.appColors.primary,
+            //   ),
+            // ],
+            destinations: const [
+              NavigationDestination(
+                selectedIcon: Icon(Icons.shopping_basket),
+                icon: Icon(Icons.shopping_basket_outlined),
                 label: 'Item List',
-                backgroundColor: theme.appColors.primary,
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.event),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.event),
+                icon: Icon(Icons.event_outlined),
                 label: 'Event List',
-                backgroundColor: theme.appColors.primary,
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.bookmark),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.bookmark),
+                icon: Icon(Icons.bookmark_border),
                 label: 'Favorite',
-                backgroundColor: theme.appColors.primary,
               ),
-              BottomNavigationBarItem(
-                // icon: const Icon(Icons.texture),
-                icon: const FaIcon(FontAwesomeIcons.ticketSimple),
+              NavigationDestination(
+                selectedIcon: FaIcon(FontAwesomeIcons.ticketSimple),
+                icon: FaIcon(FontAwesomeIcons.ticket),
                 label: 'Purchased Items',
-                backgroundColor: theme.appColors.primary,
               ),
             ],
           );

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/repository/transaction/purchase/order_repository_impal.dart';
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -103,7 +104,16 @@ class OrderPage extends HookConsumerWidget {
           //     ),
           //   ),
           body: SafeArea(
-            child: orderDataTable(data: data),
+            child: Row(
+              children: [
+                MediaQuery.of(context).size.width > 768
+                    ? const CustomDrawer()
+                    : Container(),
+                Expanded(
+                  child: orderDataTable(data: data),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -120,12 +130,12 @@ class OrderPage extends HookConsumerWidget {
         );
       },
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

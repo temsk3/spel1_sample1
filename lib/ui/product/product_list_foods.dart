@@ -55,12 +55,12 @@ class ProductFoodsPage extends HookConsumerWidget {
         );
       },
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

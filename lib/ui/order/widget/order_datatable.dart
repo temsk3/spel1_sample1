@@ -17,19 +17,19 @@ class orderDataTable extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     return HorizontalDataTable(
       leftHandSideColumnWidth: 100,
-      rightHandSideColumnWidth: 600,
+      rightHandSideColumnWidth: 700,
       isFixedHeader: true,
       headerWidgets: _getTitleWidget(),
       leftSideItemBuilder: _generateFirstColumnRow,
       rightSideItemBuilder: _generateRightHandSideColumnRow,
       itemCount: data.length,
-      rowSeparatorWidget: Divider(
-        color: theme.appColors.onBackground,
+      rowSeparatorWidget: const Divider(
+        // color: theme.appColors.onBackground,
         height: 1.0,
         thickness: 0.0,
       ),
-      leftHandSideColBackgroundColor: theme.appColors.background,
-      rightHandSideColBackgroundColor: theme.appColors.background,
+      // leftHandSideColBackgroundColor: theme.appColors.background,
+      // rightHandSideColBackgroundColor: theme.appColors.background,
       onScrollControllerReady: (vertical, horizontal) {
         verticalScrollController = vertical;
         horizontalScrollController = horizontal;

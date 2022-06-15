@@ -13,7 +13,7 @@ class Footer extends ConsumerWidget {
     final theme = ref.watch(appThemeProvider);
 
     return AutoTabsScaffold(
-      backgroundColor: theme.appColors.background,
+      // backgroundColor: theme.appColors.background,
       homeIndex: 1,
       routes: const [
         BazaarListRouter(),
@@ -23,7 +23,7 @@ class Footer extends ConsumerWidget {
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
-          backgroundColor: theme.appColors.background,
+          // backgroundColor: theme.appColors.background,
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
           items: const [

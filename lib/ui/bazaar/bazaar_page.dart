@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/repository/bazaar/bazaar_repository_impal.dart';
 import 'package:flutter_application_1/ui/bazaar/widget/bazaar_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../routes/app_route.gr.dart';
@@ -18,36 +20,46 @@ class BazaarListPage extends HookConsumerWidget {
     final viewModel = ref.watch(bazzarViewModelProvider.notifier);
     final l10n = useL10n();
     final appRoute = useRouter();
+    final asyncValue = ref.watch(bazaarListStreamProvider);
     const staff = true; // c
-    return state.when(
+    return asyncValue.when(
       data: (data) {
         return Scaffold(
-          backgroundColor: theme.appColors.background,
+          // backgroundColor: theme.appColors.background,
           // appBar: TopHeader(title: 'All Event'),
           // drawer: const CustomDrawer(),
           body: SafeArea(
-            child: Center(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  // ref.refresh(bazzarViewModelProvider);
-                  viewModel.readBazaar();
-                },
-                child: ListView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: data.bazaarList.length,
-                  itemBuilder: (_, index) {
-                    final bazaar = data.bazaarList[index];
-                    return EventCard(index: index, bazaar: bazaar);
-                  },
+            child: Row(
+              children: [
+                MediaQuery.of(context).size.width > 768
+                    ? const CustomDrawer()
+                    : Container(),
+                Expanded(
+                  child: Center(
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        // ref.refresh(bazzarViewModelProvider);
+                        viewModel.readBazaar();
+                      },
+                      child: ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: data.length,
+                        itemBuilder: (_, index) {
+                          final bazaar = data[index];
+                          return EventCard(index: index, bazaar: bazaar);
+                        },
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
           floatingActionButton: Visibility(
             visible: staff,
             child: FloatingActionButton(
-              backgroundColor: theme.appColors.primary,
-              foregroundColor: theme.appColors.onPrimary,
+              // backgroundColor: theme.appColors.primary,
+              // foregroundColor: theme.appColors.onPrimary,
               onPressed: () async {
                 appRoute.push(const BazaarAddRoute());
               },
@@ -69,12 +81,12 @@ class BazaarListPage extends HookConsumerWidget {
         );
       },
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

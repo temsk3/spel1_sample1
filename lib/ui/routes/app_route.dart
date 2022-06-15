@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
 import '../../ui/routes/route_path.dart';
-import '../auth/auth.dart';
+import '../auth/start_page.dart';
 import '../bazaar/bazaar_add_page.dart';
 import '../bazaar/bazaar_details_page.dart';
 import '../bazaar/bazaar_edit_page.dart';
@@ -32,7 +32,7 @@ import '../product/product_page.dart';
         // Auth
         AutoRoute(
           path: RoutePath.appRouteAuth,
-          page: AuthPage,
+          page: StartPage,
         ),
         // User
         // AutoRoute(

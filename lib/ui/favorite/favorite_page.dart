@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../common/drawer.dart';
 import '../hooks/use_l10n.dart';
 import '../hooks/use_router.dart';
 import '../theme/app_theme.dart';
@@ -38,8 +39,17 @@ class FavoritePage extends HookConsumerWidget {
       //   centerTitle: true,
       // ),
       body: SafeArea(
-        child: Center(
-          child: ListView(children: const []),
+        child: Row(
+          children: [
+            MediaQuery.of(context).size.width > 768
+                ? const CustomDrawer()
+                : Container(),
+            Expanded(
+              child: Center(
+                child: ListView(children: const []),
+              ),
+            ),
+          ],
         ),
       ),
     );

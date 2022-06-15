@@ -162,27 +162,27 @@ class BazaarViewModel extends StateNotifier<AsyncValue<BazaarState>> {
     required Uint8List newPicture,
     required Bazaar updateBazaar,
   }) async {
-    String? _pictureName;
-    String? _pictureURL;
+    String? pictureName;
+    String? pictureURL;
     final name = await imageRepository.pictureNameing(path: path);
-    name.when(success: (pictureName) {
-      _pictureName = pictureName;
+    name.when(success: (name) {
+      pictureName = name;
     }, failure: (error) {
       state = AsyncValue.error(error);
     });
     final url = await imageRepository.uploadImage(
-        image: newPicture, path: _path, pictureName: _pictureName.toString());
+        image: newPicture, path: _path, pictureName: pictureName.toString());
     url.when(
-      success: (pictureURL) {
-        _pictureURL = pictureURL;
+      success: (url) {
+        pictureURL = url;
       },
       failure: (error) {
         state = AsyncValue.error(error);
       },
     );
     return updateBazaar.copyWith(
-      pictureName: _pictureName,
-      pictureURL: _pictureURL,
+      pictureName: pictureName,
+      pictureURL: pictureURL,
     );
   }
 }

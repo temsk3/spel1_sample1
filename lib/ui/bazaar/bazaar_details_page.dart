@@ -37,10 +37,10 @@ class BazaarDetailsPage extends HookConsumerWidget {
             value.where((element) => element.bazaarId == bazaar.id).toList();
 
         return Scaffold(
-          backgroundColor: theme.appColors.background,
+          // backgroundColor: theme.appColors.background,
           appBar: AppBar(
-            backgroundColor: theme.appColors.primary,
-            foregroundColor: theme.appColors.onPrimary,
+            // backgroundColor: theme.appColors.primary,
+            // foregroundColor: theme.appColors.onPrimary,
             // leading: const AutoLeadingButton(),
             automaticallyImplyLeading: false,
             actions: [
@@ -57,12 +57,11 @@ class BazaarDetailsPage extends HookConsumerWidget {
                       if (result) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: theme.appColors.error,
-                            content: Text(
-                              'Processing Data',
-                              style: theme.textTheme.h30
-                                  .copyWith(color: theme.appColors.onError),
-                            ),
+                            // backgroundColor: theme.appColors.error,
+                            content: Text('Processing Data',
+                                style: theme.textTheme.h30
+                                // .copyWith(color: theme.appColors.onError),
+                                ),
                           ),
                         );
                         viewModel.deleteBazaar(
@@ -127,56 +126,48 @@ class BazaarDetailsPage extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const Spacer(),
-                        Text(
-                          'status:',
-                          style: theme.textTheme.h30
-                              .copyWith(color: theme.appColors.onBackground),
-                        ),
+                        Text('status:', style: theme.textTheme.h30
+                            // .copyWith(color: theme.appColors.onBackground),
+                            ),
                         const Spacer(),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           onPressed: () {
                             appRoute.push(OrderRoute(bazaar: bazaar.id));
                           },
-                          child: Text(
-                            'order',
-                            style: theme.textTheme.h30
-                                .copyWith(color: theme.appColors.onPrimary),
-                          ),
+                          child: Text('order', style: theme.textTheme.h30
+                              // .copyWith(color: theme.appColors.onPrimary),
+                              ),
                         ),
                         const Spacer(),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           onPressed: () {
                             appRoute.push(SalesStatusRoute(bazaar: bazaar.id));
                           },
-                          child: Text(
-                            'sales',
-                            style: theme.textTheme.h30
-                                .copyWith(color: theme.appColors.onPrimary),
-                          ),
+                          child: Text('sales', style: theme.textTheme.h30
+                              // .copyWith(color: theme.appColors.onPrimary),
+                              ),
                         ),
                         const Spacer(),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           onPressed: () {
-                            // appRoute
-                            //     .push(ProductStatusRoute(bazaar: bazaar.id));
+                            appRoute
+                                .push(ProductStatusRoute(bazaar: bazaar.id));
                           },
-                          child: Text(
-                            'product',
-                            style: theme.textTheme.h30
-                                .copyWith(color: theme.appColors.onPrimary),
-                          ),
+                          child: Text('product', style: theme.textTheme.h30
+                              // .copyWith(color: theme.appColors.onPrimary),
+                              ),
                         ),
                         const Spacer(),
                       ],
@@ -294,15 +285,15 @@ class BazaarDetailsPage extends HookConsumerWidget {
           floatingActionButton: Visibility(
             visible: staff,
             child: FloatingActionButton(
-              backgroundColor: theme.appColors.primary,
-              foregroundColor: theme.appColors.onPrimary,
+              // backgroundColor: theme.appColors.primary,
+              // foregroundColor: theme.appColors.onPrimary,
               onPressed: () {
                 // context.navigateTo(ProductRouter(children:ProductAddPage(bazaar: bazaar,)));
                 appRoute.push(ProductDetailsRoute(bazaarEvent: bazaar));
               },
-              child: Icon(
+              child: const Icon(
                 Icons.add_sharp,
-                color: theme.appColors.onPrimary,
+                // color: theme.appColors.onPrimary,
               ),
             ),
           ),
@@ -319,12 +310,12 @@ class BazaarDetailsPage extends HookConsumerWidget {
         ),
       ),
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
           //  Consuming a provider using watch method and storing it in a variable
           //  Now we will use this variable to access all the functions of the
           //  authentication
-          final _auth = ref.watch(authenticationProvider);
+          final auth = ref.watch(authenticationProvider);
 
           //  Instead of creating a clutter on the onPressed Function
           //  I have decided to create a seperate function and pass them into the
@@ -99,11 +99,11 @@ class _LoginPageState extends State<LoginPage> {
             // print(_password.text);
             if (type == Status.login) {
               loading();
-              await _auth
+              await auth
                   .signInWithEmailAndPassword(
                       _email.text, _password.text, context)
                   .whenComplete(
-                      () => _auth.authStateChange.listen((event) async {
+                      () => auth.authStateChange.listen((event) async {
                             if (event == null) {
                               loading();
                               return;
@@ -111,11 +111,11 @@ class _LoginPageState extends State<LoginPage> {
                           }));
             } else {
               loading();
-              await _auth
+              await auth
                   .signUpWithEmailAndPassword(
                       _email.text, _password.text, context)
                   .whenComplete(
-                      () => _auth.authStateChange.listen((event) async {
+                      () => auth.authStateChange.listen((event) async {
                             if (event == null) {
                               loading();
                               return;
@@ -131,9 +131,9 @@ class _LoginPageState extends State<LoginPage> {
 
           Future<void> _loginWithGoogle() async {
             loading2();
-            await _auth
+            await auth
                 .signInWithGoogle(context)
-                .whenComplete(() => _auth.authStateChange.listen((event) async {
+                .whenComplete(() => auth.authStateChange.listen((event) async {
                       if (event == null) {
                         loading2();
                         return;
@@ -153,8 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                            child: const Center(child: Text('jumble moll'))),
+                        Container(child: const Center(child: Text('_____'))),
                         // const Center(child: FlutterLogo(size: 81)),
                         const Spacer(flex: 1),
                         Container(
@@ -268,13 +267,6 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CircularProgressIndicator())
                                 : MaterialButton(
                                     onPressed: _onPressedFunction,
-                                    child: Text(
-                                      type == Status.login
-                                          ? 'Log in'
-                                          : 'Sign up',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                    ),
                                     textColor: Colors.blue.shade700,
                                     textTheme: ButtonTextTheme.primary,
                                     minWidth: 100,
@@ -283,6 +275,13 @@ class _LoginPageState extends State<LoginPage> {
                                       borderRadius: BorderRadius.circular(25),
                                       side: BorderSide(
                                           color: Colors.blue.shade700),
+                                    ),
+                                    child: Text(
+                                      type == Status.login
+                                          ? 'Log in'
+                                          : 'Sign up',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                           ),
@@ -295,6 +294,15 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CircularProgressIndicator())
                                 : MaterialButton(
                                     onPressed: _loginWithGoogle,
+                                    textColor: Colors.blue.shade700,
+                                    textTheme: ButtonTextTheme.primary,
+                                    minWidth: 100,
+                                    padding: const EdgeInsets.all(18),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                      side: BorderSide(
+                                          color: Colors.blue.shade700),
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -309,15 +317,6 @@ class _LoginPageState extends State<LoginPage> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                       ],
-                                    ),
-                                    textColor: Colors.blue.shade700,
-                                    textTheme: ButtonTextTheme.primary,
-                                    minWidth: 100,
-                                    padding: const EdgeInsets.all(18),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                      side: BorderSide(
-                                          color: Colors.blue.shade700),
                                     ),
                                   ),
                           ),

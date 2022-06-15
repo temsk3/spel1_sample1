@@ -27,12 +27,13 @@ class ProductCard extends HookConsumerWidget {
     return Stack(
       children: [
         Card(
-          color: theme.appColors.background,
+          color: product.stock == 0 ? Colors.black.withOpacity(0.3) : null,
+          // : theme.appColors.background,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           margin: const EdgeInsets.all(10.0),
-          elevation: 20.0,
+          elevation: 10.0,
           child: Column(
             //
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,19 +47,23 @@ class ProductCard extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        product.name.toString(),
-                        style: theme.textTheme.h50
-                            .bold()
-                            .copyWith(color: theme.appColors.onBackground),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          product.name.toString(),
+                          style: theme.textTheme.h50.bold(),
+                          // .copyWith(color: theme.appColors.onBackground),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        formatter.format(product.price),
-                        style: theme.textTheme.h40
-                            .copyWith(color: theme.appColors.onBackground),
+                      // const SizedBox(height: 8.0),
+                      Expanded(
+                        flex: 1,
+                        child: Text(formatter.format(product.price),
+                            style: theme.textTheme.h40
+                            // .copyWith(color: theme.appColors.onBackground),
+                            ),
                       ),
                     ],
                   ),
@@ -94,12 +99,10 @@ class ProductCard extends HookConsumerWidget {
         ),
         if (product.stock == 0)
           Positioned(
-            child: Text(
-              'SOLDOUT',
-              style: theme.textTheme.h60
-                  .bold()
-                  .copyWith(color: theme.appColors.onPrimary),
-            ),
+            top: 4,
+            child: Text('SOLDOUT', style: theme.textTheme.h60.bold()
+                // .copyWith(color: theme.appColors.onPrimary),
+                ),
           ),
       ],
     );

@@ -21,21 +21,24 @@ class CustomDrawer extends HookConsumerWidget {
         child: Drawer(
           child: ListView(
             children: [
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: theme.appColors.primary),
+              const UserAccountsDrawerHeader(
+                // decoration:
+                //     BoxDecoration(color: theme.appColors.onInverseSurface),
                 accountName: Text(
                   "User Name",
-                  style: theme.textTheme.h30.copyWith(
-                    color: theme.appColors.onPrimary,
-                  ),
+                  // style: theme.textTheme.h30
+                  // .copyWith(
+                  //   color: theme.appColors.onPrimary,
+                  // ),
                 ),
                 accountEmail: Text(
                   "User Email",
-                  style: theme.textTheme.h30.copyWith(
-                    color: theme.appColors.onPrimary,
-                  ),
+                  // style: theme.textTheme.h30
+                  // .copyWith(
+                  //   color: theme.appColors.onPrimary,
+                  // ),
                 ),
-                currentAccountPicture: const CircleAvatar(
+                currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.grey,
                   // backgroundImage: NetworkImage(userAvatarUrl),
                 ),
@@ -50,7 +53,7 @@ class CustomDrawer extends HookConsumerWidget {
               ListTile(
                 title: const Text('signin'),
                 onTap: () {
-                  appRoute.push(const AuthRoute());
+                  appRoute.navigate(const FavoriteRoute());
                 },
               ),
               ListTile(

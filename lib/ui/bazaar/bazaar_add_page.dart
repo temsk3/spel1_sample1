@@ -53,8 +53,8 @@ class BazaarAddPage extends HookConsumerWidget {
     //   data: (data) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: theme.appColors.primary,
-        foregroundColor: theme.appColors.onPrimary,
+        //backgroundColor: theme.appColors.primary,
+        //foregroundColor: theme.appColors.onPrimary,
         // toolbarHeight: 30,
         title: Text(
           'Event',
@@ -115,14 +115,14 @@ class BazaarAddPage extends HookConsumerWidget {
                   child: Container(
                     height: 100,
                     width: 300,
-                    color: theme.appColors.primary,
+                    // color: theme.appColors.primary,
                     alignment: Alignment.center,
                     child: ref.watch(imageCropProvider
                                 .select((s) => s.croppedData)) ==
                             null
-                        ? Icon(
+                        ? const Icon(
                             Icons.add_photo_alternate,
-                            color: theme.appColors.onPrimary,
+                            // color: theme.appColors.onPrimary,
                           )
                         : SizedBox.expand(
                             child: Image.memory(
@@ -133,7 +133,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 ),
                 TextFormField(
                   controller: name,
-                  style: TextStyle(color: theme.appColors.onPrimary),
+                  // style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(labelText: 'title'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -156,9 +156,9 @@ class BazaarAddPage extends HookConsumerWidget {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: theme.appColors.primary,
-                        onPrimary: theme.appColors.onPrimary,
-                      ),
+                          // primary: theme.appColors.primary,
+                          // onPrimary: theme.appColors.onPrimary,
+                          ),
                       child: const Text('販売期間'),
                       onPressed: () async {
                         final dateRange = await showDateRangePicker(
@@ -181,7 +181,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: salesStart,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "From",
@@ -207,7 +207,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: salesEnd,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "To",
@@ -233,9 +233,9 @@ class BazaarAddPage extends HookConsumerWidget {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: theme.appColors.primary,
-                        onPrimary: theme.appColors.onPrimary,
-                      ),
+                          // primary: theme.appColors.primary,
+                          // onPrimary: theme.appColors.onPrimary,
+                          ),
                       child: const Text('開催期間'),
                       onPressed: () async {
                         final dateRange = await showDateRangePicker(
@@ -261,7 +261,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: eventFrom,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "From",
@@ -283,7 +283,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     Flexible(
                       child: TextFormField(
                         controller: eventTo,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "To",
@@ -310,7 +310,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 ),
                 TextFormField(
                   controller: place,
-                  style: TextStyle(color: theme.appColors.onPrimary),
+                  // style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(labelText: 'place'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -328,7 +328,7 @@ class BazaarAddPage extends HookConsumerWidget {
                 TextFormField(
                   controller: message,
                   maxLines: 2,
-                  style: TextStyle(color: theme.appColors.onPrimary),
+                  // style: TextStyle(color: theme.appColors.onPrimary),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'message',

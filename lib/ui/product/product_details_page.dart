@@ -80,8 +80,10 @@ class ProductDetailsPage extends HookConsumerWidget {
       organizer = bazaar.organizer;
       bazaarId = bazaar.id;
     }
-    final form = GlobalKey<FormState>();
+    //
     const uid = 'test';
+    //
+    final form = GlobalKey<FormState>();
     DateTime now = DateTime.now();
     final quantity = useState<int>(1);
 
@@ -110,10 +112,10 @@ class ProductDetailsPage extends HookConsumerWidget {
             int.parse(product.stock.toString()), (index) => 1 + index);
 
         return Scaffold(
-          backgroundColor: theme.appColors.background,
+          // backgroundColor: theme.appColors.background,
           appBar: AppBar(
-            backgroundColor: theme.appColors.primary,
-            foregroundColor: theme.appColors.onPrimary,
+            // backgroundColor: theme.appColors.primary,
+            // foregroundColor: theme.appColors.onPrimary,
             actions: [
               if (update.value && add.value == false)
                 IconButton(
@@ -126,9 +128,9 @@ class ProductDetailsPage extends HookConsumerWidget {
                       );
                       if (result) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: theme.appColors.error,
-                            content: const Text('Processing Data'),
+                          const SnackBar(
+                            // backgroundColor: theme.appColors.error,
+                            content: Text('Processing Data'),
                           ),
                         );
                         viewModel.deleteProduct(
@@ -152,11 +154,11 @@ class ProductDetailsPage extends HookConsumerWidget {
                     if (form.currentState!.validate()) {
                       form.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                             'Processing Data',
-                            style: theme.textTheme.h30
-                                .copyWith(color: theme.appColors.onError),
+                            // style: theme.textTheme.h30
+                            //     .copyWith(color: theme.appColors.onError),
                           ),
                         ),
                       );
@@ -189,11 +191,11 @@ class ProductDetailsPage extends HookConsumerWidget {
                     if (form.currentState!.validate()) {
                       form.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                             'Processing Data',
-                            style: theme.textTheme.h30
-                                .copyWith(color: theme.appColors.onError),
+                            // style: theme.textTheme.h30
+                            //     .copyWith(color: theme.appColors.onError),
                           ),
                         ),
                       );
@@ -219,9 +221,9 @@ class ProductDetailsPage extends HookConsumerWidget {
                   icon: const Icon(Icons.save),
                 ),
             ],
-            title: Text(product.name.toString(),
-                style: theme.textTheme.h50
-                    .copyWith(color: theme.appColors.onPrimary)),
+            title: Text(product.name.toString(), style: theme.textTheme.h50
+                // .copyWith(color: theme.appColors.onPrimary),
+                ),
             centerTitle: true,
             automaticallyImplyLeading: false,
           ),
@@ -254,8 +256,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                             child: TextFormField(
                               enabled: edit.value,
                               controller: code,
-                              style:
-                                  TextStyle(color: theme.appColors.onPrimary),
+                              // style:
+                              //     TextStyle(color: theme.appColors.onPrimary),
                               decoration:
                                   const InputDecoration(labelText: 'code'),
                               // validator: (value) {
@@ -308,7 +310,7 @@ class ProductDetailsPage extends HookConsumerWidget {
                       TextFormField(
                         enabled: edit.value,
                         controller: name,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(labelText: 'name'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -330,7 +332,7 @@ class ProductDetailsPage extends HookConsumerWidget {
                         enabled: edit.value,
                         controller: desc,
                         maxLines: 2,
-                        style: TextStyle(color: theme.appColors.onPrimary),
+                        // style: TextStyle(color: theme.appColors.onPrimary),
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'desc',
@@ -354,8 +356,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                             child: TextFormField(
                               enabled: edit.value,
                               controller: stock,
-                              style:
-                                  TextStyle(color: theme.appColors.onPrimary),
+                              // style:
+                              // TextStyle(color: theme.appColors.onPrimary),
                               decoration:
                                   const InputDecoration(labelText: 'stock'),
                               validator: (value) {
@@ -376,8 +378,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                             child: TextFormField(
                               enabled: edit.value,
                               controller: price,
-                              style:
-                                  TextStyle(color: theme.appColors.onPrimary),
+                              // style:
+                              //     TextStyle(color: theme.appColors.onPrimary),
                               decoration:
                                   const InputDecoration(labelText: 'price'),
                               validator: (value) {
@@ -400,20 +402,20 @@ class ProductDetailsPage extends HookConsumerWidget {
                       Row(
                         children: [
                           (order.value || edit.value == false)
-                              ? Text(
+                              ? const Text(
                                   '有効期間',
-                                  style: theme.textTheme.h30.copyWith(
-                                      color: theme.appColors.onPrimary),
+                                  // style: theme.textTheme.h30.copyWith(
+                                  //     color: theme.appColors.onPrimary),
                                 )
                               : ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: theme.appColors.primary,
-                                    onPrimary: theme.appColors.onPrimary,
-                                  ),
-                                  child: Text(
+                                      // primary: theme.appColors.primary,
+                                      // onPrimary: theme.appColors.onPrimary,
+                                      ),
+                                  child: const Text(
                                     '有効期間',
-                                    style: theme.textTheme.h30.copyWith(
-                                        color: theme.appColors.onPrimary),
+                                    // style: theme.textTheme.h30.copyWith(
+                                    //     color: theme.appColors.onPrimary),
                                   ),
                                   onPressed: () async {
                                     final dateRange = await showDateRangePicker(
@@ -443,8 +445,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                             child: TextFormField(
                               enabled: false,
                               controller: expirationFrom,
-                              style:
-                                  TextStyle(color: theme.appColors.onPrimary),
+                              // style:
+                              //     TextStyle(color: theme.appColors.onPrimary),
                               decoration: const InputDecoration(
                                 border: UnderlineInputBorder(),
                                 labelText: "From",
@@ -471,8 +473,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                             child: TextFormField(
                               enabled: false,
                               controller: expirationTo,
-                              style:
-                                  TextStyle(color: theme.appColors.onPrimary),
+                              // style:
+                              //     TextStyle(color: theme.appColors.onPrimary),
                               decoration: const InputDecoration(
                                 border: UnderlineInputBorder(),
                                 labelText: "To",
@@ -497,11 +499,9 @@ class ProductDetailsPage extends HookConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              '数量：',
-                              style: theme.textTheme.h30
-                                  .copyWith(color: theme.appColors.onPrimary),
-                            ),
+                            Text('数量：', style: theme.textTheme.h30
+                                // .copyWith(color: theme.appColors.onPrimary),
+                                ),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 4.0),
                             ),
@@ -526,10 +526,10 @@ class ProductDetailsPage extends HookConsumerWidget {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: theme.appColors.primary,
-                                onPrimary: theme.appColors.onPrimary,
-                              ),
-                              onPressed: product.stock == 0
+                                  // primary: theme.appColors.primary,
+                                  // onPrimary: theme.appColors.onPrimary,
+                                  ),
+                              onPressed: (product.stock == 0)
                                   ? null
                                   : () async {
                                       // if(){};
@@ -597,12 +597,12 @@ class ProductDetailsPage extends HookConsumerWidget {
         ),
       ),
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

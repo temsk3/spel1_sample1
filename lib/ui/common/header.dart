@@ -15,8 +15,8 @@ class Header extends ConsumerWidget with PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     return AppBar(
-      backgroundColor: theme.appColors.primary,
-      foregroundColor: theme.appColors.onPrimary,
+      // backgroundColor: theme.appColors.primary,
+      // foregroundColor: theme.appColors.onPrimary,
       // toolbarHeight: 30,
       title: Text(
         title,

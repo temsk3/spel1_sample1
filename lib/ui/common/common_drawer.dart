@@ -22,19 +22,17 @@ class CommonDrawer extends HookConsumerWidget {
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: theme.appColors.primary),
-                accountName: Text(
-                  "User Name",
-                  style: theme.textTheme.h30.copyWith(
-                    color: theme.appColors.onPrimary,
-                  ),
-                ),
-                accountEmail: Text(
-                  "User Email",
-                  style: theme.textTheme.h30.copyWith(
-                    color: theme.appColors.onPrimary,
-                  ),
-                ),
+                decoration: const BoxDecoration(),
+                accountName: Text("User Name", style: theme.textTheme.h30
+                    // .copyWith(
+                    //   color: theme.appColors.onPrimary,
+                    // ),
+                    ),
+                accountEmail: Text("User Email", style: theme.textTheme.h30
+                    // .copyWith(
+                    //   color: theme.appColors.onPrimary,
+                    // ),
+                    ),
                 currentAccountPicture: const CircleAvatar(
                   backgroundColor: Colors.grey,
                   // backgroundImage: NetworkImage(userAvatarUrl),

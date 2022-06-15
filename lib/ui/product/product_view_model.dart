@@ -178,16 +178,16 @@ class ProductViewModel extends StateNotifier<AsyncValue<ProductState>> {
     String? pictureName;
     String? pictureURL;
     final name = await imageRepository.pictureNameing(path: path);
-    name.when(success: (pictureName) {
-      pictureName = pictureName;
+    name.when(success: (name) {
+      pictureName = name;
     }, failure: (error) {
       state = AsyncValue.error(error);
     });
     final url = await imageRepository.uploadImage(
         image: newPicture1, path: _path, pictureName: pictureName.toString());
     url.when(
-      success: (pictureURL) {
-        pictureURL = pictureURL;
+      success: (url) {
+        pictureURL = url;
       },
       failure: (error) {
         state = AsyncValue.error(error);

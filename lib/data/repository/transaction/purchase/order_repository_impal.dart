@@ -62,21 +62,28 @@ class OrderRepositoryImpl implements OrderRepository {
   Future<Result<void>> updateOrder({required Order order}) async {
     return Result.guardFuture(
       () async {
-        // アイテムを更新
-        if ((order.numberOfUse) == 0) {
-          _db.collection(_collectionPath).doc(order.id)
-            ..update(order.toJson())
-            ..set({
-              'isActive': false,
-              'updatedAt': FieldValue.serverTimestamp(),
-            }, SetOptions(merge: true));
-        } else {
-          _db.collection(_collectionPath).doc(order.id)
-            ..update(order.toJson())
-            ..set({
-              'updatedAt': FieldValue.serverTimestamp(),
-            }, SetOptions(merge: true));
-        }
+        _db.collection(_collectionPath).doc(order.id)
+          ..update(order.toJson())
+          ..set({
+            // 'numberOfUse': FieldValue.increment(-1),
+            'updatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        // // アイテムを更新
+        // if ((order.numberOfUse) == 0) {
+        //   _db.collection(_collectionPath).doc(order.id)
+        //     ..update(order.toJson())
+        //     ..set({
+        //       'isActive': false,
+        //       'updatedAt': FieldValue.serverTimestamp(),
+        //     }, SetOptions(merge: true));
+        // } else {
+        //   _db.collection(_collectionPath).doc(order.id)
+        //     ..update(order.toJson())
+        //     ..set({
+        //       'numberOfUse': FieldValue.increment(-1),
+        //       'updatedAt': FieldValue.serverTimestamp(),
+        //     }, SetOptions(merge: true));
+        // }
       },
     );
   }

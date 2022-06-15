@@ -13,57 +13,57 @@ class ImageCropPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = CropController();
+    final controller = CropController();
     final theme = ref.watch(appThemeProvider);
     final appRoute = useRouter();
 
-    final _state = ref.watch(imageCropProvider);
-    final _vm = ref.watch(imageCropProvider.notifier);
-    final _photoImage = _state.uint8list as Uint8List;
+    final state = ref.watch(imageCropProvider);
+    final vm = ref.watch(imageCropProvider.notifier);
+    final photoImage = state.uint8list as Uint8List;
 
-    var _isProcessing = false;
-    Uint8List? _croppedData = _state.croppedData;
+    var isProcessing = false;
+    Uint8List? croppedData = state.croppedData;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.appColors.primary,
-        title: Text(
+        title: const Text(
           'Image Crop',
-          style: TextStyle(color: theme.appColors.onPrimary),
+          // style: TextStyle(color: theme.appColors.onPrimary),
         ),
         centerTitle: true,
         actions: [
-          if (_croppedData == null)
+          if (croppedData == null)
             IconButton(
               icon: const Icon(Icons.cut),
               onPressed: () {
-                _vm.isProcessing(true);
-                _controller.crop();
+                vm.isProcessing(true);
+                controller.crop();
               },
             ),
-          if (_croppedData != null)
+          if (croppedData != null)
             IconButton(
               icon: const Icon(Icons.redo),
-              onPressed: () => _vm.croppedData(null),
+              onPressed: () => vm.croppedData(null),
             ),
-          if (_croppedData != null)
+          if (croppedData != null)
             IconButton(
                 onPressed: () {
-                  _vm.saveImage(_croppedData);
+                  vm.saveImage(croppedData);
                   appRoute.pop();
                 },
                 icon: const Icon(Icons.save))
         ],
-        iconTheme: IconThemeData(color: theme.appColors.onPrimary),
+        // iconTheme: IconThemeData(color: theme.appColors.onPrimary),
       ),
       body: Visibility(
-        visible: _croppedData == null,
+        visible: croppedData == null,
         child: Crop(
-            controller: _controller,
-            image: _photoImage,
+            controller: controller,
+            image: photoImage,
             onCropped: (cropped) {
-              _vm.croppedData(cropped);
-              _vm.isProcessing(false);
+              vm.croppedData(cropped);
+              vm.isProcessing(false);
             },
             aspectRatio: 3 / 1,
             initialSize: 0.8,
@@ -79,13 +79,13 @@ class ImageCropPage extends HookConsumerWidget {
             baseColor: Colors.grey
             // withCircleUi: true,
             ),
-        replacement: _croppedData != null
+        replacement: croppedData != null
             ? Container(
                 padding: const EdgeInsets.all(16),
                 height: double.infinity,
                 width: double.infinity,
                 child: Image.memory(
-                  _croppedData,
+                  croppedData,
                   fit: BoxFit.contain,
                 ),
               )

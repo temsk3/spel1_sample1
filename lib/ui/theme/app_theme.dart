@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_colors.dart';
 import 'app_text_theme.dart';
+import 'color_schemes.g.dart';
 
 final appThemeModeProvider =
     StateNotifierProvider<StateController<ThemeMode>, ThemeMode>(
@@ -35,12 +36,28 @@ class AppTheme {
     const mode = ThemeMode.light;
     final appColors = AppColors.light();
     final themeData = ThemeData.light().copyWith(
+      useMaterial3: true,
+      colorScheme: lightColorScheme,
+      brightness: Brightness.light,
       scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: appColors.error,
         behavior: SnackBarBehavior.floating,
       ),
+      tabBarTheme: TabBarTheme(
+        indicator: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: appColors.onPrimaryContainer,
+              width: 2.5,
+            ),
+          ),
+        ),
+      ),
+      primaryColor: appColors.surface,
+      primaryTextTheme:
+          GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
     );
     return AppTheme(
       mode: mode,
@@ -54,12 +71,28 @@ class AppTheme {
     const mode = ThemeMode.dark;
     final appColors = AppColors.dark();
     final themeData = ThemeData.dark().copyWith(
-      scaffoldBackgroundColor: appColors.background,
+      useMaterial3: true,
+      colorScheme: darkColorScheme,
+      brightness: Brightness.dark,
+      // scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
-      snackBarTheme: SnackBarThemeData(
-        backgroundColor: appColors.error,
-        behavior: SnackBarBehavior.floating,
+      // snackBarTheme: SnackBarThemeData(
+      //   backgroundColor: appColors.error,
+      //   behavior: SnackBarBehavior.floating,
+      // ),
+      tabBarTheme: TabBarTheme(
+        indicator: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: appColors.onPrimaryContainer,
+              width: 2.5,
+            ),
+          ),
+        ),
       ),
+      primaryColor: appColors.surface,
+      // primaryTextTheme:
+      //     GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
     );
     return AppTheme(
       mode: mode,

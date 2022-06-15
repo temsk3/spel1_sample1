@@ -64,11 +64,9 @@ class SalesStatusPage extends HookConsumerWidget {
           // ),
           body: SafeArea(
             child: Column(children: [
-              Text(
-                'sum:${numFormatter.format(sum)}',
-                style: theme.textTheme.h50
-                    .copyWith(color: theme.appColors.onPrimary),
-              ),
+              Text('sum:${numFormatter.format(sum)}', style: theme.textTheme.h50
+                  // .copyWith(color: theme.appColors.onPrimary),
+                  ),
               Flexible(child: salesDataTable(data: data))
             ]),
           ),
@@ -88,12 +86,12 @@ class SalesStatusPage extends HookConsumerWidget {
         );
       },
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

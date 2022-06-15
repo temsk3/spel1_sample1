@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import './error_screen.dart';
-import './home_page.dart';
 import './loading_screen.dart';
 import '../../data/repository/auth/auth_repository.dart';
 import 'login_page.dart';
+import 'start_page.dart';
 
 class AuthChecker extends ConsumerWidget {
   const AuthChecker({Key? key}) : super(key: key);
@@ -21,8 +21,8 @@ class AuthChecker extends ConsumerWidget {
 
     //  now the following variable contains an asyncValue so now we can use .when method
     //  to imply the condition
-    final _authState = ref.watch(authStateProvider);
-    return _authState.when(
+    final authState = ref.watch(authStateProvider);
+    return authState.when(
         data: (data) {
           if (data != null) return const StartPage();
           return const LoginPage();

@@ -60,8 +60,8 @@ class BazaarEditPage extends HookConsumerWidget {
         final oldPicture = useTextEditingController(text: bazaar.pictureURL);
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: theme.appColors.primary,
-            foregroundColor: theme.appColors.onPrimary,
+            // backgroundColor: theme.appColors.primary,
+            // foregroundColor: theme.appColors.onPrimary,
             // toolbarHeight: 30,
             title: Text(
               'Event',
@@ -126,7 +126,7 @@ class BazaarEditPage extends HookConsumerWidget {
                       child: Container(
                         height: 100,
                         width: 300,
-                        color: theme.appColors.primary,
+                        // color: theme.appColors.primary,
                         alignment: Alignment.center,
                         child: (ref.watch(imageCropProvider
                                     .select((s) => s.croppedData)) ==
@@ -165,9 +165,9 @@ class BazaarEditPage extends HookConsumerWidget {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           child: const Text('販売期間'),
                           onPressed: () async {
                             final dateRange = await showDateRangePicker(
@@ -243,9 +243,9 @@ class BazaarEditPage extends HookConsumerWidget {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           child: const Text('開催期間'),
                           onPressed: () async {
                             final dateRange = await showDateRangePicker(
@@ -372,12 +372,12 @@ class BazaarEditPage extends HookConsumerWidget {
         ),
       ),
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

@@ -55,8 +55,8 @@ class ProductEditPage extends HookConsumerWidget {
         final oldPicture = useTextEditingController(text: product.picture1URL);
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: theme.appColors.primary,
-            foregroundColor: theme.appColors.onPrimary,
+            // backgroundColor: theme.appColors.primary,
+            // foregroundColor: theme.appColors.onPrimary,
             // toolbarHeight: 30,
             title: Text(
               'Product Item',
@@ -257,9 +257,9 @@ class ProductEditPage extends HookConsumerWidget {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: theme.appColors.primary,
-                            onPrimary: theme.appColors.onPrimary,
-                          ),
+                              // primary: theme.appColors.primary,
+                              // onPrimary: theme.appColors.onPrimary,
+                              ),
                           child: const Text('有効期間'),
                           onPressed: () async {
                             final dateRange = await showDateRangePicker(
@@ -347,12 +347,12 @@ class ProductEditPage extends HookConsumerWidget {
         ),
       ),
       loading: () {
-        return Scaffold(
+        return const Scaffold(
           body: SafeArea(
             child: Center(
               child: CircularProgressIndicator(
-                color: theme.appColors.primary,
-              ),
+                  // color: theme.appColors.primary,
+                  ),
             ),
           ),
         );

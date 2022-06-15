@@ -17,14 +17,12 @@ class PictureCover extends HookConsumerWidget {
     final l10n = useL10n();
     final appRoute = useRouter();
     return Container(
-      color: theme.appColors.primary,
+      // color: theme.appColors.primary,
       child: Center(
         child: (picture == null || picture == '')
-            ? Text(
-                'NoImage',
-                style: theme.textTheme.h30
-                    .copyWith(color: theme.appColors.onPrimary),
-              )
+            ? Text('NoImage', style: theme.textTheme.h30
+                // .copyWith(color: theme.appColors.onPrimary),
+                )
             : SizedBox.expand(
                 child: Image.network(picture.toString()),
               ),
@@ -46,7 +44,7 @@ class PictureDetail extends HookConsumerWidget {
     return Container(
       height: 100,
       width: 160,
-      color: theme.appColors.primary,
+      color: Colors.grey.withOpacity(0.3),
       alignment: Alignment.center,
       child: (picture == null)
           ? (oldPicture == '' || oldPicture == null)
