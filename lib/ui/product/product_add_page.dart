@@ -79,6 +79,8 @@ class ProductAddPage extends HookConsumerWidget {
                 viewModel.addProduct(
                     organizer: organizer,
                     bazaarId: bazaarId,
+                    salesStart: bazaar.salesStart as DateTime,
+                    salesEnd: bazaar.salesEnd as DateTime,
                     register: uid,
                     code: code.text,
                     name: name.text,
@@ -158,7 +160,7 @@ class ProductAddPage extends HookConsumerWidget {
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                 ),
                 DropdownButtonFormField<String>(
-                  items: ['Foods', 'Goods']
+                  items: ['Foods', 'Goods', 'others']
                       .map(
                         (item) => DropdownMenuItem<String>(
                           value: item,

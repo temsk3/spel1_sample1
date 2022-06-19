@@ -51,18 +51,23 @@ class CustomDrawer extends HookConsumerWidget {
               //   decoration: BoxDecoration(color: theme.appColors.primary),
               // ),
               ListTile(
-                title: const Text('signin'),
+                title: const Text('SignIn'),
                 onTap: () {
-                  appRoute.navigate(const FavoriteRoute());
+                  // appRoute.push(const LoginRoute());
+                  appRoute.replaceAll([const AuthRoute()]);
                 },
               ),
               ListTile(
                 title: const Text('Profile'),
-                onTap: () {},
+                onTap: () {
+                  appRoute.push(const AuthRoute());
+                },
               ),
               ListTile(
                 title: const Text('test3'),
-                onTap: () {},
+                onTap: () {
+                  // appRoute.push(const StartRoute());ß
+                },
               ),
             ],
           ),

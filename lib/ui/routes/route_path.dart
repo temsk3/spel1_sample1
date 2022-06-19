@@ -4,6 +4,8 @@ class RoutePath {
   static const appRouteHome = '/';
   // auth
   static const appRouteAuth = 'auth';
+  static const appRouteLogin = 'login';
+  static const appRouteStart = 'start';
   // User
   static const appRouteUser = 'users';
   static const appRouteProfile = 'profile';
@@ -20,6 +22,7 @@ class RoutePath {
   static const appRouteProductAll = 'productAll';
   static const appRouteProductFoods = 'productFoods';
   static const appRouteProductGoods = 'productGoods';
+  static const appRouteProductOthers = 'productOthers';
   static const appRouteProductEdit = 'productEdit';
   static const appRouteProductAdd = 'productAdd';
   // order

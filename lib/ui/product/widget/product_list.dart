@@ -27,7 +27,10 @@ class ProductCard extends HookConsumerWidget {
     return Stack(
       children: [
         Card(
-          color: product.stock == 0 ? Colors.black.withOpacity(0.3) : null,
+          color: (product.stock == 0 ||
+                  DateTime.now().isAfter(product.salesEnd as DateTime))
+              ? Colors.black.withOpacity(0.3)
+              : null,
           // : theme.appColors.background,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -101,6 +104,13 @@ class ProductCard extends HookConsumerWidget {
           Positioned(
             top: 4,
             child: Text('SOLDOUT', style: theme.textTheme.h60.bold()
+                // .copyWith(color: theme.appColors.onPrimary),
+                ),
+          ),
+        if (DateTime.now().isAfter(product.salesEnd as DateTime))
+          Positioned(
+            top: 4,
+            child: Text('End of sales', style: theme.textTheme.h60.bold()
                 // .copyWith(color: theme.appColors.onPrimary),
                 ),
           ),

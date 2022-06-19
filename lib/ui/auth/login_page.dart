@@ -153,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(child: const Center(child: Text('_____'))),
+                        Container(
+                            child: const Center(
+                                child: Text(''))), //'jumble moll'))),
                         // const Center(child: FlutterLogo(size: 81)),
                         const Spacer(flex: 1),
                         Container(
@@ -162,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 4),
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              // color: Colors.white,
                               borderRadius: BorderRadius.circular(25)),
                           child: TextFormField(
                             controller: _email,
@@ -170,13 +172,15 @@ class _LoginPageState extends State<LoginPage> {
                             enableSuggestions: true,
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (value) {},
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Email address',
-                              hintStyle: const TextStyle(color: Colors.black54),
-                              icon: Icon(Icons.email_outlined,
-                                  color: Colors.blue.shade700, size: 24),
+                              // hintStyle: const TextStyle(color: Colors.black54),
+                              icon: Icon(
+                                Icons.email_outlined,
+                                // color: Colors.blue.shade700, size: 24,
+                              ),
                               alignLabelWithHint: true,
-                              border: InputBorder.none,
+                              // border: InputBorder.none,
                             ),
                             validator: (value) {
                               if (value!.isEmpty || !value.contains('@')) {
@@ -192,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 4),
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              // color: Colors.white,
                               borderRadius: BorderRadius.circular(25)),
                           child: TextFormField(
                             controller: _password,
@@ -203,13 +207,16 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               return null;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Password',
-                              hintStyle: const TextStyle(color: Colors.black54),
-                              icon: Icon(CupertinoIcons.lock_circle,
-                                  color: Colors.blue.shade700, size: 24),
+                              // hintStyle: const TextStyle(color: Colors.black54),
+                              icon: Icon(
+                                CupertinoIcons.lock_circle,
+                                // color: Colors.blue.shade700,
+                                size: 24,
+                              ),
                               alignLabelWithHint: true,
-                              border: InputBorder.none,
+                              // border: InputBorder.none,
                             ),
                           ),
                         ),
@@ -221,18 +228,21 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 4),
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                // color: Colors.white,
                                 borderRadius: BorderRadius.circular(25)),
                             child: TextFormField(
                               obscureText: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'Confirm password',
-                                hintStyle:
-                                    const TextStyle(color: Colors.black54),
-                                icon: Icon(CupertinoIcons.lock_circle,
-                                    color: Colors.blue.shade700, size: 24),
+                                // hintStyle:
+                                //     const TextStyle(color: Colors.black54),
+                                icon: Icon(
+                                  CupertinoIcons.lock_circle,
+                                  // color: Colors.blue.shade700,
+                                  size: 24,
+                                ),
                                 alignLabelWithHint: true,
-                                border: InputBorder.none,
+                                // border: InputBorder.none,
                               ),
                               validator: type == Status.signUp
                                   ? (value) {
@@ -251,9 +261,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Container(
+                  child: SizedBox(
                       width: double.infinity,
-                      decoration: const BoxDecoration(color: Colors.white),
+                      // decoration: const BoxDecoration(color: Colors.white),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -267,14 +277,15 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CircularProgressIndicator())
                                 : MaterialButton(
                                     onPressed: _onPressedFunction,
-                                    textColor: Colors.blue.shade700,
-                                    textTheme: ButtonTextTheme.primary,
+                                    // textColor: Colors.blue.shade700,
+                                    // textTheme: ButtonTextTheme.primary,
                                     minWidth: 100,
                                     padding: const EdgeInsets.all(18),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
-                                      side: BorderSide(
-                                          color: Colors.blue.shade700),
+                                      side: const BorderSide(
+                                          // color: Colors.blue.shade700,
+                                          ),
                                     ),
                                     child: Text(
                                       type == Status.login
@@ -294,14 +305,15 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CircularProgressIndicator())
                                 : MaterialButton(
                                     onPressed: _loginWithGoogle,
-                                    textColor: Colors.blue.shade700,
-                                    textTheme: ButtonTextTheme.primary,
+                                    // textColor: Colors.blue.shade700,
+                                    // textTheme: ButtonTextTheme.primary,
                                     minWidth: 100,
                                     padding: const EdgeInsets.all(18),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
-                                      side: BorderSide(
-                                          color: Colors.blue.shade700),
+                                      side: const BorderSide(
+                                          // color: Colors.blue.shade700,
+                                          ),
                                     ),
                                     child: Row(
                                       mainAxisAlignment:
@@ -328,14 +340,18 @@ class _LoginPageState extends State<LoginPage> {
                                 text: type == Status.login
                                     ? 'Don\'t have an account? '
                                     : 'Already have an account? ',
-                                style: const TextStyle(color: Colors.black),
+                                style: const TextStyle(
+                                    // color: Colors.black,
+                                    ),
                                 children: [
                                   TextSpan(
                                       text: type == Status.login
                                           ? 'Sign up now'
                                           : 'Log in',
-                                      style: TextStyle(
-                                          color: Colors.blue.shade700),
+                                      style: const TextStyle(
+                                          //     color: Colors.blue.shade700,
+                                          color:
+                                              Color.fromARGB(255, 158, 29, 80)),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
                                           _switchType();

@@ -104,7 +104,7 @@ class BazaarEditPage extends HookConsumerWidget {
             ],
           ),
           // Header(title: 'Event'),
-          drawer: const CustomDrawer(),
+          drawer: CustomDrawer(),
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),

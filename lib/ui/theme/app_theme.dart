@@ -58,6 +58,8 @@ class AppTheme {
       primaryColor: appColors.surface,
       primaryTextTheme:
           GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
+      dialogTheme:
+          DialogTheme(titleTextStyle: TextStyle(color: appColors.onPrimary)),
     );
     return AppTheme(
       mode: mode,
@@ -71,29 +73,30 @@ class AppTheme {
     const mode = ThemeMode.dark;
     final appColors = AppColors.dark();
     final themeData = ThemeData.dark().copyWith(
-      useMaterial3: true,
-      colorScheme: darkColorScheme,
-      brightness: Brightness.dark,
-      // scaffoldBackgroundColor: appColors.background,
-      textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
-      // snackBarTheme: SnackBarThemeData(
-      //   backgroundColor: appColors.error,
-      //   behavior: SnackBarBehavior.floating,
-      // ),
-      tabBarTheme: TabBarTheme(
-        indicator: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: appColors.onPrimaryContainer,
-              width: 2.5,
+        useMaterial3: true,
+        colorScheme: darkColorScheme,
+        brightness: Brightness.dark,
+        // scaffoldBackgroundColor: appColors.background,
+        textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
+        // snackBarTheme: SnackBarThemeData(
+        //   backgroundColor: appColors.error,
+        //   behavior: SnackBarBehavior.floating,
+        // ),
+        tabBarTheme: TabBarTheme(
+          indicator: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: appColors.onPrimaryContainer,
+                width: 2.5,
+              ),
             ),
           ),
         ),
-      ),
-      primaryColor: appColors.surface,
-      // primaryTextTheme:
-      //     GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
-    );
+        primaryColor: appColors.surface,
+        primaryTextTheme:
+            GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
+        dialogTheme:
+            DialogTheme(titleTextStyle: TextStyle(color: appColors.onPrimary)));
     return AppTheme(
       mode: mode,
       data: themeData,

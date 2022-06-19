@@ -26,6 +26,7 @@ class ProductPage extends HookConsumerWidget {
             ProductAllRoute(),
             ProductFoodsRoute(),
             ProductGoodsRoute(),
+            ProductOthersRoute(),
           ],
           // homeIndex: 1,
           builder: (context, child, controller) {
@@ -67,6 +68,7 @@ class ProductPage extends HookConsumerWidget {
                         Tab(text: 'All Item'),
                         Tab(text: 'Foods'),
                         Tab(text: 'Goods'),
+                        Tab(text: 'Others'),
                       ],
                     ),
                   ],

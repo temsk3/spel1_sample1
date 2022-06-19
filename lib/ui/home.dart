@@ -17,6 +17,14 @@ class HomePage extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final appRoute = useRouter();
     final appMQ = useMediaQuery();
+    //
+    // final initialize = ref.watch(firebaseinitializerProvider);
+    // initialize.when(
+    //     data: (data) {
+    //       return const AuthChecker();
+    //     },
+    //     loading: () => const LoadingScreen(),
+    //     error: (e, stackTrace) => ErrorScreen(e, stackTrace));
 
     return WillPopScope(
       onWillPop: () => _finishNextPage(),

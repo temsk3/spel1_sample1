@@ -107,7 +107,7 @@ class OrderPage extends HookConsumerWidget {
             child: Row(
               children: [
                 MediaQuery.of(context).size.width > 768
-                    ? const CustomDrawer()
+                    ? CustomDrawer()
                     : Container(),
                 Expanded(
                   child: orderDataTable(data: data),

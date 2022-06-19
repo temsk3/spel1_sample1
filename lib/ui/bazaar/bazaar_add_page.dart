@@ -23,6 +23,8 @@ class BazaarAddPage extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final l10n = useL10n();
     final appRoute = useRouter();
+    final mode = ref.watch(appThemeModeProvider);
+    final themeMode = ref.watch(appThemeModeProvider);
     // final state = ref.watch(bazzarViewModelProvider);
     final viewModel = ref.watch(bazzarViewModelProvider.notifier);
     final bazaar = Bazaar.empty();
@@ -116,6 +118,7 @@ class BazaarAddPage extends HookConsumerWidget {
                     height: 100,
                     width: 300,
                     // color: theme.appColors.primary,
+                    color: Colors.grey.withOpacity(0.3),
                     alignment: Alignment.center,
                     child: ref.watch(imageCropProvider
                                 .select((s) => s.croppedData)) ==
@@ -168,6 +171,19 @@ class BazaarAddPage extends HookConsumerWidget {
                           firstDate: DateTime(DateTime.now().year,
                               DateTime.now().month, DateTime.now().day),
                           lastDate: DateTime(DateTime.now().year + 3),
+                          builder: isDarkMode(context)
+                              ? null
+                              : (context, child) {
+                                  return Theme(
+                                    data: theme.data.copyWith(
+                                      colorScheme:
+                                          theme.data.colorScheme.copyWith(
+                                        surface: theme.appColors.primary,
+                                      ),
+                                    ),
+                                    child: child as Widget,
+                                  );
+                                },
                         );
                         if (dateRange != null) {
                           salesStart.text = dateFormat.format(dateRange.start);
@@ -246,6 +262,34 @@ class BazaarAddPage extends HookConsumerWidget {
                           ),
                           firstDate: DateTime(now.year, now.month, now.day),
                           lastDate: DateTime(now.year + 3),
+                          builder:
+                              // isDarkMode(context)
+                              //     ? null
+                              //     :
+                              (context, child) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: Theme.of(context)
+                                    .colorScheme
+                                    .copyWith(
+                                      surface:
+                                          Theme.of(context).colorScheme.primary,
+                                      onPrimary: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                      // background: Theme.of(context)
+                                      //     .colorScheme
+                                      //     .inverseSurface,
+                                    ),
+                                primaryColor:
+                                    Theme.of(context).colorScheme.primary,
+                                scaffoldBackgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                              ),
+                              child: child as Widget,
+                            );
+                          },
                         );
                         if (dateRange != null) {
                           eventFrom.text =
@@ -376,4 +420,10 @@ class BazaarAddPage extends HookConsumerWidget {
     // },
     // );
   }
+}
+
+///true:dark, false:light
+bool isDarkMode(BuildContext context) {
+  final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+  return brightness == Brightness.dark;
 }

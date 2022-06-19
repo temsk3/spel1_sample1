@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
 import '../../ui/routes/route_path.dart';
-import '../auth/start_page.dart';
+import '../auth/auth.dart';
 import '../bazaar/bazaar_add_page.dart';
 import '../bazaar/bazaar_details_page.dart';
 import '../bazaar/bazaar_edit_page.dart';
@@ -19,21 +19,23 @@ import '../product/product_edit_page.dart';
 import '../product/product_list_all.dart';
 import '../product/product_list_foods.dart';
 import '../product/product_list_goods.dart';
+import '../product/product_list_others.dart';
 import '../product/product_page.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
+    // Auth
+    AutoRoute(
+      fullscreenDialog: true,
+      path: RoutePath.appRouteAuth,
+      page: AuthPage,
+    ),
     AutoRoute(
       path: RoutePath.appRouteHome,
       page: HomePage,
       initial: true,
       children: [
-        // Auth
-        AutoRoute(
-          path: RoutePath.appRouteAuth,
-          page: StartPage,
-        ),
         // User
         // AutoRoute(
         //   path: RoutePath.appRouteUser,
@@ -126,6 +128,10 @@ import '../product/product_page.dart';
                 AutoRoute(
                   path: RoutePath.appRouteProductGoods,
                   page: ProductGoodsPage,
+                ),
+                AutoRoute(
+                  path: RoutePath.appRouteProductOthers,
+                  page: ProductOthersPage,
                 ),
               ],
             ),

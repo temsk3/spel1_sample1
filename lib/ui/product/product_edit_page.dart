@@ -178,7 +178,7 @@ class ProductEditPage extends HookConsumerWidget {
                       padding: EdgeInsets.symmetric(vertical: 8.0),
                     ),
                     DropdownButtonFormField<String>(
-                      items: ['Foods', 'Goods']
+                      items: ['Foods', 'Goods', 'others']
                           .map(
                             (item) => DropdownMenuItem<String>(
                               value: item,

@@ -19,7 +19,7 @@ class TransactionPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: TopHeader(title: 'List'),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       // appBar: AppBar(
       //   backgroundColor: theme.appColors.primary,
       //   foregroundColor: theme.appColors.onPrimary,

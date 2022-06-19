@@ -81,6 +81,7 @@ class ProductDetailsPage extends HookConsumerWidget {
       bazaarId = bazaar.id;
     }
     //
+
     const uid = 'test';
     //
     final form = GlobalKey<FormState>();
@@ -202,6 +203,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                       viewModel.addProduct(
                           organizer: organizer.toString(),
                           bazaarId: bazaarId.toString(),
+                          salesStart: bazaar.salesStart as DateTime,
+                          salesEnd: bazaar.salesEnd as DateTime,
                           register: uid,
                           code: code.text,
                           name: name.text,
@@ -237,14 +240,62 @@ class ProductDetailsPage extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () async {
-                          if (edit.value) {
-                            form.currentState!.save();
-                            final XFile? image = await picker.pickImage(
-                                source: ImageSource.gallery);
-                            uint8List.value = await image!.readAsBytes();
-                          }
-                        },
+                        onTap: (edit.value)
+                            ? () async {
+                                form.currentState!.save();
+                                final XFile? image = await picker.pickImage(
+                                    source: ImageSource.gallery);
+                                uint8List.value = await image!.readAsBytes();
+                              }
+                            : (oldPicture != null || oldPicture != '')
+                                ? () {
+                                    showGeneralDialog(
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1000),
+                                      barrierDismissible: true,
+                                      barrierLabel: '',
+                                      context: context,
+                                      pageBuilder:
+                                          (context, animation1, animation2) {
+                                        return DefaultTextStyle(
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .bodyText1!,
+                                          child: Center(
+                                            child: SizedBox(
+                                              height: 500,
+                                              width: 500,
+                                              child: SingleChildScrollView(
+                                                child: Stack(
+                                                  children: [
+                                                    InteractiveViewer(
+                                                      minScale: 0.1,
+                                                      maxScale: 5,
+                                                      child: Container(
+                                                        child: Image.network(
+                                                            oldPicture.text),
+                                                      ),
+                                                    ),
+                                                    SafeArea(
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        icon: const Icon(
+                                                            Icons.close),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
+                                : null,
                         child: PictureDetail(
                           picture: uint8List.value,
                           oldPicture: oldPicture.text,
@@ -279,7 +330,7 @@ class ProductDetailsPage extends HookConsumerWidget {
                           ),
                           Flexible(
                             child: DropdownButtonFormField<String>(
-                              items: ['Foods', 'Goods']
+                              items: ['Foods', 'Goods', 'Others']
                                   .map(
                                     (item) => DropdownMenuItem<String>(
                                       value: item,
@@ -429,6 +480,21 @@ class ProductDetailsPage extends HookConsumerWidget {
                                           DateTime.now().day),
                                       lastDate:
                                           DateTime(DateTime.now().year + 3),
+                                      builder: isDarkMode(context)
+                                          ? null
+                                          : (context, child) {
+                                              return Theme(
+                                                data: theme.data.copyWith(
+                                                  colorScheme: theme
+                                                      .data.colorScheme
+                                                      .copyWith(
+                                                    surface:
+                                                        theme.appColors.primary,
+                                                  ),
+                                                ),
+                                                child: child as Widget,
+                                              );
+                                            },
                                     );
                                     if (dateRange != null) {
                                       expirationFrom.text =
@@ -529,9 +595,18 @@ class ProductDetailsPage extends HookConsumerWidget {
                                   // primary: theme.appColors.primary,
                                   // onPrimary: theme.appColors.onPrimary,
                                   ),
-                              onPressed: (product.stock == 0)
-                                  ? null
-                                  : () async {
+                              onPressed: (product.stock != 0 ||
+                                      // ((now.isEqual(product.salesStart) ||now.isAfter(
+                                      //     product.salesStart as DateTime)) &&
+                                      // now.isBefore(
+                                      //     product.salesEnd as DateTime))
+                                      now.compareTo(product.salesStart
+                                                  as DateTime) >=
+                                              0 &&
+                                          now.compareTo(product.salesEnd
+                                                  as DateTime) <
+                                              0)
+                                  ? () async {
                                       // if(){};
                                       final isConfirmed = await showConfirmDialog(
                                           context,
@@ -540,6 +615,10 @@ class ProductDetailsPage extends HookConsumerWidget {
                                       if (isConfirmed) {
                                         try {
                                           // await model.createCharge(product);
+                                          await viewModel.updateProduct(
+                                              updateProduct: product.copyWith(
+                                                  stock: (product.stock! -
+                                                      quantity.value)));
                                           await ref
                                               .watch(orderViewModelProvider
                                                   .notifier)
@@ -573,7 +652,8 @@ class ProductDetailsPage extends HookConsumerWidget {
                                               context, e.toString());
                                         }
                                       }
-                                    },
+                                    }
+                                  : null,
                               child: const Text('購入する'),
                             ),
                           ],
@@ -609,4 +689,9 @@ class ProductDetailsPage extends HookConsumerWidget {
       },
     );
   }
+}
+
+bool isDarkMode(BuildContext context) {
+  final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+  return brightness == Brightness.dark;
 }

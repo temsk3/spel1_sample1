@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../hooks/use_router.dart';
-import '../routes/app_route.gr.dart';
 import '../theme/app_theme.dart';
 
 class CommonDrawer extends HookConsumerWidget {
@@ -48,7 +47,7 @@ class CommonDrawer extends HookConsumerWidget {
               ListTile(
                 title: const Text('signin'),
                 onTap: () {
-                  appRoute.push(const AuthRoute());
+                  // appRoute.push(const AuthRoute());
                 },
               ),
               ListTile(

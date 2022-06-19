@@ -17,6 +17,22 @@ const timestampkey = JsonKey(
 );
 
 //
+// enum GenreType {
+//   goods,
+//   foods,
+//   others,
+// }
+
+// extension GenreTypeExt on GenreType {
+//   static final genreTypes = {
+//     GenreType.goods: 'Goods',
+//     GenreType.foods: 'Foods',
+//     GenreType.others: 'Others',
+//   };
+//   String get genreType => genreTypes[this].toString();
+// }
+
+//
 @freezed
 class Product with _$Product {
   const Product._();
@@ -26,6 +42,8 @@ class Product with _$Product {
     String? organizer,
     String? bazaarId,
     String? bazaarName,
+    @timestampkey required DateTime? salesStart,
+    @timestampkey required DateTime? salesEnd,
     String? register,
     int? exchangeNumber, //不要
     String? code,
@@ -50,6 +68,8 @@ class Product with _$Product {
 
   factory Product.empty() => const Product(
         organizer: '',
+        salesStart: null,
+        salesEnd: null,
         register: '',
         name: '',
         genre: 'Goods',

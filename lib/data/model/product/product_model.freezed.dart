@@ -24,6 +24,10 @@ mixin _$Product {
   String? get organizer => throw _privateConstructorUsedError;
   String? get bazaarId => throw _privateConstructorUsedError;
   String? get bazaarName => throw _privateConstructorUsedError;
+  @timestampkey
+  DateTime? get salesStart => throw _privateConstructorUsedError;
+  @timestampkey
+  DateTime? get salesEnd => throw _privateConstructorUsedError;
   String? get register => throw _privateConstructorUsedError;
   int? get exchangeNumber => throw _privateConstructorUsedError; //不要
   String? get code => throw _privateConstructorUsedError;
@@ -64,6 +68,8 @@ abstract class $ProductCopyWith<$Res> {
       String? organizer,
       String? bazaarId,
       String? bazaarName,
+      @timestampkey DateTime? salesStart,
+      @timestampkey DateTime? salesEnd,
       String? register,
       int? exchangeNumber,
       String? code,
@@ -100,6 +106,8 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
     Object? organizer = freezed,
     Object? bazaarId = freezed,
     Object? bazaarName = freezed,
+    Object? salesStart = freezed,
+    Object? salesEnd = freezed,
     Object? register = freezed,
     Object? exchangeNumber = freezed,
     Object? code = freezed,
@@ -138,6 +146,14 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
           ? _value.bazaarName
           : bazaarName // ignore: cast_nullable_to_non_nullable
               as String?,
+      salesStart: salesStart == freezed
+          ? _value.salesStart
+          : salesStart // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      salesEnd: salesEnd == freezed
+          ? _value.salesEnd
+          : salesEnd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       register: register == freezed
           ? _value.register
           : register // ignore: cast_nullable_to_non_nullable
@@ -233,6 +249,8 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? organizer,
       String? bazaarId,
       String? bazaarName,
+      @timestampkey DateTime? salesStart,
+      @timestampkey DateTime? salesEnd,
       String? register,
       int? exchangeNumber,
       String? code,
@@ -270,6 +288,8 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? organizer = freezed,
     Object? bazaarId = freezed,
     Object? bazaarName = freezed,
+    Object? salesStart = freezed,
+    Object? salesEnd = freezed,
     Object? register = freezed,
     Object? exchangeNumber = freezed,
     Object? code = freezed,
@@ -308,6 +328,14 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           ? _value.bazaarName
           : bazaarName // ignore: cast_nullable_to_non_nullable
               as String?,
+      salesStart: salesStart == freezed
+          ? _value.salesStart
+          : salesStart // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      salesEnd: salesEnd == freezed
+          ? _value.salesEnd
+          : salesEnd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       register: register == freezed
           ? _value.register
           : register // ignore: cast_nullable_to_non_nullable
@@ -400,6 +428,8 @@ class _$_Product extends _Product {
       this.organizer,
       this.bazaarId,
       this.bazaarName,
+      @timestampkey required this.salesStart,
+      @timestampkey required this.salesEnd,
       this.register,
       this.exchangeNumber,
       this.code,
@@ -433,6 +463,12 @@ class _$_Product extends _Product {
   final String? bazaarId;
   @override
   final String? bazaarName;
+  @override
+  @timestampkey
+  final DateTime? salesStart;
+  @override
+  @timestampkey
+  final DateTime? salesEnd;
   @override
   final String? register;
   @override
@@ -482,7 +518,7 @@ class _$_Product extends _Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, organizer: $organizer, bazaarId: $bazaarId, bazaarName: $bazaarName, register: $register, exchangeNumber: $exchangeNumber, code: $code, name: $name, genre: $genre, desc: $desc, stock: $stock, price: $price, picture1Name: $picture1Name, picture1URL: $picture1URL, picture2Name: $picture2Name, picture2URL: $picture2URL, picture3Name: $picture3Name, picture3URL: $picture3URL, expirationFrom: $expirationFrom, expirationTo: $expirationTo, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Product(id: $id, organizer: $organizer, bazaarId: $bazaarId, bazaarName: $bazaarName, salesStart: $salesStart, salesEnd: $salesEnd, register: $register, exchangeNumber: $exchangeNumber, code: $code, name: $name, genre: $genre, desc: $desc, stock: $stock, price: $price, picture1Name: $picture1Name, picture1URL: $picture1URL, picture2Name: $picture2Name, picture2URL: $picture2URL, picture3Name: $picture3Name, picture3URL: $picture3URL, expirationFrom: $expirationFrom, expirationTo: $expirationTo, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -495,6 +531,9 @@ class _$_Product extends _Product {
             const DeepCollectionEquality().equals(other.bazaarId, bazaarId) &&
             const DeepCollectionEquality()
                 .equals(other.bazaarName, bazaarName) &&
+            const DeepCollectionEquality()
+                .equals(other.salesStart, salesStart) &&
+            const DeepCollectionEquality().equals(other.salesEnd, salesEnd) &&
             const DeepCollectionEquality().equals(other.register, register) &&
             const DeepCollectionEquality()
                 .equals(other.exchangeNumber, exchangeNumber) &&
@@ -535,6 +574,8 @@ class _$_Product extends _Product {
         const DeepCollectionEquality().hash(organizer),
         const DeepCollectionEquality().hash(bazaarId),
         const DeepCollectionEquality().hash(bazaarName),
+        const DeepCollectionEquality().hash(salesStart),
+        const DeepCollectionEquality().hash(salesEnd),
         const DeepCollectionEquality().hash(register),
         const DeepCollectionEquality().hash(exchangeNumber),
         const DeepCollectionEquality().hash(code),
@@ -574,6 +615,8 @@ abstract class _Product extends Product {
       final String? organizer,
       final String? bazaarId,
       final String? bazaarName,
+      @timestampkey required final DateTime? salesStart,
+      @timestampkey required final DateTime? salesEnd,
       final String? register,
       final int? exchangeNumber,
       final String? code,
@@ -606,6 +649,12 @@ abstract class _Product extends Product {
   String? get bazaarId => throw _privateConstructorUsedError;
   @override
   String? get bazaarName => throw _privateConstructorUsedError;
+  @override
+  @timestampkey
+  DateTime? get salesStart => throw _privateConstructorUsedError;
+  @override
+  @timestampkey
+  DateTime? get salesEnd => throw _privateConstructorUsedError;
   @override
   String? get register => throw _privateConstructorUsedError;
   @override

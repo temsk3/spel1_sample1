@@ -19,17 +19,17 @@ class orderDataTable extends HookConsumerWidget {
       leftHandSideColumnWidth: 100,
       rightHandSideColumnWidth: 700,
       isFixedHeader: true,
-      headerWidgets: _getTitleWidget(),
+      headerWidgets: _getTitleWidget(context),
       leftSideItemBuilder: _generateFirstColumnRow,
       rightSideItemBuilder: _generateRightHandSideColumnRow,
       itemCount: data.length,
-      rowSeparatorWidget: const Divider(
-        // color: theme.appColors.onBackground,
+      rowSeparatorWidget: Divider(
+        color: Theme.of(context).colorScheme.onSurface, //
         height: 1.0,
         thickness: 0.0,
       ),
-      // leftHandSideColBackgroundColor: theme.appColors.background,
-      // rightHandSideColBackgroundColor: theme.appColors.background,
+      leftHandSideColBackgroundColor: Theme.of(context).colorScheme.surface, //
+      rightHandSideColBackgroundColor: Theme.of(context).colorScheme.surface, //
       onScrollControllerReady: (vertical, horizontal) {
         verticalScrollController = vertical;
         horizontalScrollController = horizontal;
@@ -37,19 +37,21 @@ class orderDataTable extends HookConsumerWidget {
     );
   }
 
-  List<Widget> _getTitleWidget() {
+  List<Widget> _getTitleWidget(BuildContext context) {
     return [
-      _getTitleItemWidget('Name', 100),
-      _getTitleItemWidget('Status', 100),
-      _getTitleItemWidget('code', 100),
-      _getTitleItemWidget('product', 200),
-      _getTitleItemWidget('quantity', 100),
-      _getTitleItemWidget('Purchase date', 200),
+      _getTitleItemWidget('Name', 100, context),
+      _getTitleItemWidget('Status', 100, context),
+      _getTitleItemWidget('code', 100, context),
+      _getTitleItemWidget('product', 200, context),
+      _getTitleItemWidget('quantity', 100, context),
+      _getTitleItemWidget('Purchase date', 200, context),
     ];
   }
 
-  Widget _getTitleItemWidget(String label, double width) {
+  Widget _getTitleItemWidget(String label, double width, BuildContext context) {
     return Container(
+      decoration:
+          BoxDecoration(color: Theme.of(context).colorScheme.surface), //
       width: width,
       height: 56,
       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -60,6 +62,8 @@ class orderDataTable extends HookConsumerWidget {
 
   Widget _generateFirstColumnRow(BuildContext context, int index) {
     return Container(
+      decoration:
+          BoxDecoration(color: Theme.of(context).colorScheme.surface), //
       width: 100,
       height: 52,
       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -74,6 +78,8 @@ class orderDataTable extends HookConsumerWidget {
     return Row(
       children: <Widget>[
         Container(
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.surface), //
           width: 100,
           height: 52,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -91,6 +97,8 @@ class orderDataTable extends HookConsumerWidget {
           ),
         ),
         Container(
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.surface), //
           width: 100,
           height: 52,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -98,6 +106,8 @@ class orderDataTable extends HookConsumerWidget {
           child: Text(data[index].code.toString()),
         ),
         Container(
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.surface), //
           width: 200,
           height: 52,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -105,6 +115,8 @@ class orderDataTable extends HookConsumerWidget {
           child: Text(data[index].name.toString()),
         ),
         Container(
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.surface), //
           width: 100,
           height: 52,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -112,6 +124,8 @@ class orderDataTable extends HookConsumerWidget {
           child: Text(data[index].quantity.toString()),
         ),
         Container(
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.surface), //
           width: 200,
           height: 52,
           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
