@@ -262,34 +262,44 @@ class BazaarAddPage extends HookConsumerWidget {
                           ),
                           firstDate: DateTime(now.year, now.month, now.day),
                           lastDate: DateTime(now.year + 3),
-                          builder:
-                              // isDarkMode(context)
-                              //     ? null
-                              //     :
-                              (context, child) {
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                colorScheme: Theme.of(context)
-                                    .colorScheme
-                                    .copyWith(
-                                      surface:
-                                          Theme.of(context).colorScheme.primary,
-                                      onPrimary: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      // background: Theme.of(context)
-                                      //     .colorScheme
-                                      //     .inverseSurface,
+                          builder: isDarkMode(context)
+                              ? null
+                              : (context, child) {
+                                  return Theme(
+                                    data: theme.data.copyWith(
+                                      colorScheme:
+                                          theme.data.colorScheme.copyWith(
+                                        surface: theme.appColors.primary,
+                                      ),
                                     ),
-                                primaryColor:
-                                    Theme.of(context).colorScheme.primary,
-                                scaffoldBackgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
-                              ),
-                              child: child as Widget,
-                            );
-                          },
+                                    child: child as Widget,
+                                  );
+                                },
+                          //     (context, child) {
+                          //   return Theme(
+                          //     data: Theme.of(context).copyWith(
+                          //       colorScheme:
+                          //           Theme.of(context).colorScheme.copyWith(
+                          //                 surface: Theme.of(context)
+                          //                     .colorScheme
+                          //                     .tertiary,
+                          //                 onPrimary: Theme.of(context)
+                          //                     .colorScheme
+                          //                     .onPrimary,
+                          //               ),
+                          //       backgroundColor: Theme.of(context)
+                          //           .colorScheme
+                          //           .surfaceVariant,
+                          //       dialogBackgroundColor: Theme.of(context)
+                          //           .colorScheme
+                          //           .surfaceVariant,
+                          //       scaffoldBackgroundColor: Theme.of(context)
+                          //           .colorScheme
+                          //           .surfaceVariant,
+                          //     ),
+                          //     child: child as Widget,
+                          //   );
+                          // },
                         );
                         if (dateRange != null) {
                           eventFrom.text =
