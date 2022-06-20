@@ -1,61 +1,72 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/foundation.dart';
 // import 'package:freezed_annotation/freezed_annotation.dart';
 
-// @immutable
-// class User {
-//   final DocumentReference? ref;
-//   final String name;
-//   final DateTime createdAt;
-//   final DateTime updatedAt;
-//   final DateTime? deletedAt;
+// import '../../../utils/verification_status.dart';
 
-//   const User({
-//     this.ref,
-//     required this.name,
-//     required this.createdAt,
-//     required this.updatedAt,
-//     this.deletedAt,
-//   });
+// part 'user_model.freezed.dart';
+// part 'user_model.g.dart';
 
-//   //Firebaseからデータを取得する際の変換処理
-//   factory User.fromJson(DocumentSnapshot data) {
-//     final Map<String, dynamic> json = data.data()! as Map<String, dynamic>;
-//     return User(
-//       name: json['name']! as String,
-//       createdAt: (json['createdAt']! as Timestamp).toDate(),
-//       updatedAt: (json['updatedAt']! as Timestamp).toDate(),
-//       deletedAt: (json['deletedAt'] as Timestamp?)?.toDate(),
-//     );
-//   }
-//   // : this(
-//   //     userId: json['userId']! as String,
-//   //     name: json['name']! as String,
-//   //     createdAt: (json['createdAt']! as Timestamp).toDate(),
-//   //     updatedAt: (json['updatedAt']! as Timestamp).toDate(),
-//   //     deletedAt: (json['deletedAt'] as Timestamp?)?.toDate(),
-//   //   );
+// // // firestore から受け取った Timestamp型を DateTime型に変換するためにJsonKeyを作成 @timestamp DateTime
+// DateTime? dateFromTimestampValue(dynamic value) =>
+//     value != null ? (value as Timestamp).toDate() : null;
 
-//   //DartのオブジェクトからFirebaseへ渡す際の変換処理
-//   Map<String, Object?> toJson() {
-//     Timestamp? deletedTimestamp;
-//     if (deletedAt != null) {
-//       deletedTimestamp = Timestamp.fromDate(deletedAt!);
-//     }
-//     return {
-//       'name': name,
-//       'createdAt':
-//           Timestamp.fromDate(createdAt), //DartのDateTimeからFirebaseのTimestampへ変換
-//       'updatedAt':
-//           Timestamp.fromDate(updatedAt), //DartのDateTimeからFirebaseのTimestampへ変換
-//       'deletedAt': deletedTimestamp
-//     };
-//   }
+// Timestamp? timestampFromDateValue(dynamic value) =>
+//     value is DateTime ? Timestamp.fromDate(value) : null;
+
+// const timestampkey = JsonKey(
+//   fromJson: dateFromTimestampValue,
+//   toJson: timestampFromDateValue,
+// );
+
+// //
+// @freezed
+// class User with _$User {
+//   const User._();
+
+//   const factory User({
+//     String? id,
+//     String? displayName,
+//     String? email,
+//     String? customerId,
+//     String? accountId,
+//     String? sourceId,
+//     Status? status,
+//     bool? chargesEnabled,
+//   }) = _User;
+
+//   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 // }
+import '../../../utils/verification_status.dart';
 
-// class UserDocument {
-//   String documentId;
-//   User user;
+class User {
+  String? id;
+  String? displayName;
+  String? email;
+  String? customerId;
+  String? accountId;
+  String? sourceId;
+  Status? status;
+  bool? chargesEnabled;
 
-//   UserDocument(this.documentId, this.user);
-// }
+  User({
+    this.id,
+    this.displayName,
+    this.email,
+    this.customerId,
+    this.accountId,
+    this.sourceId,
+    this.status,
+    this.chargesEnabled,
+  });
+
+  User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    displayName = json['displayName'];
+    email = json['email'];
+    customerId = json['customerId'];
+    accountId = json['accountId'];
+    sourceId = json['sourceId'];
+    status = StatusExtension.parseUserStatus(json['status'] as String);
+    chargesEnabled = json['chargesEnabled'];
+  }
+}
